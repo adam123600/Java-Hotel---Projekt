@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './App/App.css';
-import AppNavbar from './AppNavbar';
 import { Container } from 'reactstrap';
-import UserService from "../services/UserService";
+import UserService from "../service/UserService";
 
 class Home extends Component {
   constructor(props) {
@@ -34,7 +33,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <AppNavbar/>
         <Container fluid>
           <header className="jumbotron">
             <h3>{this.state.content}</h3>
