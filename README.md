@@ -38,6 +38,9 @@ Musimy posiadac aplikcję, ktora wysyła nam zapytania REST
  jak na zdjęciu: 
  ![](image/dodanie_admina.PNG) 
  
+ LINK Z APLIKACJI NOWY I POPRWANY!: 
+ http://localhost:8080/api/auth/register
+ 
  W bazie powinien być już admin dzięki któremu się logujemy
 
 ## Uruchamianie:
