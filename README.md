@@ -25,33 +25,31 @@ w pliku src/main/resources/application.properties znajdują sie informacje.
 Logujemy się jako root, proszę wpisać takie jakie macie własne ustawione.
 
 ## Dodanie admina:
-W bazie danych dodajemy role (to tak poczatkowo tylko):
-```
-INSERT INTO roles(name) VALUES('ROLE_USER');
-INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
-INSERT INTO roles(name) VALUES('ROLE_ADMIN');
-```
-Jeszcze nie ma zrobione, aby admin byl automatycznie dodawany do bazy, 
-dlatego nalezy to zrobić osobiście. Jest to tak zrobione jak pod koniec
-tego kursu: https://bezkoder.com/spring-boot-jwt-authentication/
+Role są dodawane autmatycznie do bazy w pliku data.sql w resources.
+Jeśli uruchamiasz na Windowsie, powinien admin sam się dodać do bazy.
+Admin ma login: admin, hasło: 12345678
+
+Jeśli nie stało się to automatycznie (np. pracujesz na innym systemie, musisz dodac osobiście,
+lub dodać w HotelApplication komendę curl która doda admina automatycznie na Linuxie)
+Jest to tak zrobione jak pod koniec tego kursu: https://bezkoder.com/spring-boot-jwt-authentication/
 
 Musimy posiadac aplikcję, ktora wysyła nam zapytania REST
  ( na google chrome program Advenced Rest Controller) i wysyłamy rejestracje admina
  jak na zdjęciu: 
  ![](image/dodanie_admina.PNG) 
  
- W bazie powinien być już admin dzięk któremu się logujemy
+ W bazie powinien być już admin dzięki któremu się logujemy
 
 ## Uruchamianie:
 - Aby udostępnić API, należy uruchomić HotelApplication, na localhost:8080
-
+   na localhost:8080/api mamy różne jsony które udosepniamy przez API
 - w katalogu src/main/java/frontend poprzez node.js wpisać komendę: 
 ```
 npm start
 ```
 Uruchomi się nam localhost:3000, na którym będą pokazywać się zmiany robione w aplikacji React
 
-## Budowanie pliku jar:
+## Budowanie pliku jar: NARAZIE NIE KONIECZNE
 - należy w katalogu src/main/java/frontend poprzez node.js wpisać komendę:
 ```
 npm run build
