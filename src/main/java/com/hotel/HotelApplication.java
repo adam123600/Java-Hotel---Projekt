@@ -21,6 +21,9 @@ public class HotelApplication implements CommandLineRunner {
 			String cmdString = "cmd /c curl -X POST -H \"Content-Type: application/json\" -d @src/main/resources/data.json http://localhost:8080/api/auth/register";
 			System.out.println(cmdString);
 			Runtime.getRuntime().exec(cmdString);
+			cmdString = "cmd /c curl -X POST -H \"Content-Type: application/json\" -d @src/main/resources/regularUser.json http://localhost:8080/api/auth/register";
+			System.out.println(cmdString);
+			Runtime.getRuntime().exec(cmdString);
 		} else {
 			//TODO
 			/*Kto pracuje na linuxie niech sprobuje zrobić to samo polecenie

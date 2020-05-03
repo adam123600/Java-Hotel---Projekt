@@ -10,7 +10,7 @@ import Profile from "../Profile";
 import BoardUser from "../Board/BoardUser";
 import BoardModerator from "../Board/BoardModerator";
 import BoardAdmin from "../Board/BoardAdmin";
-import ItemStorage from "../ItemStorage";
+import ItemStorage from "../Storage/ItemStorage";
 
 
 class App extends Component {

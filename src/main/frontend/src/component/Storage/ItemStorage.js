@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import ItemService from "../service/ItemService";
+import ItemService from "../../service/ItemService";
+import Item from "./Item";
 
 export default class ItemStorage extends Component {
     constructor(props) {
@@ -34,9 +35,8 @@ export default class ItemStorage extends Component {
     render() {
         return (
             <div>
-                {this.state.content.map(item => <div><li>{item.item_name}</li></div>)}
+                {this.state.content.map(item => <Item {...item} />)}
             </div>
-
         );
     }
 }
