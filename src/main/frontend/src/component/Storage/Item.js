@@ -11,6 +11,7 @@ export default class Item extends Component{
             item_id: 0,
             item_name: "",
             min_quantity: 0,
+            current_quantity: 0,
             item_category: ""
         }
     }
@@ -24,6 +25,7 @@ export default class Item extends Component{
                 item_id: this.props.item_id,
                 item_name: this.props.item_name,
                 min_quantity: this.props.min_quantity,
+                current_quantity: this.props.current_quantity,
                 item_category: this.props.item_category
             });
         }
@@ -31,11 +33,13 @@ export default class Item extends Component{
 
     render() {
         return (
-            <div style={{margin: '10px'}}>
+            <div style={{margin: '10px', borderStyle: 'solid'}}>
                 <h3 style={{display: 'inline'}}>{this.state.item_name}</h3>
                 {this.state.showEditButton &&
                     <button class="btn btn-dark" style={{margin: '5px'}}>Edytuj</button>
                 }
+                <h4>Obecna ilość: {this.state.current_quantity}</h4>
+                <h4>Minimalna ilość: {this.state.min_quantity}</h4>
             </div>
         );
     }

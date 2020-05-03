@@ -26,6 +26,9 @@ public class Item {
     @Column(nullable = false)
     private Integer min_quantity;
 
+    @Column(nullable = false)
+    private Integer current_quantity;
+
     @Enumerated(EnumType.STRING)
     @Column(length = 30, nullable = false)
     private EItem item_category;
@@ -33,7 +36,8 @@ public class Item {
     public Item() {
     }
 
-    public Item(String itemName, Integer minQuantity, EItem itemCategory){
+    public Item(String itemName, Integer minQuantity, Integer current_quantity, EItem itemCategory){
+        this.current_quantity = current_quantity;
         this.item_category = itemCategory;
         this.min_quantity = minQuantity;
         this.item_name = itemName;
@@ -69,5 +73,13 @@ public class Item {
 
     public void setItem_id(Long item_id) {
         this.item_id = item_id;
+    }
+
+    public Integer getCurrent_quantity() {
+        return current_quantity;
+    }
+
+    public void setCurrent_quantity(Integer current_quantity) {
+        this.current_quantity = current_quantity;
     }
 }
