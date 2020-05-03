@@ -33,9 +33,38 @@ export default class ItemStorage extends Component {
     }
 
     render() {
+        const listOfFood = [];
+        this.state.content.map(item => {
+                if (item.item_category === 'CAT_FOOD') {
+                    listOfFood.push(item);
+                }
+            }
+        );
+
+        const listOfOffice = [];
+        this.state.content.map(item => {
+                if (item.item_category === 'CAT_OFFICE') {
+                    listOfOffice.push(item);
+                }
+            }
+        );
+
+        const listOfOther = [];
+        this.state.content.map(item => {
+                if (item.item_category === 'CAT_OTHER') {
+                    listOfOther.push(item);
+                }
+            }
+        );
+
         return (
             <div>
-                {this.state.content.map(item => <Item {...item} />)}
+                <h2 style={{margin: '5px'}}>Jedzenie:</h2>
+                {listOfFood.map(item => <Item {...item} />)}
+                <h2 style={{margin: '5px'}}>Biuro:</h2>
+                {listOfOffice.map(item => <Item {...item} />)}
+                <h2 style={{margin: '5px'}}>Inne:</h2>
+                {listOfOther.map(item => <Item {...item} />)}
             </div>
         );
     }
