@@ -10,6 +10,7 @@ import Profile from "../Profile";
 import BoardUser from "../Board/BoardUser";
 import BoardModerator from "../Board/BoardModerator";
 import BoardAdmin from "../Board/BoardAdmin";
+import ItemStorage from "../ItemStorage";
 
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
           <Route path="/user" component={BoardUser} />
           <Route path="/mod" component={BoardModerator} />
           <Route path="/admin" component={BoardAdmin} />
+          <Route path="/itemstorage" component={ItemStorage} />
         </Switch>
         </div>
 

@@ -66,6 +66,11 @@ export default class AppNavbar extends Component {
                   <NavLink href="/user">User</NavLink>
                 </NavItem>
               )}
+              {currentUser && (
+                  <NavItem>
+                    <NavLink href="/itemstorage">Magazyn Przedmiotów</NavLink>
+                  </NavItem>
+              )}
             </Nav>
         
           {currentUser ? (
