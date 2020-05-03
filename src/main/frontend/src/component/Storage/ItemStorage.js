@@ -33,6 +33,14 @@ export default class ItemStorage extends Component {
     }
 
     render() {
+       /* const listOfCategories = [];
+        this.state.content.map(item => {
+                if (!listOfCategories.includes(item.item_category)) {
+                    listOfCategories.push(item.item_category);
+                }
+            }
+        );*/
+
         const listOfFood = [];
         this.state.content.map(item => {
                 if (item.item_category === 'CAT_FOOD') {
@@ -59,6 +67,16 @@ export default class ItemStorage extends Component {
 
         return (
             <div>
+               {/* {listOfCategories.map(category => (
+                    <h2 style={{margin: '5px'}}>{category}</h2>
+                    this.state.content.map(item => {
+                        if (item.item_category === category) {
+                            <Item {...item} />
+                        }
+                    });
+                ))}*/}
+
+
                 <h2 style={{margin: '5px'}}>Jedzenie:</h2>
                 {listOfFood.map(item => <Item {...item} />)}
                 <h2 style={{margin: '5px'}}>Biuro:</h2>
