@@ -1,10 +1,10 @@
 INSERT IGNORE INTO roles VALUES (1,'ROLE_USER');
 INSERT IGNORE INTO roles VALUES (2,'ROLE_MODERATOR');
 INSERT IGNORE INTO roles VALUES (3,'ROLE_ADMIN');
-INSERT IGNORE INTO items VALUES (1, 'CAT_FOOD', 'Banany', 10, 30);
-INSERT IGNORE INTO items VALUES (2, 'CAT_FOOD', 'Chleb', 20, 30);
-INSERT IGNORE INTO items VALUES (3, 'CAT_FOOD', 'Brukselka', 15, 30);
-INSERT IGNORE INTO items VALUES (4, 'CAT_OFFICE', 'Papier do drukarki', 20, 30);
-INSERT IGNORE INTO items VALUES (5, 'CAT_OFFICE', 'Długopisy', 10, 30);
-INSERT IGNORE INTO items VALUES (6, 'CAT_OFFICE', 'Spinacze', 30, 30);
-INSERT IGNORE INTO items VALUES (7, 'CAT_OTHER', 'Papier toaletowy', 200, 30);
+INSERT IGNORE INTO items ( item_category, item_name, current_quantity, min_quantity) VALUES ( 'CAT_FOOD', 'Banany', 10, 30);
+INSERT IGNORE INTO items ( item_category, item_name, current_quantity, min_quantity) VALUES ( 'CAT_FOOD', 'Chleb', 20, 30);
+INSERT IGNORE INTO items ( item_category, item_name, current_quantity, min_quantity) VALUES ( 'CAT_FOOD', 'Brukselka', 15, 30);
+INSERT IGNORE INTO items ( item_category, item_name, current_quantity, min_quantity) VALUES ( 'CAT_OFFICE', 'Papier do drukarki', 20, 30);
+INSERT IGNORE INTO items ( item_category, item_name, current_quantity, min_quantity) VALUES ( 'CAT_OFFICE', 'Długopisy', 10, 30);
+INSERT IGNORE INTO items ( item_category, item_name, current_quantity, min_quantity) VALUES ( 'CAT_OFFICE', 'Spinacze', 30, 30);
+INSERT IGNORE INTO items ( item_category, item_name, current_quantity, min_quantity) VALUES ( 'CAT_OTHER', 'Papier toaletowy', 200, 30);
