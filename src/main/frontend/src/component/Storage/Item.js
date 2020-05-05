@@ -36,7 +36,7 @@ export default class Item extends Component{
             <div style={{margin: '10px', borderStyle: 'solid'}}>
                 <h3 style={{display: 'inline'}}>{this.state.item_name}</h3>
                 {this.state.showEditButton &&
-                    <button class="btn btn-dark" style={{margin: '5px'}}>Edytuj</button>
+                    <button className="btn btn-dark" style={{margin: '5px'}}>Edytuj</button>
                 }
                 <h4>Obecna ilość: {this.state.current_quantity}</h4>
                 <h4>Minimalna ilość: {this.state.min_quantity}</h4>

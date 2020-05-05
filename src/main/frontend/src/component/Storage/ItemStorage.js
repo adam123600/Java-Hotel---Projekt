@@ -51,7 +51,7 @@ export default class ItemStorage extends Component {
 
         return (
             <div>
-                {listOfCategories.map(category => {
+                {listOfCategories.map((category, index) => {
                     let nameOfCategory = '';
                     switch (category) { //TODO: W razie dodania nowej kateogrii należy jedynie dopisać odpowiedni case
                         case 'CAT_FOOD':
@@ -68,10 +68,10 @@ export default class ItemStorage extends Component {
                     }
                     return (
                         <div>
-                            <h2 style={{margin: '5px'}}>{nameOfCategory}</h2>
+                            <h2 key={index} style={{margin: '5px'}}>{nameOfCategory}</h2>
                             {this.state.content.map(item => {
                                 if (item.item_category === category)
-                                    return <Item {...item} />
+                                    return <Item key={item.item_id} {...item} />
                             })}
                         </div>
                     )
