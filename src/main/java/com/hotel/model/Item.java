@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Model Itemu w bazie danych
@@ -29,27 +31,41 @@ public class Item {
     @Column(nullable = false)
     private Integer current_quantity;
 
-    @Enumerated(EnumType.STRING)
+/*    @Enumerated(EnumType.STRING)
     @Column(length = 30, nullable = false)
-    private EItem item_category;
+    private EItem item_category;*/
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "item_category",
+            joinColumns = @JoinColumn(name = "item_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<ItemCategory> category = new HashSet<>();
+
 
     public Item() {
     }
 
-    public Item(String itemName, Integer minQuantity, Integer current_quantity, EItem itemCategory){
+    public Item(String itemName, Integer minQuantity, Integer current_quantity/*, EItem itemCategory*/){
         this.current_quantity = current_quantity;
-        this.item_category = itemCategory;
+        //this.item_category = itemCategory;
         this.min_quantity = minQuantity;
         this.item_name = itemName;
     }
 
-    public EItem getItem_category() {
+    public Set<ItemCategory> getCategory() {
+        return category;
+    }
+
+    public void setCategory(Set<ItemCategory> category) {
+        this.category = category;
+    }
+
+   /* public EItem getItem_category() {
         return item_category;
     }
 
     public void setItem_category(EItem item_category) {
         this.item_category = item_category;
-    }
+    }*/
 
     public String getItem_name() {
         return item_name;

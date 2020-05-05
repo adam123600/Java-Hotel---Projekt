@@ -41,10 +41,16 @@ export default class ItemStorage extends Component {
             );
         }
 
+        /**
+         * Poniżej znajduje się lista kategorii itemów aktualnie znajdujących się w bazie (NIE wszystkich możliwych kategorii)
+         * Kategorie w bazie są w postaci wiele do wielu, więc zwracany jest zagnieżdżony JSON,
+         * stąd biorę jeden element zwróconej listy kategorii o indeksie [0].
+         */
+
         const listOfCategories = [];
         this.state.content.map(item => {
-                if (!listOfCategories.includes(item.item_category)) {
-                    listOfCategories.push(item.item_category);
+                if (!listOfCategories.includes(item.category[0].category)) {
+                    listOfCategories.push(item.category[0].category);
                 }
             }
         );
@@ -70,7 +76,7 @@ export default class ItemStorage extends Component {
                         <div>
                             <h2 key={index} style={{margin: '5px'}}>{nameOfCategory}</h2>
                             {this.state.content.map(item => {
-                                if (item.item_category === category)
+                                if (item.category[0].category === category)
                                     return <Item key={item.item_id} {...item} />
                             })}
                         </div>
