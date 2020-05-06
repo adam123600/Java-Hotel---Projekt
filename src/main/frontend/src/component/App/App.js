@@ -25,7 +25,7 @@ class App extends Component {
     return (
       <Router>
         <AppNavbar/>
-        <div className="containter mt-3">
+        <div className="new-container">
         <Switch>
           <Route exact path="/home" component={Home} />
           <Route exact path={["/", "/login"]} component={Login} />
