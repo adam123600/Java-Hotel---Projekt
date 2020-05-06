@@ -8,6 +8,10 @@ class ItemService {
         return axios.get(API_URL, {headers: authHeader()});
     }
 
+    getAllCategories() {
+        return axios.get(API_URL + 'categories', {headers: authHeader()});
+    }
+
     getItemById(id) {
         return axios.get(API_URL + id, {headers: authHeader()});
     }
