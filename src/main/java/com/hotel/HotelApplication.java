@@ -29,8 +29,11 @@ public class HotelApplication implements CommandLineRunner {
 			/*Kto pracuje na linuxie niech sprobuje zrobić to samo polecenie
 			abu automatycznie rejestrowalo admina
 			Runtime.getRuntime()
-					.exec(String.format("sh -c ls %s", homeDirectory));
-			 */
+					.exec(String.format("sh -c ls %s", homeDirectory));*/
+			String shString = "curl -X POST -H \"Content-Type: application/json\" -d @src/main/resources/data.json http://localhost:8080/api/auth/register";
+			System.out.println(shString);
+			Runtime.getRuntime().exec(shString);
+
 		}
 
 	}

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 
 import AuthService from "../../service/AuthService";
+import { withRouter } from "react-router";
 
-export default class AppNavbar extends Component {
+class AppNavbar extends Component {
   constructor(props) {
     super(props);
 
@@ -42,7 +43,10 @@ export default class AppNavbar extends Component {
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+
+    if(this.props.location.pathname != '/login' && this.props.location.pathname != '/' ){
+
+      const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
 
     return (
       <div>
@@ -68,8 +72,8 @@ export default class AppNavbar extends Component {
               )}
               {currentUser && (
                   <NavItem>
-                    <NavLink href="/itemstorage">Magazyn Przedmiotów</NavLink>
-                  </NavItem>
+                      <NavLink href="/itemstorage">Magazyn Przedmiotów</NavLink>
+                </NavItem>
               )}
             </Nav>
         
@@ -94,16 +98,21 @@ export default class AppNavbar extends Component {
                   </NavLink>
                 </NavItem>
 
-                <NavItem>
-                  <NavLink href="/register">
-                    Sign Up
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            )}
-          </Collapse>
-        </Navbar>
-      </div>
-    );
+                  <NavItem>
+                    <NavLink href="/register">
+                      Sign Up
+                    </NavLink>
+                  </NavItem>
+                </Nav>
+              )}
+            </Collapse>
+          </Navbar>
+        </div>
+      );
+    }else{
+      return null;
+    }
   }
 }
+
+export default withRouter(AppNavbar)
