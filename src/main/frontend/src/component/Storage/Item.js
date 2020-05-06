@@ -43,16 +43,19 @@ export default class Item extends Component{
 
     render() {
         return (
-            <div style={{margin: '10px', borderStyle: 'solid'}}>
-                <h3 style={{display: 'inline'}}>{this.state.item_name}</h3>
-                {this.state.showEditButton &&
-                    <button className="btn btn-dark" style={{margin: '10px'}} onClick={this.onEditBtnClick}>Edytuj</button>
-                }
-                <h4>Obecna ilość: {this.state.current_quantity}</h4>
-                <h4>Minimalna ilość: {this.state.min_quantity}</h4>
-                {this.state.showEditField &&
+            <div className="card">
+                <h3 className='card-header'>{this.state.item_name}</h3>
+                <div className='card-body'>
+                    <h4 className='card-title'>Obecna ilość: {this.state.current_quantity}</h4>
+                    <h4 className='card-subtitle'>Minimalna ilość: {this.state.min_quantity}</h4>
+                    {this.state.showEditButton &&
+                    <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.onEditBtnClick}>Edytuj</button>
+                    }
+                    {this.state.showEditField &&
                     <EditItem onCancel={this.onCancelBtnClick} {...this.props}/>
-                }
+                    }
+                </div>
+
 
             </div>
         );
