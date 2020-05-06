@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 
 import AuthService from "../../service/AuthService";
+import { withRouter } from "react-router";
 
-export default class AppNavbar extends Component {
+class AppNavbar extends Component {
   constructor(props) {
     super(props);
 
@@ -42,63 +43,71 @@ export default class AppNavbar extends Component {
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
 
-    return (
-      <div>
-        <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/">Home</NavbarBrand>
-          <NavbarToggler onClick={this.toggle}/>
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              {showModeratorBoard && (
-                <NavItem>
-                  <NavLink href="/mod">Moderator Board</NavLink>
-                </NavItem>
-              )}
-              {showAdminBoard && (
-                <NavItem>
-                  <NavLink href="/admin">Admin Board</NavLink>
-                </NavItem>
-              )}
-              {currentUser && (
-                <NavItem>
-                  <NavLink href="/user">User</NavLink>
-                </NavItem>
-              )}
-            </Nav>
-        
-          {currentUser ? (
-              <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <NavLink href="/profile">
-                    {currentUser.username}
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/login" onClick={this.logOut}>
-                    Log out
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            ) : (
-              <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <NavLink href="/login">
-                    Login
-                  </NavLink>
-                </NavItem>
+    if(this.props.location.pathname != '/login' && this.props.location.pathname != '/' ){
 
-                <NavItem>
-                  <NavLink href="/register">
-                    Sign Up
-                  </NavLink>
-                </NavItem>
+      const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+
+      return (
+        <div>
+          <Navbar color="dark" dark expand="md">
+            <NavbarBrand href="/">Home</NavbarBrand>
+            <NavbarToggler onClick={this.toggle}/>
+            <Collapse isOpen={this.state.isOpen} navbar>
+              <Nav className="mr-auto" navbar>
+                {showModeratorBoard && (
+                  <NavItem>
+                    <NavLink href="/mod">Moderator Board</NavLink>
+                  </NavItem>
+                )}
+                {showAdminBoard && (
+                  <NavItem>
+                    <NavLink href="/admin">Admin Board</NavLink>
+                  </NavItem>
+                )}
+                {currentUser && (
+                  <NavItem>
+                    <NavLink href="/user">User</NavLink>
+                  </NavItem>
+                )}
               </Nav>
-            )}
-          </Collapse>
-        </Navbar>
-      </div>
-    );
+          
+            {currentUser ? (
+                <Nav className="ml-auto" navbar>
+                  <NavItem>
+                    <NavLink href="/profile">
+                      {currentUser.username}
+                    </NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink href="/login" onClick={this.logOut}>
+                      Log out
+                    </NavLink>
+                  </NavItem>
+                </Nav>
+              ) : (
+                <Nav className="ml-auto" navbar>
+                  <NavItem>
+                    <NavLink href="/login">
+                      Login
+                    </NavLink>
+                  </NavItem>
+
+                  <NavItem>
+                    <NavLink href="/register">
+                      Sign Up
+                    </NavLink>
+                  </NavItem>
+                </Nav>
+              )}
+            </Collapse>
+          </Navbar>
+        </div>
+      );
+    }else{
+      return null;
+    }
   }
 }
+
+export default withRouter(AppNavbar)
