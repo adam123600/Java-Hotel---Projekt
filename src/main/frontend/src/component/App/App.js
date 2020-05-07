@@ -14,6 +14,7 @@ import ItemStorage from "../Storage/ItemStorage";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ForgotPassword from '../ForgotPassword';
 
 
 toast.configure();
@@ -35,6 +36,7 @@ class App extends Component {
           <Route path="/mod" component={BoardModerator} />
           <Route path="/admin" component={BoardAdmin} />
           <Route path="/itemstorage" component={ItemStorage} />
+          <Route path="/forgotpassword" component={ForgotPassword}/>
         </Switch>
         </div>
 

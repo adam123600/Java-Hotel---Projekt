@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+
+import {Link, withRouter} from 'react-router-dom'
 import { toast } from 'react-toastify';
 import AuthService from "../service/AuthService";
 import './LoginPage.css';
@@ -27,7 +29,7 @@ export default class Login extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onCheckboxChange = this.onCheckboxChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleForgotPasswordClick = this.handleForgotPasswordClick.bind(this);
     
   
     this.state = {
@@ -36,7 +38,8 @@ export default class Login extends Component {
       loading: false,
       message: "",
       isChecked: false,
-      toastId : null
+      toastId : null,
+      // forgotpassword : false
     };
   }
 
@@ -54,16 +57,28 @@ export default class Login extends Component {
     });
   }
 
+
   onChangePassword(e) {
     this.setState({
       password: e.target.value
     });
   }
 
-  handleClick(e) {
-      e.preventDefault();
-      console.log('Kliknięto w link Forgot Password.');
-    }
+
+  // handleForgotPasswordClick(e) {
+  //     e.preventDefault();
+
+  //     this.setState({
+  //       forgotpassword: true
+  //     })
+
+  //     console.log('Kliknięto w link Forgot Password.');
+  //     this.props.history.push("/forgotpassword");
+    
+      
+  //   }
+
+
 
   handleLogin(e) {
     e.preventDefault();
@@ -182,9 +197,9 @@ export default class Login extends Component {
                     <span>LOGIN</span>
                   </button>
                 </div>
-               
-                <a href="#" onClick={this.handleClick}className="forgot-password-link">Forgot password?</a>
-    
+              
+                <Link to = "/forgotpassword" className = "forgot-password-link">Forgot password?</Link>
+              
                 <CheckButton
                   style={{ display: "none" }}
                   ref={c => {
@@ -200,3 +215,4 @@ export default class Login extends Component {
     );
   }
 }
+
