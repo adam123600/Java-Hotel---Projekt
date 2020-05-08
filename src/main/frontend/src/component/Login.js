@@ -40,8 +40,6 @@ export default class Login extends Component {
     };
   }
 
-  
-
   onCheckboxChange(e){
     this.setState({
       isChecked: e.target.value
@@ -110,6 +108,9 @@ export default class Login extends Component {
   }
 
   render() {
+
+    const isUser = AuthService.getCurrentUser();
+    console.log("Jestem " + isUser);
     return (
 
       <div className="my-row">
@@ -126,72 +127,84 @@ export default class Login extends Component {
         <div className="my-column">
           <div className="rightside">
             <div className="login-container">
-              <div className="welcome-text">
-                  <span>Welcome Back</span>
-              </div>
-
-              <Form className = "login-form"
-                onSubmit={this.handleLogin}
-                ref={c => {
-                  this.form = c;
-                }}>
-
-                <div className="my-form-group">
-                  <label htmlFor="username" className="my-label">USERNAME</label>
-                  <Input
-                    type="text"
-                    className="input-control"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.onChangeUsername}
-                    validations={[required]}
-                  />
+              { isUser ? (
+                <div>
+                  <div className="welcome-text">
+                    <span>Welcome Back</span>
+                  </div>
+                  <a href="/home" className="login-text">{isUser.username}</a>
                 </div>
+              ) : (
+                <div>
+                  <div className="welcome-text">
+                    <span>Welcome</span>
+                  </div>
 
-                <div className="my-form-group">
-                  <label htmlFor="password" className="my-label">PASSWORD</label>
-                  <Input
-                    type="password"
-                    className="input-control"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onChangePassword}
-                    validations={[required]}
-                  />
-                </div>
-
-
-                <div className="checkbox">
-                    <label htmlFor="checkid">
-                      <input 
-                      id = "checkid"
-                      type = "checkbox"
-                      value = {this.state.isChecked}
-                      onChange={this.onCheckboxChange}
-                      />
-                      <span className="remember-me-text"> Remember me</span>
-                    </label>
-                </div>
-
-
-                <div className="my-form-group">
-                  <button
-                    className="my-button login-button"
-                    disabled={this.state.loading}
-                  >
-                    <span>LOGIN</span>
-                  </button>
-                </div>
-               
-                <a href="#" onClick={this.handleClick}className="forgot-password-link">Forgot password?</a>
-    
-                <CheckButton
-                  style={{ display: "none" }}
+                  <Form className = "login-form"
+                  onSubmit={this.handleLogin}
                   ref={c => {
-                    this.checkBtn = c;
-                  }}
-                />
-              </Form>
+                    this.form = c;
+                  }}>
+
+                    <div className="my-form-group">
+                      <label htmlFor="username" className="my-label">USERNAME</label>
+                      <Input
+                        type="text"
+                        className="input-control"
+                        name="username"
+                        value={this.state.username}
+                        onChange={this.onChangeUsername}
+                        validations={[required]}
+                      />
+                    </div>
+
+                    <div className="my-form-group">
+                      <label htmlFor="password" className="my-label">PASSWORD</label>
+                      <Input
+                        type="password"
+                        className="input-control"
+                        name="password"
+                        value={this.state.password}
+                        onChange={this.onChangePassword}
+                        validations={[required]}
+                      />
+                    </div>
+
+
+                    <div className="checkbox">
+                        <label htmlFor="checkid">
+                          <input 
+                          id = "checkid"
+                          type = "checkbox"
+                          value = {this.state.isChecked}
+                          onChange={this.onCheckboxChange}
+                          />
+                          <span className="remember-me-text"> Remember me</span>
+                        </label>
+                    </div>
+
+
+                    <div className="my-form-group">
+                      <button
+                        className="my-button login-button"
+                        disabled={this.state.loading}
+                      >
+                        <span>LOGIN</span>
+                      </button>
+                    </div>
+                  
+                    <a href="#" onClick={this.handleClick}className="forgot-password-link">Forgot password?</a>
+        
+                    <CheckButton
+                      style={{ display: "none" }}
+                      ref={c => {
+                        this.checkBtn = c;
+                      }}
+                    />
+                  </Form>
+                </div>
+              )}
+              
             </div>
           </div>
         </div>

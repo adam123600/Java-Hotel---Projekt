@@ -101,6 +101,17 @@
     color: #f99cab;
   }
 
+  .login-text {
+    display: flex;
+    align-self: flex-start;
+    font-family: 'Source Sans Pro', sans-serif;
+    margin-bottom: 40px;
+    margin-left: 150px;
+    font-weight: 600;
+    font-size: 30px;
+    color: #f99cab;
+  }
+
 
   .my-button{    
     background-color: red;
