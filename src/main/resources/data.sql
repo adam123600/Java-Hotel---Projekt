@@ -18,3 +18,5 @@ INSERT IGNORE INTO item_category (item_id, category_id) VALUES (4, 2);
 INSERT IGNORE INTO item_category (item_id, category_id) VALUES (5, 2);
 INSERT IGNORE INTO item_category (item_id, category_id) VALUES (6, 2);
 INSERT IGNORE INTO item_category (item_id, category_id) VALUES (7, 3);
+INSERT IGNORE INTO notificationtypes (id, type) VALUES (1, 'RES_USER_PASSWORD');
+INSERT IGNORE INTO notificationtypes (id, type) VALUES (2, 'FOOD_ENDED');

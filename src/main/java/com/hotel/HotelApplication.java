@@ -1,8 +1,11 @@
 package com.hotel;
 
+import com.hotel.model.NotificationType;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 
 @SpringBootApplication
 public class HotelApplication implements CommandLineRunner {
@@ -37,5 +40,6 @@ public class HotelApplication implements CommandLineRunner {
 		}
 
 	}
+
 
 }

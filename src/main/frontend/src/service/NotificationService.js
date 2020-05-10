@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_URL = "/api/userpassword/";
+const API_URL = "/api/notifications/";
 
-class ForgotPasswordService{
+class NotificationService{
 
     forgotUserPassword(username){
         return axios.post(API_URL + "forgotpassword",{
@@ -11,4 +11,4 @@ class ForgotPasswordService{
     }
 }
 
-export default new ForgotPasswordService()
+export default new NotificationService()
