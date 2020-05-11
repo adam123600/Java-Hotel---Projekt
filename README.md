@@ -52,7 +52,7 @@ npm start
 ```
 Uruchomi się nam localhost:3000, na którym będą pokazywać się zmiany robione w aplikacji React
 
-## Budowanie pliku jar: NARAZIE NIE KONIECZNE
+## Budowanie pliku jar: NARAZIE NIEKONIECZNE
 - należy w katalogu src/main/java/frontend poprzez node.js wpisać komendę:
 ```
 npm run build
