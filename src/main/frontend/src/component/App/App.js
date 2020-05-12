@@ -11,6 +11,7 @@ import BoardUser from "../Board/BoardUser";
 import BoardModerator from "../Board/BoardModerator";
 import BoardAdmin from "../Board/BoardAdmin";
 import ItemStorage from "../Storage/ItemStorage";
+import BoardManager3 from "../Board/BoardManager3";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -35,6 +36,7 @@ class App extends Component {
           <Route path="/mod" component={BoardModerator} />
           <Route path="/admin" component={BoardAdmin} />
           <Route path="/itemstorage" component={ItemStorage} />
+          <Route path="/manager3" component={BoardManager3}/>
         </Switch>
         </div>
 
