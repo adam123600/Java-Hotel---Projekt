@@ -1,4 +1,5 @@
 import axios from "axios";
+import authHeader from "./AuthHeader";
 
 const API_URL = "/api/auth/";
 
@@ -33,6 +34,13 @@ class AuthService {
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));
   }
+
+  getAllUsers() {
+    return axios.get("/api/users/", {headers: authHeader()}).then(response => {
+      console.log(response);
+      return response.data;
+    });
+  };
 }
 
 export default new AuthService();

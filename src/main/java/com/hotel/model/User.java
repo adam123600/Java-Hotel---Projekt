@@ -1,5 +1,6 @@
 package com.hotel.model;
 
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,6 +32,15 @@ public class User {
     @NotBlank
     @Size(max = 120)
     private String password;
+
+    @Size(max = 30)
+    private String firstname;
+
+    @Size(max = 40)
+    private String lastname;
+
+    @Size(min = 6, max = 15)    // np. '+48 xxx xxx xxx'
+    private String phonenumber;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",
@@ -78,6 +88,18 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getFirstname() { return firstname; }
+
+    public void setFirstname(String firstname) { this.firstname = firstname; }
+
+    public String getLastname() { return lastname; }
+
+    public void setLastname(String lastname) { this.lastname = lastname; }
+
+    public String getPhonenumber() { return phonenumber; }
+
+    public void setPhonenumber(String phonenumber) { this.phonenumber = phonenumber; }
 
     public Set<Role> getRoles() {
         return roles;

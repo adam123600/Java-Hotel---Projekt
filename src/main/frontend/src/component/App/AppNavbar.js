@@ -75,6 +75,11 @@ class AppNavbar extends Component {
                       <NavLink href="/itemstorage">Magazyn Przedmiotów</NavLink>
                 </NavItem>
               )}
+              {currentUser && (
+                  <NavItem>
+                    <NavLink href="/pracownicy">Pracownicy</NavLink>
+                  </NavItem>
+              )}
             </Nav>
         
           {currentUser ? (
