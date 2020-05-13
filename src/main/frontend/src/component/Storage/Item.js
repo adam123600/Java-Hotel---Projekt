@@ -2,13 +2,14 @@ import React, { Component } from "react";
 
 import AuthService from "../../service/AuthService";
 import EditItem from "./EditItem";
+import ItemService from "../../service/ItemService";
 
 export default class Item extends Component{
     constructor(props) {
         super(props);
 
         this.state = {
-            showEditButton: false,
+            showEditDeleteButton: false,
             showEditField: false,
             item_id: 0,
             item_name: "",
@@ -22,7 +23,7 @@ export default class Item extends Component{
 
         if (user) {
             this.setState({
-                showEditButton: user.roles.includes("ROLE_ADMIN"), //TODO: Podmien na role managera!
+                showEditDeleteButton: user.roles.includes("ROLE_ADMIN"), //TODO: Podmien na role managera!
                 item_id: this.props.item_id,
                 item_name: this.props.item_name,
                 min_quantity: this.props.min_quantity,
@@ -33,6 +34,10 @@ export default class Item extends Component{
 
     onEditBtnClick = () => {
         this.setState({showEditField: !this.state.showEditField});
+    };
+    onDeleteBtnClick = () => {
+        ItemService.deleteItemById(this.state.item_id);
+        window.location.reload();
     };
     /**
      * Funkcja używana wewnątrz komponentu EditItem.js
@@ -48,11 +53,14 @@ export default class Item extends Component{
                 <div className='card-body'>
                     <h4 className='card-title'>Obecna ilość: {this.state.current_quantity}</h4>
                     <h4 className='card-subtitle'>Minimalna ilość: {this.state.min_quantity}</h4>
-                    {this.state.showEditButton &&
-                    <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.onEditBtnClick}>Edytuj</button>
+                    {this.state.showEditDeleteButton &&
+                        <div>
+                            <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.onEditBtnClick}>Edytuj</button>
+                            <button className="btn btn-danger" style={{margin: '10px'}} onClick={this.onDeleteBtnClick}>Usuń</button>
+                        </div>
                     }
                     {this.state.showEditField &&
-                    <EditItem onCancel={this.onCancelBtnClick} {...this.props}/>
+                        <EditItem onCancel={this.onCancelBtnClick} {...this.props}/>
                     }
                 </div>
 

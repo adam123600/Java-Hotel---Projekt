@@ -2,13 +2,17 @@ import React, { Component } from "react";
 
 import ItemService from "../../service/ItemService";
 import Item from "./Item";
+import AuthService from "../../service/AuthService";
+import AddItem from "./AddItem";
 
 export default class ItemStorage extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            content: []
+            content: [],
+            showAddItemForm: false,
+            showAddItemButton: false
         }
     }
 
@@ -30,12 +34,34 @@ export default class ItemStorage extends Component {
                 });
             }
         );
+        const user = AuthService.getCurrentUser();
+        if (user) {
+            this.setState({
+                showAddItemButton: user.roles.includes("ROLE_ADMIN"), //TODO: Podmien na role managera!
+            });
+        }
     }
+
+    onAddBtnClick = () => {
+        this.setState({showAddItemForm: !this.state.showAddItemForm});
+    };
+    /**
+     * Funkcja używana wewnątrz komponentu AddItem.js
+     */
+    onCancelBtnClick = () => {
+        this.setState({showAddItemForm: false});
+    };
 
     render() {
         if (this.state.content.length === 0) {
             return (
                 <div>
+                    {this.state.showAddItemButton &&
+                        <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.onAddBtnClick}>Dodaj przedmiot</button>
+                    }
+                    {this.state.showAddItemForm &&
+                        <AddItem onCancel={this.onCancelBtnClick}/>
+                    }
                     <h3 style={{margin: '5px'}}>Brak przedmiotów w bazie.</h3>
                 </div>
             );
@@ -57,6 +83,12 @@ export default class ItemStorage extends Component {
 
         return (
             <div>
+                {this.state.showAddItemButton &&
+                <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.onAddBtnClick}>Dodaj przedmiot</button>
+                }
+                {this.state.showAddItemForm &&
+                <AddItem onCancel={this.onCancelBtnClick}/>
+                }
                 {listOfCategories.map((category, index) => {
                     let nameOfCategory = '';
                     switch (category) { //TODO: W razie dodania nowej kateogrii należy jedynie dopisać odpowiedni case
