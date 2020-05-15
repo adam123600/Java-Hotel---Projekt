@@ -25,7 +25,7 @@ export default class Notification extends Component{
         if (user) {
           this.setState({
             currentUser: AuthService.getCurrentUser(),
-            showAdminNotifications: user.roles.includes("ROLE_ADMIN")
+            showAdminNotifications: user.roles.includes("ROLE_MANAGER")
           });
         }
 
