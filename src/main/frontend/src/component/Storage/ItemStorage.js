@@ -37,7 +37,7 @@ export default class ItemStorage extends Component {
         const user = AuthService.getCurrentUser();
         if (user) {
             this.setState({
-                showAddItemButton: user.roles.includes("ROLE_ADMIN"), //TODO: Podmien na role managera!
+                showAddItemButton: user.roles.includes("ROLE_MANAGER"), //TODO: Podmien na role managera!
             });
         }
     }
@@ -98,8 +98,14 @@ export default class ItemStorage extends Component {
                         case 'CAT_OFFICE':
                             nameOfCategory = 'Biuro';
                             break;
+                        case 'CAT_WORKSHOP':
+                            nameOfCategory = 'Warsztat'
+                            break;
                         case 'CAT_OTHER':
                             nameOfCategory = 'Inne';
+                            break;
+                        case 'CAT_HYGIENE':
+                            nameOfCategory = 'Higiena';
                             break;
                         default:
                             nameOfCategory = 'Nieznana kategoria';
@@ -109,7 +115,7 @@ export default class ItemStorage extends Component {
                             <h2 key={index} style={{margin: '5px'}}>{nameOfCategory}</h2>
                             {this.state.content.map(item => {
                                 if (item.category[0].category === category)
-                                    return <Item key={item.item_id} {...item} />
+                                    return <Item key={item.item_id} {...item}/>
                             })}
                         </div>
                     )

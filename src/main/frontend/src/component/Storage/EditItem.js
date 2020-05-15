@@ -77,8 +77,14 @@ export default class EditItem extends Component {
                                 case 'CAT_OFFICE':
                                     nameOfCategory = 'Biuro';
                                     break;
+                                case 'CAT_WORKSHOP':
+                                    nameOfCategory = 'Warsztat';
+                                    break;
                                 case 'CAT_OTHER':
                                     nameOfCategory = 'Inne';
+                                    break;
+                                case 'CAT_HYGIENE':
+                                    nameOfCategory = 'Higiena';
                                     break;
                                 default:
                                     nameOfCategory = 'Nieznana kategoria';

@@ -14,7 +14,7 @@ export default class Item extends Component{
             item_id: 0,
             item_name: "",
             min_quantity: 0,
-            current_quantity: 0
+            current_quantity: 0,
         }
     }
 
@@ -23,13 +23,26 @@ export default class Item extends Component{
 
         if (user) {
             this.setState({
-                showEditDeleteButton: user.roles.includes("ROLE_ADMIN"), //TODO: Podmien na role managera!
+                showEditDeleteButton: this.checkPermissionToEditDeleteButton(user.roles),
                 item_id: this.props.item_id,
                 item_name: this.props.item_name,
                 min_quantity: this.props.min_quantity,
                 current_quantity: this.props.current_quantity,
             });
         }
+    }
+
+    checkPermissionToEditDeleteButton = (roles) => {
+        const category = this.props.category[0].category;
+        return (roles.includes("ROLE_MANAGER")  //TODO: Podmien na role managera!
+            || (roles.includes("ROLE_REPAIRMAN") &&
+                category.includes("CAT_WORKSHOP"))
+            || (roles.includes("ROLE_CLEANER") &&
+                category.includes("CAT_HYGIENE"))
+            || (roles.includes("ROLE_KITCHEN_MANAGER") &&
+                category.includes("CAT_FOOD"))
+            || ((roles.includes("ROLE_RECEPTIONIST") || roles.includes("ROLE_ACCOUNTANT")) &&
+                category.includes("CAT_OFFICE")));
     }
 
     onEditBtnClick = () => {

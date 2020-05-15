@@ -7,5 +7,7 @@ package com.hotel.model;
 public enum EItem {
     CAT_FOOD,
     CAT_OFFICE,
-    CAT_OTHER
+    CAT_WORKSHOP,
+    CAT_OTHER,
+    CAT_HYGIENE
 }
