@@ -65,11 +65,13 @@ public class NotificationController {
     public Notification getNotificationById(@PathVariable Long id){
         return notificationRepository.getOne(id);
     }
-
-//    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void deleteNotificationById(@PathVariable Long id){ NotificationRepository.deleteById(id);
+//
+//    @DeleteMapping
+//    public void deleteNotificationById(@PathVariable Long id){
+//        return NotificationRepository.deleteById(id);
 //    }
+
+
 
 
 }

@@ -11,6 +11,7 @@ import BoardUser from "../Board/BoardUser";
 import BoardModerator from "../Board/BoardModerator";
 import BoardAdmin from "../Board/BoardAdmin";
 import ItemStorage from "../Storage/ItemStorage";
+import Notification from "../Notification";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,6 +38,7 @@ class App extends Component {
           <Route path="/admin" component={BoardAdmin} />
           <Route path="/itemstorage" component={ItemStorage} />
           <Route path="/forgotpassword" component={ForgotPassword}/>
+          <Route path="/notifications" component={Notification}/>
         </Switch>
         </div>
 
