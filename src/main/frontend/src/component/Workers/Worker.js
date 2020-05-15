@@ -21,8 +21,6 @@ export default class Worker extends React.Component {
         this.setState({renderEdit: !this.state.renderEdit});
     }
 
-
-
     render() {
         return(
             <div style={{padding: '25px'}}>

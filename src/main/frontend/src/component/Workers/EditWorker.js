@@ -58,8 +58,8 @@ export default class EditWorker extends React.Component {
         };
         console.log(role);
         axios.put(this.props.href + '/roles', role,{headers: authHeader()});
+        window.location.reload();
     }
-
 
     render() {
         return(
