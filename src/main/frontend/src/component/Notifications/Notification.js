@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import NotificationService from "../service/NotificationService";
-import AuthService from "../service/AuthService";
+import NotificationService from "../../service/NotificationService";
+import AuthService from "../../service/AuthService";
 
 import { toast } from 'react-toastify';
 import "./Notification.css";

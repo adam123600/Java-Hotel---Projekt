@@ -4,7 +4,7 @@ import Input from "react-validation/build/input";
 import { toast } from 'react-toastify';
 import CheckButton from "react-validation/build/button";
 
-import ForgotPasswordService from "../service/NotificationService";
+import ForgotPasswordService from "../../service/NotificationService";
 
 
 

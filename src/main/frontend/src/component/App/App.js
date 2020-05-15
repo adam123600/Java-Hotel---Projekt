@@ -12,11 +12,11 @@ import BoardModerator from "../Board/BoardModerator";
 import BoardAdmin from "../Board/BoardAdmin";
 import ItemStorage from "../Storage/ItemStorage";
 import AllWorkers from "../Workers/AllWorkers";
-import Notification from "../Notification";
+import Notification from "../Notifications/Notification";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ForgotPassword from '../ForgotPassword';
+import ForgotPassword from '../Notifications/ForgotPassword';
 
 
 toast.configure();
