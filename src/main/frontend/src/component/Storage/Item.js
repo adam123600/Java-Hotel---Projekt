@@ -22,7 +22,7 @@ export default class Item extends Component{
 
         if (user) {
             this.setState({
-                showEditButton: user.roles.includes("ROLE_ADMIN"), //TODO: Podmien na role managera!
+                showEditButton: user.roles.includes("ROLE_USER"), //TODO: Podmien na role managera!
                 item_id: this.props.item_id,
                 item_name: this.props.item_name,
                 min_quantity: this.props.min_quantity,

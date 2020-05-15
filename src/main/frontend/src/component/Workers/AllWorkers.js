@@ -8,18 +8,14 @@ export default class AllWorkers extends React.Component {
         super(props);
         this.state = {
             allWorkers: [],
+            allRoles: [],
         }
-    }
-
-    componentDidMount() {
-        WorkerService.getAllUsers().then(response => {
-            this.setState({allWorkers: response});
+        WorkerService.getAllWorkers().then(result => {
+            this.setState({allWorkers: result});
         });
-        /*axios.get("/api/users/").then(response =>{
-            this.setState({
-                allWorkers: response.data._embedded.users
-            });
-        });*/
+        WorkerService.getAllRoles().then(result => {
+            this.setState({allRoles: result});
+        });
     }
 
     render() {
@@ -32,7 +28,7 @@ export default class AllWorkers extends React.Component {
                     <ul>
                         {this.state.allWorkers.map(worker => (
                             <li key={worker._links.self}>
-                                <Worker worker={worker}/>
+                                <Worker worker={worker} allRoles={this.state.allRoles}/>
                             </li>
                         ))}
                     </ul>

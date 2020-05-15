@@ -10,4 +10,5 @@ public enum ERole {
     ROLE_BUTLER,
     ROLE_MANAGER,
     ROLE_KITCHEN_MANAGER,
+    ROLE_REPAIRMAN,
 }
