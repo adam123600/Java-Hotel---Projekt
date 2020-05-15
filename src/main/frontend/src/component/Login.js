@@ -29,7 +29,7 @@ export default class Login extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onCheckboxChange = this.onCheckboxChange.bind(this);
-    // this.handleForgotPasswordClick = this.handleForgotPasswordClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     
   
     this.state = {
@@ -38,8 +38,7 @@ export default class Login extends Component {
       loading: false,
       message: "",
       isChecked: false,
-      toastId : null,
-      // forgotpassword : false
+      toastId : null
     };
   }
 
@@ -57,28 +56,16 @@ export default class Login extends Component {
     });
   }
 
-
   onChangePassword(e) {
     this.setState({
       password: e.target.value
     });
   }
 
-
-  // handleForgotPasswordClick(e) {
-  //     e.preventDefault();
-
-  //     this.setState({
-  //       forgotpassword: true
-  //     })
-
-  //     console.log('Kliknięto w link Forgot Password.');
-  //     this.props.history.push("/forgotpassword");
-    
-      
-  //   }
-
-
+  handleClick(e) {
+      e.preventDefault();
+      console.log('Kliknięto w link Forgot Password.');
+    }
 
   handleLogin(e) {
     e.preventDefault();
@@ -125,6 +112,9 @@ export default class Login extends Component {
   }
 
   render() {
+
+    const isUser = AuthService.getCurrentUser();
+    console.log("Jestem " + isUser);
     return (
 
       <div className="my-row">
@@ -141,52 +131,61 @@ export default class Login extends Component {
         <div className="my-column">
           <div className="rightside">
             <div className="login-container">
-              <div className="welcome-text">
-                  <span>Welcome Back</span>
-              </div>
-
-              <Form className = "login-form"
-                onSubmit={this.handleLogin}
-                ref={c => {
-                  this.form = c;
-                }}>
-
-                <div className="my-form-group">
-                  <label htmlFor="username" className="my-label">USERNAME</label>
-                  <Input
-                    type="text"
-                    className="input-control"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.onChangeUsername}
-                    validations={[required]}
-                  />
+              { isUser ? (
+                <div>
+                  <div className="welcome-text">
+                    <span>Welcome Back</span>
+                  </div>
+                  <a href="/home" className="login-text">{isUser.username}</a>
                 </div>
+              ) : (
+                <div>
+                  <div className="welcome-text">
+                    <span>Welcome</span>
+                  </div>
 
-                <div className="my-form-group">
-                  <label htmlFor="password" className="my-label">PASSWORD</label>
-                  <Input
-                    type="password"
-                    className="input-control"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onChangePassword}
-                    validations={[required]}
-                  />
-                </div>
+                  <Form className = "login-form"
+                  onSubmit={this.handleLogin}
+                  ref={c => {
+                    this.form = c;
+                  }}>
 
-
-                <div className="checkbox">
-                    <label htmlFor="checkid">
-                      <input 
-                      id = "checkid"
-                      type = "checkbox"
-                      value = {this.state.isChecked}
-                      onChange={this.onCheckboxChange}
+                    <div className="my-form-group">
+                      <label htmlFor="username" className="my-label">USERNAME</label>
+                      <Input
+                        type="text"
+                        className="input-control"
+                        name="username"
+                        value={this.state.username}
+                        onChange={this.onChangeUsername}
+                        validations={[required]}
                       />
-                      <span className="remember-me-text"> Remember me</span>
-                    </label>
-                </div>
+                    </div>
+
+                    <div className="my-form-group">
+                      <label htmlFor="password" className="my-label">PASSWORD</label>
+                      <Input
+                        type="password"
+                        className="input-control"
+                        name="password"
+                        value={this.state.password}
+                        onChange={this.onChangePassword}
+                        validations={[required]}
+                      />
+                    </div>
+
+
+                    <div className="checkbox">
+                        <label htmlFor="checkid">
+                          <input
+                          id = "checkid"
+                          type = "checkbox"
+                          value = {this.state.isChecked}
+                          onChange={this.onCheckboxChange}
+                          />
+                          <span className="remember-me-text"> Remember me</span>
+                        </label>
+                    </div>
 
 
                 <div className="my-form-group">
@@ -197,9 +196,9 @@ export default class Login extends Component {
                     <span>LOGIN</span>
                   </button>
                 </div>
-              
-                <Link to = "/forgotpassword" className = "forgot-password-link">Forgot password?</Link>
-              
+
+                        <Link to = "/forgotpassword" className = "forgot-password-link">Forgot password?</Link>
+    
                 <CheckButton
                   style={{ display: "none" }}
                   ref={c => {
@@ -208,11 +207,13 @@ export default class Login extends Component {
                 />
               </Form>
             </div>
+          )}
+
           </div>
         </div>
       </div>
+     </div>
 
     );
   }
 }
-

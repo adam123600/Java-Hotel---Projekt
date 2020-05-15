@@ -9,6 +9,7 @@ export default class Item extends Component{
 
         this.state = {
             showEditButton: false,
+            showEditField: false,
             item_id: 0,
             item_name: "",
             min_quantity: 0,
@@ -30,20 +31,32 @@ export default class Item extends Component{
         }
     }
 
-    onEditBtnClick(event) {
-
-    }
+    onEditBtnClick = () => {
+        this.setState({showEditField: !this.state.showEditField});
+    };
+    /**
+     * Funkcja używana wewnątrz komponentu EditItem.js
+     */
+    onCancelBtnClick = () => {
+      this.setState({showEditField: false});
+    };
 
     render() {
         return (
-            <div style={{margin: '10px', borderStyle: 'solid'}}>
-                <h3 style={{display: 'inline'}}>{this.state.item_name}</h3>
-                {this.state.showEditButton &&
-                    <button className="btn btn-dark" style={{margin: '5px'}} onClick={this.onEditBtnClick}>Edytuj</button>
-                }
-                <h4>Obecna ilość: {this.state.current_quantity}</h4>
-                <h4>Minimalna ilość: {this.state.min_quantity}</h4>
-                <EditItem {...this.props}/>
+            <div className="card">
+                <h3 className='card-header'>{this.state.item_name}</h3>
+                <div className='card-body'>
+                    <h4 className='card-title'>Obecna ilość: {this.state.current_quantity}</h4>
+                    <h4 className='card-subtitle'>Minimalna ilość: {this.state.min_quantity}</h4>
+                    {this.state.showEditButton &&
+                    <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.onEditBtnClick}>Edytuj</button>
+                    }
+                    {this.state.showEditField &&
+                    <EditItem onCancel={this.onCancelBtnClick} {...this.props}/>
+                    }
+                </div>
+
+
             </div>
         );
     }
