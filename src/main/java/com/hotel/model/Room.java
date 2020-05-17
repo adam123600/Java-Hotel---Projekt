@@ -1,6 +1,8 @@
 package com.hotel.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -31,13 +33,16 @@ public class Room {
     @Column(nullable = false)
     private Float balance;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "standard_id", nullable = false)
     private RoomStandard roomStandard;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
     private List<Reservation> reservations;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
     private List<Guest> guests;
 
