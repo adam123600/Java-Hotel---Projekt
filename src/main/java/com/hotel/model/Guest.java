@@ -32,12 +32,10 @@ public class Guest {
 
     @Column(nullable = false)
     @Type(type="date")
-    @NotBlank
     private Date accommodationDate;
 
     @Column(nullable = false)
     @Type(type="date")
-    @NotBlank
     private Date checkOutDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
