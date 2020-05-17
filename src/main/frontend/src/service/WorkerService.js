@@ -3,7 +3,7 @@ import authHeader from './AuthHeader';
 
 class WorkerService {
     getAllWorkers() {
-        return axios.get("http://localhost:8080/api/users").then(response => {
+        return axios.get("/api/users").then(response => {
             console.log(response.data);
             return response.data._embedded.users;
         }).catch(err=>{console.log(err)});

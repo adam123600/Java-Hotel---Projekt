@@ -30,12 +30,10 @@ public class Reservation {
 
     @Column(nullable = false)
     @Type(type="date")
-    @NotBlank
     private Date startDate;
 
     @Column(nullable = false)
     @Type(type="date")
-    @NotBlank
     private Date endDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

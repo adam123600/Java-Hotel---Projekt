@@ -76,3 +76,11 @@ label {
   background-color: #f3c2c7;
 
 }
+
+.room {
+  margin: 25px;
+  padding: 25px;
+  background-color: skyblue;
+  float: left;
+  width: 200px;
+}
