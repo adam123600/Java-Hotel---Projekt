@@ -108,6 +108,41 @@ public class AuthController {
                         roles.add(modRole);
 
                         break;
+                    case "receptionist":
+                        Role receptionistRole = roleRepository.findByName(ERole.ROLE_RECEPTIONIST)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(receptionistRole);
+                        break;
+                    case "accountant":
+                        Role accountantRole = roleRepository.findByName(ERole.ROLE_ACCOUNTANT)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(accountantRole);
+                        break;
+                    case "cleaner":
+                        Role cleanerRole = roleRepository.findByName(ERole.ROLE_CLEANER)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(cleanerRole);
+                        break;
+                    case "butler":
+                        Role butlerRole = roleRepository.findByName(ERole.ROLE_BUTLER)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(butlerRole);
+                        break;
+                    case "manager":
+                        Role managerRole = roleRepository.findByName(ERole.ROLE_MANAGER)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(managerRole);
+                        break;
+                    case "kitchen_manager":
+                        Role kitchenManagerRole = roleRepository.findByName(ERole.ROLE_KITCHEN_MANAGER)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(kitchenManagerRole);
+                        break;
+                    case "repairman":
+                        Role repairManRole = roleRepository.findByName(ERole.ROLE_REPAIRMAN)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(repairManRole);
+                        break;
                     default:
                         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));

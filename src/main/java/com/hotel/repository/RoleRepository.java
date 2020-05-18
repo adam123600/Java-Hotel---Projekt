@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import com.hotel.model.ERole;
 import com.hotel.model.Role;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
     Optional<Role> findByName(ERole name);

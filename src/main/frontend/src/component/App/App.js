@@ -11,11 +11,13 @@ import BoardUser from "../Board/BoardUser";
 import BoardModerator from "../Board/BoardModerator";
 import BoardAdmin from "../Board/BoardAdmin";
 import ItemStorage from "../Storage/ItemStorage";
+import AllWorkers from "../Workers/AllWorkers";
+import Notification from "../Notifications/Notification";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ChangePassword from '../User/ChangePassword';
-
+import ForgotPassword from '../Notifications/ForgotPassword';
 
 toast.configure();
 
@@ -37,6 +39,9 @@ class App extends Component {
           <Route path="/admin" component={BoardAdmin} />
           <Route path="/itemstorage" component={ItemStorage} />
           <Route path="/changepassword" component={ChangePassword} />
+          <Route path="/forgotpassword" component={ForgotPassword}/>
+          <Route path="/notifications" component={Notification}/>
+          <Route path="/pracownicy" component={AllWorkers} />
         </Switch>
         </div>
 

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+
+import {Link, withRouter} from 'react-router-dom'
 import { toast } from 'react-toastify';
 import AuthService from "../../service/AuthService";
 import './LoginPage.css';
@@ -39,6 +41,8 @@ export default class Login extends Component {
       toastId : null
     };
   }
+
+  
 
   onCheckboxChange(e){
     this.setState({
@@ -173,7 +177,7 @@ export default class Login extends Component {
 
                     <div className="checkbox">
                         <label htmlFor="checkid">
-                          <input 
+                          <input
                           id = "checkid"
                           type = "checkbox"
                           value = {this.state.isChecked}
@@ -184,31 +188,31 @@ export default class Login extends Component {
                     </div>
 
 
-                    <div className="my-form-group">
-                      <button
-                        className="my-button login-button"
-                        disabled={this.state.loading}
-                      >
-                        <span>LOGIN</span>
-                      </button>
-                    </div>
-                  
-                    <a href="#" onClick={this.handleClick}className="forgot-password-link">Forgot password?</a>
-        
-                    <CheckButton
-                      style={{ display: "none" }}
-                      ref={c => {
-                        this.checkBtn = c;
-                      }}
-                    />
-                  </Form>
+                <div className="my-form-group">
+                  <button
+                    className="my-button login-button"
+                    disabled={this.state.loading}
+                  >
+                    <span>LOGIN</span>
+                  </button>
                 </div>
-              )}
-              
+
+                        <Link to = "/forgotpassword" className = "forgot-password-link">Forgot password?</Link>
+    
+                <CheckButton
+                  style={{ display: "none" }}
+                  ref={c => {
+                    this.checkBtn = c;
+                  }}
+                />
+              </Form>
             </div>
+          )}
+
           </div>
         </div>
       </div>
+     </div>
 
     );
   }
