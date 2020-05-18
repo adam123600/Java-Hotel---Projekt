@@ -4,7 +4,7 @@ import AppNavbar from './AppNavbar';
 import Home from '../Home';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-import Login from "../Login";
+import Login from "../Login/Login";
 import Register from "../Register";
 import Profile from "../Profile";
 import BoardUser from "../Board/BoardUser";
@@ -14,6 +14,7 @@ import ItemStorage from "../Storage/ItemStorage";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ChangePassword from '../User/ChangePassword';
 
 
 toast.configure();
@@ -35,6 +36,7 @@ class App extends Component {
           <Route path="/mod" component={BoardModerator} />
           <Route path="/admin" component={BoardAdmin} />
           <Route path="/itemstorage" component={ItemStorage} />
+          <Route path="/changepassword" component={ChangePassword} />
         </Switch>
         </div>
 

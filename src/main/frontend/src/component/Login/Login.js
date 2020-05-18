@@ -3,9 +3,9 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { toast } from 'react-toastify';
-import AuthService from "../service/AuthService";
+import AuthService from "../../service/AuthService";
 import './LoginPage.css';
-const hotelImg = require('../image/hotel.jpg');
+const hotelImg = require('../../image/hotel.jpg');
 
 
 const required = value => {
