@@ -46,7 +46,7 @@ class AppNavbar extends Component {
 
     if(this.props.location.pathname != '/login' && this.props.location.pathname != '/' ){
 
-      const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+      const { currentUser } = this.state;
 
     return (
       <div>
@@ -55,21 +55,6 @@ class AppNavbar extends Component {
           <NavbarToggler onClick={this.toggle}/>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              {showModeratorBoard && (
-                <NavItem>
-                  <NavLink href="/mod">Moderator Board</NavLink>
-                </NavItem>
-              )}
-              {showAdminBoard && (
-                <NavItem>
-                  <NavLink href="/admin">Admin Board</NavLink>
-                </NavItem>
-              )}
-              {currentUser && (
-                <NavItem>
-                  <NavLink href="/user">User</NavLink>
-                </NavItem>
-              )}
               {currentUser && (
                   <NavItem>
                       <NavLink href="/itemstorage">Magazyn Przedmiotów</NavLink>

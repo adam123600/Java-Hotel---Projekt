@@ -35,6 +35,10 @@ class WorkerService {
             default: return roleName;
         }
     }
+
+    resetPassword(href, userResetPassword) {
+        return axios.put(href + "/changePassword", userResetPassword, {headers: authHeader()});
+    }
 }
 
 export default new WorkerService();

@@ -1,6 +1,7 @@
 package com.hotel.controller;
 
 import com.hotel.model.User;
+import com.hotel.payload.request.ChangePasswordRequest;
 import com.hotel.payload.response.MessageResponse;
 import com.hotel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +23,13 @@ public class UserController {
     @Autowired
     PasswordEncoder encoder;
 
-    @GetMapping
-    public List<User> getAllItems(){
-        return userRepository.findAll();
-    }
+    @RequestMapping(value = "{id}/changePassword", method = RequestMethod.PUT)
+    public ResponseEntity<MessageResponse> updateUser(@PathVariable Long id, @Valid @RequestBody ChangePasswordRequest newPassword){
 
-    @RequestMapping(value = "{id}/change_password", method = RequestMethod.PUT)
-    public ResponseEntity<MessageResponse> changePassword(@PathVariable Long id, @Valid @RequestBody User user){
+        User userToUpdate= userRepository.getOne(id);
+        userToUpdate.setPassword(encoder.encode(newPassword.getPassword()));
 
-        User userToChangePassword = userRepository.getOne(id);
-        userToChangePassword.setPassword(encoder.encode(user.getPassword()));
-
-        userRepository.save(userToChangePassword);
+        userRepository.save(userToUpdate);
         return ResponseEntity.ok(new MessageResponse("Hasło zostało zmienione!"));
     }
 }

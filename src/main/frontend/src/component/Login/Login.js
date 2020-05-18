@@ -186,6 +186,7 @@ export default class Login extends Component {
                           <span className="remember-me-text"> Remember me</span>
                         </label>
                     </div>
+                
 
 
                 <div className="my-form-group">

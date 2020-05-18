@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App/App.css';
 import { Container } from 'reactstrap';
-import UserService from "../service/UserService";
 
 
 class Home extends Component {
@@ -14,21 +13,10 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    UserService.getPublicContent().then(
-      response => {
-        this.setState({
-          content: response.data
-        });
-      },
-      error => {
-        this.setState({
-          content:
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString()
-        });
-      }
-    );
+
+    this.setState({
+      content: "TODO"
+    });
   }
 
   render() {
