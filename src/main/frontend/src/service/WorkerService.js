@@ -23,6 +23,14 @@ class WorkerService {
         })
     }
 
+    deleteUser(id) {
+        axios.delete("/api/users/" + id).then(function (response) {
+            console.log(response);
+        }).catch(err => {
+            console.log(err)
+        });
+    }
+
     roleNameToPolish(roleName) {
         switch(roleName) {
             case 'ROLE_RECEPTIONIST': return 'Recepcjonista';
