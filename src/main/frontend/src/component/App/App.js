@@ -14,6 +14,7 @@ import ItemStorage from "../Storage/ItemStorage";
 import AllWorkers from "../Workers/AllWorkers";
 import Notification from "../Notification";
 import AllRooms from "../Rooms/AllRooms";
+import AllGuests from "../Guests/AllGuests";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -43,6 +44,7 @@ class App extends Component {
           <Route path="/notifications" component={Notification}/>
           <Route path="/pracownicy" component={AllWorkers} />
           <Route path="/rooms" component={AllRooms} />
+          <Route path="/goscie" component={AllGuests}/>
         </Switch>
         </div>
 
