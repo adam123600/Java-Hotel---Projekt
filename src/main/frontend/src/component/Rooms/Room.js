@@ -1,22 +1,38 @@
 import React, { Component } from "react";
 import RoomService from "../../service/RoomService"
 
+const img = "/RoomOccupancy/";
+
 export default class Room extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            roomStandard: [],
+            roomStandard: {},
+            roomCapacity: "",
+            img: '01.png',
         }
+    }
 
+    componentDidMount() {
+        console.log(this.props.room);
         RoomService.getRoomStandard(this.props.room).then(result => {
-            this.setState({roomStandard: result});
+            console.log(result);
+            this.setState({
+                roomStandard: result,
+                img: img + this.props.room.currentNumberOfGuests + result.max_capacity + '.png',
+            });
+            console.log("img:");
+            console.log(this.state.img);
         });
     }
 
     render() {
+        var roomClass = this.props.room.currentNumberOfGuests ? 'room occupied' : 'room free';
+
         return(
-            <div className="room">
-                <p>Numer pokoju: {this.props.room.roomName}</p>
+            <div className={roomClass}>
+                <p>{this.props.room.roomName}</p>
+                <img src={this.state.img}/>
             </div>
         )
     }

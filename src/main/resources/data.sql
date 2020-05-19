@@ -52,8 +52,8 @@ INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, stan
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (7, 342.18, 3, '3001', 3);
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (8, 342.18, 0, '3002', 3);
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (9, 342.18, 1, '3003', 1);
-INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (10, 342.18, 1, '3004', 1);
-INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (11, 342.18, 2, '3005', 2);
+INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (10, 342.18, 0, '3004', 1);
+INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (11, 342.18, 1, '3005', 2);
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (12, 342.18, 2, '3006', 2);
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (13, 342.18, 3, '4001', 3);
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (14, 342.18, 2, '4002', 2);

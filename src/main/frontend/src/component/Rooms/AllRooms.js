@@ -18,9 +18,9 @@ export default class AllRooms extends React.Component {
             <div className="main-container">
                 <div className="content">
                     {this.state.allRooms.map(room => (
-                        <li key={room.roomName}>
+                        <div key={room.roomName}>
                             <Room room={room}/>
-                        </li>
+                        </div>
                     ))}
                 </div>
             </div>

@@ -71,16 +71,41 @@ label {
   height: 100%;
 }
 
+.main-container {
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  width: 80%;
+}
 
 .color-nav{
   background-color: #f3c2c7;
-
 }
 
 .room {
   margin: 25px;
-  padding: 25px;
+  padding: 15px;
   background-color: skyblue;
   float: left;
   width: 200px;
+  height: 120px;
+  font-family: Verdana;
+  font-size: 20px;
+  font-weight: bold;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.room.occupied {
+  background-color: #ff4d4d;
+}
+
+.room.free {
+  background-color: lawngreen;
 }

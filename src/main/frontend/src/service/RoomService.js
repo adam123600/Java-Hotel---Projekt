@@ -1,4 +1,5 @@
 import axios from 'axios';
+import authHeader from "./AuthHeader";
 
 class RoomService {
     getAllRooms() {
@@ -9,8 +10,9 @@ class RoomService {
     }
 
     getRoomStandard(room) {
-        return axios.get(room._links.self.roomStandard).then(response => {
-            //console.log(response.data);
+        return axios.get(room._links.roomStandard.href, {headers: authHeader()}).then(response => {
+            console.log("hej");
+            console.log(response.data);
             return response.data;
         })
     }
