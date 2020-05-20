@@ -115,7 +115,7 @@
 						</goals>
 						<phase>generate-resources</phase>
 						<configuration>
-							<argumnets>install</argumnets>
+							<arguments>install</arguments>
 						</configuration>
 					</execution>
 
@@ -126,7 +126,18 @@
 						</goals>
 						<phase>generate-resources</phase>
 						<configuration>
-							<argumnets>run build</argumnets>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>npm install react datepicker</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<arguments>install react-date-picker</arguments>
 						</configuration>
 					</execution>
 				</executions>
