@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import NotificationService from "../../service/NotificationService";
 import AuthService from "../../service/AuthService";
+import WorkerService from "../../service/WorkerService"
 
 import { toast } from 'react-toastify';
 import "./Notification.css";
+import ChangePassword from "../Workers/ChangePassword";
 
 
 export default class Notification extends Component{
@@ -14,9 +16,14 @@ export default class Notification extends Component{
             showAdminNotifications: false,
             allNotifications: [],
             resPassNotifications: [],
+            allWorkers: [],
             type : 1,
             message: ""
         }
+
+        WorkerService.getAllWorkers().then(result => {
+          this.setState({allWorkers: result});
+      });
     }
 
     componentDidMount() {
@@ -28,7 +35,6 @@ export default class Notification extends Component{
             showAdminNotifications: user.roles.includes("ROLE_MANAGER")
           });
         }
-
 
         NotificationService.getAllNotifications().then(
             response => {
@@ -56,13 +62,12 @@ export default class Notification extends Component{
               }
             });
 
-
-
             NotificationService.getAllNotificationsByNotificationTypeId(this.state.type).then(
               response => {
                   this.setState({
                     resPassNotifications: response.data
                   });
+
               }).catch(error => {
                   const resMessage =
                   (error.response && error.response.data && error.response.data.message) ||
@@ -83,20 +88,28 @@ export default class Notification extends Component{
                   })
                 }
               });
-
-
+            
       }
 
       render(){
+        const {worker, workerHref} = this.state;
           return(
             <div className="notification-container">
               {this.state.showAdminNotifications &&
                <div>
                   <h2>Prośby o zresetowanie hasła:</h2>
                   <div>
-                    {this.state.resPassNotifications.map(notification => <div key={notification.id}>{notification.username}</div>)}
-                  </div>
-                                         
+                    {this.state.resPassNotifications.map(notification => 
+                      <div>
+                        <div key={notification.id}>{notification.username}</div>
+                          {this.state.allWorkers.map( worker => {
+                            if(notification.username == worker.username) {
+                              return <ChangePassword href={worker._links.self.href} currentWorker={worker}/>
+                            }
+                          })}
+                      </div>
+                    )}
+                  </div>                 
                 </div>
               }
                          
