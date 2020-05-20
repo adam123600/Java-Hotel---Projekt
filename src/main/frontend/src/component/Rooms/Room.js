@@ -30,10 +30,12 @@ export default class Room extends React.Component {
         var roomClass = this.props.room.currentNumberOfGuests ? 'room occupied' : 'room free';
 
         return(
+            <a href="#">
             <div className={roomClass}>
                 <p>{this.props.room.roomName}</p>
                 <img src={this.state.img}/>
             </div>
+            </a>
         )
     }
 }

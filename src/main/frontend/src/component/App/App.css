@@ -104,8 +104,20 @@ label {
 
 .room.occupied {
   background-color: #ff4d4d;
+  color: #C8C8C8;
+  text-shadow: 3px 3px 3px #000000;
+}
+
+.room.occupied:hover {
+  background-color: #dc4d4d;
 }
 
 .room.free {
   background-color: lawngreen;
+  color: #0096FF;
+  text-shadow: 2px 2px 2px #000000;
+}
+
+.room.free:hover {
+  background-color: #64DC00;
 }
