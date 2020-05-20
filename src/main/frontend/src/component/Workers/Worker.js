@@ -43,7 +43,7 @@ export default class Worker extends React.Component {
                     (currentUser.username == this.props.worker.username)
                     ) 
                     && (
-                        <div>
+                        <div style={{display: 'inline-flex'}}>
                             <button onClick={this.renderEdit}>Edytuj dane</button>
                             <ChangePassword href={this.props.worker._links.self.href} currentWorker={this.props.worker}/>
                         </div>

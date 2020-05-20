@@ -149,8 +149,6 @@ export default class ChangePassword extends Component {
                     <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                         <DialogContent>
                         <div className="col-md-12">
-                            <div className="card card-container">
-
                                 <Form 
                                     onSubmit={this.handleSubmit} 
                                     style={{display: 'inline'}}
@@ -212,7 +210,6 @@ export default class ChangePassword extends Component {
                                         }}
                                     />
                                 </Form>
-                            </div>
                         </div>
                         
                         </DialogContent>

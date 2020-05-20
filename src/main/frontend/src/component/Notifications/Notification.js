@@ -6,6 +6,7 @@ import WorkerService from "../../service/WorkerService"
 import { toast } from 'react-toastify';
 import "./Notification.css";
 import ChangePassword from "../Workers/ChangePassword";
+import { Button } from "@material-ui/core";
 
 
 export default class Notification extends Component{
@@ -88,8 +89,12 @@ export default class Notification extends Component{
                   })
                 }
               });
-            
-      }
+    }
+
+    handleDeleteNotification(id) {
+      NotificationService.deleteNotificationById(id);
+      window.location.reload();
+    }
 
       render(){
         const {worker, workerHref} = this.state;
@@ -100,13 +105,21 @@ export default class Notification extends Component{
                   <h2>Prośby o zresetowanie hasła:</h2>
                   <div>
                     {this.state.resPassNotifications.map(notification => 
-                      <div>
-                        <div key={notification.id}>{notification.username}</div>
+                      <div style={{padding: '25px'}}>
+
+                        <div key={notification.id} style={{display: 'inline-flex'}}>
+                          {notification.username}
+                        </div>
+                        <div style={{display: 'inline-flex'}}>
                           {this.state.allWorkers.map( worker => {
                             if(notification.username == worker.username) {
                               return <ChangePassword href={worker._links.self.href} currentWorker={worker}/>
                             }
                           })}
+                        <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">
+                          Usuń powiadomienie
+                        </button>
+                        </div>
                       </div>
                     )}
                   </div>                 

@@ -1,20 +1,15 @@
 package com.hotel.controller;
 
-import com.hotel.model.Item;
 import com.hotel.model.Notification;
-import com.hotel.model.NotificationType;
 import com.hotel.payload.request.LoginRequest;
 import com.hotel.payload.response.MessageResponse;
 import com.hotel.repository.NotificationRepository;
 import com.hotel.repository.NotificationTypeRepository;
 import com.hotel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 @CrossOrigin
@@ -65,11 +60,11 @@ public class NotificationController {
     public Notification getNotificationById(@PathVariable Long id){
         return notificationRepository.getOne(id);
     }
-//
-//    @DeleteMapping
-//    public void deleteNotificationById(@PathVariable Long id){
-//        return NotificationRepository.deleteById(id);
-//    }
+
+    @DeleteMapping("{id}")
+    public void deleteNotificationById(@PathVariable Long id){
+        notificationRepository.deleteById(id);
+    }
 
 
 

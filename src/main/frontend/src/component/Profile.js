@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import AuthService from "../service/AuthService";
+import WorkerService from "../service/WorkerService";
+import ChangePassword from "./Workers/ChangePassword";
 
 
 export default class Profile extends Component {
@@ -7,8 +9,13 @@ export default class Profile extends Component {
     super(props);
 
     this.state = {
-      currentUser: AuthService.getCurrentUser()
+      currentUser: AuthService.getCurrentUser(),
+      allWorkers: [],
     };
+
+    WorkerService.getAllWorkers().then(result => {
+      this.setState({allWorkers: result});
+  });
   }
 
   render() {
@@ -39,6 +46,13 @@ export default class Profile extends Component {
           {currentUser.roles &&
             currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
         </ul>
+        <p>
+          {this.state.allWorkers.map( user => {
+            if(currentUser.username == user.username) {
+               return <ChangePassword href={user._links.self.href} currentWorker={user}/>
+            }
+          })}
+        </p>
       </div>
       
     );

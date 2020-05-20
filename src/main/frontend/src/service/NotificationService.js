@@ -17,13 +17,16 @@ class NotificationService{
         });
     }
 
-
     getNotificationById(id){
         return axios.get(API_URL + id, {headers: authHeader()});
     }
 
     getAllNotificationsByNotificationTypeId(notTypeId){
         return axios.get(API_URL + "type/" + notTypeId, {headers: authHeader()});
+    }
+
+    deleteNotificationById(id) {
+        return axios.delete(API_URL + id, {headers: authHeader()});
     }
 }
 
