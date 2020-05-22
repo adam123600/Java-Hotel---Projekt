@@ -1,6 +1,8 @@
 import axios from 'axios';
 import authHeader from './AuthHeader';
 
+const API_URL = '/api/usersNoLinks/';
+
 class WorkerService {
     getAllWorkers() {
         return axios.get("http://localhost:8080/api/users").then(response => {
@@ -14,6 +16,12 @@ class WorkerService {
             console.log(response.data);
             return response.data._embedded.roles[0].name;
         })
+    }
+
+    getWorkersNoLinks() {
+        return axios.get(API_URL).then(response => {
+            return response.data;
+        }).catch(err=>{console.log(err)});
     }
 
     getAllRoles() {

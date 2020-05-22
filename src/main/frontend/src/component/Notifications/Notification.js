@@ -97,7 +97,7 @@ export default class Notification extends Component{
     }
 
       render(){
-        const {worker, workerHref} = this.state;
+
           return(
             <div className="notification-container">
               {this.state.showAdminNotifications &&
