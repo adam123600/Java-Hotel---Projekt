@@ -42,6 +42,7 @@ export default class AddItem extends Component{
             current_quantity: this.state.current_quantity,
             category: [{id: this.state.id_category}]
         };
+       
         ItemService.createNewItem(newItem);//TODO: Jeśli chcemy obsługiwać komunikat błędu update'a na bazie to tutaj można to zrobić.
     };
 

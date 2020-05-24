@@ -11,6 +11,10 @@ class RoomService {
         })
     }
 
+    getAllRooms3(){
+        return axios.get("/api/rooms1", {headers: authHeader()});
+    }
+
     getAllRooms2(){
         //return axios.get(API_URL, {headers: authHeader()});
         return axios.get("/api/rooms").then(response => {

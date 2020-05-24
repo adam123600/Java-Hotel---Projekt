@@ -1,5 +1,6 @@
 package com.hotel.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class RoomStandard {
     @Column(nullable = false)
     private Integer max_capacity;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "roomStandard", fetch = FetchType.LAZY)
     private List<Room> rooms;
 

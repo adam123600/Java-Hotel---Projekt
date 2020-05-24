@@ -1,5 +1,6 @@
 package com.hotel.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -36,11 +37,11 @@ public class Room {
     @JoinColumn(name = "standard_id", nullable = false)
     private RoomStandard roomStandard;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
     private List<Reservation> reservations;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
     private List<Guest> guests;
 

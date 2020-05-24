@@ -59,3 +59,5 @@ INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, stan
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (14, 342.18, 2, '4002', 2);
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (15, 10556.0, 5, '5001', 4);
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (16, 3400.0, 2, '5002', 4);
+
+INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (2,"admin",2);

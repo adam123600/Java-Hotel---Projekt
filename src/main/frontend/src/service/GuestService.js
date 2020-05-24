@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './AuthHeader';
 
-const API_URL = 'api/guests/';
+const API_URL = '/api/guests/';
 // API: localhost:8080/api/guests
 
 class GuestService {

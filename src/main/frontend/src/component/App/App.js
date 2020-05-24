@@ -16,10 +16,11 @@ import Notification from "../Notification";
 import AllRooms from "../Rooms/AllRooms";
 import AllGuests from "../Guests/AllGuests";
 
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ForgotPassword from '../ForgotPassword';
 import AddGuest from "../Guests/AddGuest";
+import AddReservation from "../Reservations/AddReservation";
 
 
 toast.configure();
@@ -47,6 +48,7 @@ class App extends Component {
           <Route path="/rooms" component={AllRooms} />
           <Route path="/goscie" component={AllGuests}/>
           <Route path="/addguest" component={AddGuest} />
+          <Route path="/addreservation" component={AddReservation}/>
         </Switch>
         </div>
 

@@ -95,6 +95,11 @@ class AppNavbar extends Component {
                     <NavLink href="/goscie">Goście</NavLink>
                   </NavItem>
               )}
+                {currentUser && (
+                  <NavItem>
+                    <NavLink href="/addreservation">Rezerwacje</NavLink>
+                  </NavItem>
+              )}
             </Nav>
         
           {currentUser ? (
