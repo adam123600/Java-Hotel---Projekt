@@ -15,6 +15,14 @@ class GuestService {
     createNewGuest(newGuest){
         return axios.post(API_URL, newGuest, {headers: authHeader()}).catch(err=>{console.log(err)});
     }
+
+    getGuestById(id){
+        return axios.get(API_URL + id,{headers: authHeader()})
+            .then(response => {
+                return response.data;
+            })
+            .catch(err=>{console.log(err)});
+    }
 }
 
 export default new GuestService();

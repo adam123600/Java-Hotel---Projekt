@@ -21,6 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ForgotPassword from '../ForgotPassword';
 import AddGuest from "../Guests/AddGuest";
 import AddReservation from "../Reservations/AddReservation";
+import GuestDetails from "../Guests/GuestDetails";
 
 
 toast.configure();
@@ -46,8 +47,10 @@ class App extends Component {
           <Route path="/notifications" component={Notification}/>
           <Route path="/pracownicy" component={AllWorkers} />
           <Route path="/rooms" component={AllRooms} />
-          <Route path="/goscie" component={AllGuests}/>
+          <Route exact path="/guests" component={AllGuests}/>
+          <Route path="/guests/:id" component={GuestDetails}/>
           <Route path="/addguest" component={AddGuest} />
+
           <Route path="/addreservation" component={AddReservation}/>
         </Switch>
         </div>

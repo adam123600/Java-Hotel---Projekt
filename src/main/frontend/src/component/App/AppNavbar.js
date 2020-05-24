@@ -92,7 +92,7 @@ class AppNavbar extends Component {
               )}
               {currentUser && (
                   <NavItem>
-                    <NavLink href="/goscie">Goście</NavLink>
+                    <NavLink href="/guests">Goście</NavLink>
                   </NavItem>
               )}
                 {currentUser && (
