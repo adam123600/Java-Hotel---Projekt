@@ -6,6 +6,10 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
+import WorkerService from "../../service/WorkerService";
+import axios from "axios";
+import authHeader from "../../service/AuthHeader";
+import Worker from "./Worker";
 
 
 const required = value => {
@@ -48,24 +52,40 @@ const vpassword = value => {
     }
 };
 
-export default class BoardUser extends Component {
+export default class AddWorker extends React.Component {
     constructor(props) {
         super(props);
+
         this.handleRegister = this.handleRegister.bind(this);
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeRole = this.onChangeRole.bind(this);
+        this.onChangeFirstName = this.onChangeFirstName.bind(this);
+        this.onChangeLastName = this.onChangeLastName.bind(this);
+        this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
+
 
         this.state = {
-            username: "",
+            /*username: "",
             email: "",
             password: "",
-            role: "",
+            role: "", //this.props.workerRole,*/
             successful: false,
-            message: ""
+            message: "",
+            roleHref: "",
+            /*firstname: "",
+            lastname: "",
+            phonenumber: "",
+            allRoles: []*/
         };
+
+        WorkerService.getAllRoles().then(result => {
+            this.setState({allRoles: result});
+        });
     }
+
+
 
     onChangeUsername(e) {
         this.setState({
@@ -87,11 +107,58 @@ export default class BoardUser extends Component {
 
     onChangeRole(e) {
         this.setState({
-            role: e.target.value
+            roleHref: e.target.value
+        });
+    }
+    onChangeFirstName(e) {
+        this.setState({
+            firstname: e.target.value
+        });
+    }
+    onChangeLastName(e) {
+        this.setState({
+            lastname: e.target.value
+        });
+    }
+    onChangePhoneNumber(e) {
+        this.setState({
+            phonenumber: e.target.value
+        });
+    }
+
+
+    handleSelect(e) {
+        this.setState({
+            roleHref: e.target.value
         });
     }
 
     handleRegister(e) {
+        e.preventDefault();
+        const addedWorker = {
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            phonenumber: this.state.phonenumber
+        };
+        console.log(addedWorker);
+        axios.post('api/users/', addedWorker, {headers: authHeader()});
+
+        const role = {
+            _links: {
+                roles: [
+                    {
+                        href: this.state.roleHref
+                    }
+                ]
+            }
+        };
+        console.log(role);
+        axios.post('api/users/roles/', role,{headers: authHeader()});
+        window.location.reload();
+/*
         e.preventDefault();
 
         this.setState({
@@ -106,7 +173,10 @@ export default class BoardUser extends Component {
                 this.state.username,
                 this.state.email,
                 this.state.password,
-                this.state.role
+                this.state.role,
+                this.state.firstName,
+                this.state.lastName,
+                this.state.phoneNumber,
             ).then(
                 response => {
                     this.setState({
@@ -128,7 +198,7 @@ export default class BoardUser extends Component {
                     });
                 }
             );
-        }
+        }*/
     }
 
     openForm(){
@@ -145,13 +215,11 @@ export default class BoardUser extends Component {
                 <button className="btn btn-primary" style={{marginTop: 25}} onClick={this.openForm}>Dodaj nowego użytkownika</button>
 
                 <div class="form-group form-popup" id="add-user-form" style={{display: 'none'}}>
-                    <div class="card" style={{width: 400}}>
+                    <div class="card" style={{width: 500}}>
                         <Form
                             onSubmit={this.handleRegister}
 
-                            ref={c => {
-                                this.form = c;
-                            }}
+                            ref={c => {this.form = c;}}
                         >
                             {!this.state.successful && (
                                 <div>
@@ -166,6 +234,30 @@ export default class BoardUser extends Component {
                                             validations={[required, vusername]}
                                         />
                                     </div>
+
+                                        <div className="form-group">
+                                            <label htmlFor="username">Imię</label>
+                                            <Input
+                                                type="text"
+                                                className="form-control"
+                                                name="username"
+                                                value={this.state.firstname}
+                                                onChange={this.onChangeFirstName}
+                                                validations={[required, vusername]}
+                                            />
+                                        </div>
+
+                                            <div className="form-group">
+                                                <label htmlFor="username">Nazwisko</label>
+                                                <Input
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="username"
+                                                    value={this.state.lastname}
+                                                    onChange={this.onChangeLastName}
+                                                    validations={[required, vusername]}
+                                                />
+                                            </div>
 
                                     <div className="form-group">
                                         <label htmlFor="email">E-mail</label>
@@ -191,22 +283,72 @@ export default class BoardUser extends Component {
                                         />
                                     </div>
 
-                                    <div className="form-group">
-                                        <label htmlFor="name">Rola</label>
-                                        <select
-                                            class="form-control form-control-sm"
-                                            value={this.state.name}
-                                            onChange={this.onChangeRole}
-                                            name={'name'} required><br/>
 
-                                            {/*var i;
+                                        <div className="form-group">
+                                            <label htmlFor="username">Number telefonu</label>
+                                            <Input
+                                                type="text"
+                                                className="form-control"
+                                                name="username"
+                                                value={this.state.phonenumber}
+                                                onChange={this.onChangePhoneNumber}
+                                            />
+                                        </div>
+
+                                    <div className="form-group">
+                                        <label htmlFor="role">Rola</label>
+
+                                        <select class="form-control form-control-sm" onChange={this.handleSelect}>
+                                             {this.props.allRoles.map(role => {
+                                                return <option key={role._links.self.href} value={role._links.self.href}>{WorkerService.roleNameToPolish(role.name)}</option>
+                                               /* if(role.name == this.state.role)*/
+                                                   // return <option key={role._links.href} value={role._links.href} selected>{WorkerService.roleNameToPolish(role.name)}</option>
+                                               /* else
+                                                    return <option key={role._links.href} value={role._links.href}>{WorkerService.roleNameToPolish(role.name)}</option>*/
+                                            })}
+
+                                       {/* <select
+                                            class="form-control form-control-sm"
+                                            //value={this.state.role}
+                                            onChange={this.onChangeRole}>
+                                            {this.state.allRoles.map(role => {
+                                              /*  if (role.name == this.state.role)
+                                                    return <option key={role._links.href}
+                                                                   value={role._links.href}
+                                                                   selected>{WorkerService.roleNameToPolish(role.name)}</option>
+                                                else//
+                                                    return <option key={role._links.href}
+                                                                   value={role._links.href}>{WorkerService.roleNameToPolish(role.name)}</option>
+                                            })}
+*/}
+
+
+
+                                           {/* return <option key={role._links.self.href} value={role._links.self.href}>{WorkerService.roleNameToPolish(role.name)}</option>*/}
+
+                                            {/* {this.state.allWorkers.map(worker => {
+                                                <option
+                                                    key={worker._links.self}>{WorkerService.roleNameToPolish(role.name)}</option>
+                                                <Worker worker={worker} allRoles={this.state.allRoles}/>
+                                            })}*/}
+                                        </select>
+                                    </div><br/>
+                                           {/* var i;
                                         for(var i=0; i< role; i++){
                                             <option value="first">First</option>
                                         }*/}
+                                            {/*<select onChange={this.handleSelect}>
+                                                {this.props.allRoles.map(role => {
+                                                    if(role.name == this.state.role)
+                                                        return <option key={role._links.self.href} value={role._links.self.href} selected>{WorkerService.roleNameToPolish(role.name)}</option>
+                                                    else
+                                                        return <option key={role._links.self.href} value={role._links.self.href}>{WorkerService.roleNameToPolish(role.name)}</option>
+                                                })}
+                                            </select>
                                             <option value="second">Second</option>
-                                            <option value="third">Third</option>
-                                        </select>
-                                    </div><br/>
+                                            <option value="third">Third</option>*/}
+                                   {/*     </select>
+                                    </div><br/>*/}
 
 
                                     <div className="form-group">

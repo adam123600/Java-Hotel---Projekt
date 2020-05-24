@@ -96,7 +96,7 @@ export default class Register extends Component {
       AuthService.register(
         this.state.username,
         this.state.email,
-        this.state.password
+        this.state.password,
       ).then(
         response => {
           this.setState({

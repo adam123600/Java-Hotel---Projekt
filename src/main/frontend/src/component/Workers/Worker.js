@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AuthService from "../../service/AuthService";
 import EditWorker from "./EditWorker";
 import WorkerService from "../../service/WorkerService";
+import AddWorker from "./AddWorker";
 
 export default class Worker extends React.Component {
     constructor(props) {
@@ -9,6 +10,7 @@ export default class Worker extends React.Component {
 
         this.state = {
             renderEdit: false,
+            renderAdd: true,
             workerRole: "",
         }
         WorkerService.getWorkerRole(this.props.worker).then(result => {
@@ -20,6 +22,8 @@ export default class Worker extends React.Component {
     renderEdit() {
         this.setState({renderEdit: !this.state.renderEdit});
     }
+
+
 
     render() {
         return(

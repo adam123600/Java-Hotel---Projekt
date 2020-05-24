@@ -17,6 +17,7 @@ import Notification from "../Notifications/Notification";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ForgotPassword from '../Notifications/ForgotPassword';
+import AddWorker from "../Workers/AddWorker";
 
 
 toast.configure();
@@ -41,6 +42,8 @@ class App extends Component {
           <Route path="/forgotpassword" component={ForgotPassword}/>
           <Route path="/notifications" component={Notification}/>
           <Route path="/pracownicy" component={AllWorkers} />
+          <Route path="/pracownicy1" component={AddWorker} />
+
         </Switch>
         </div>
 
