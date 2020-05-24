@@ -34,8 +34,8 @@ export default class GuestDetails extends React.Component{
                     <h2>Nazwisko: {this.state.guestInfo.lastName}</h2>
                     <h3>Data zameldowania: {this.state.guestInfo.accommodationDate}</h3>
                     <h3>Data wymeldowania: {this.state.guestInfo.checkOutDate}</h3>
-                    <button style={{marginRight: "5px"}}>Rachunek</button>
-                    <button style={{marginLeft: "5px"}}>Wymelduj</button>
+                    <button style={{marginRight: "7px"}}>Rachunek</button>
+                    <button style={{marginLeft: "7px"}}>Wymelduj</button>
                 </div>
             );
             //TODO: obsługa tych dwóch przycisków
