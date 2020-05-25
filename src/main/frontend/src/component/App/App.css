@@ -37,6 +37,10 @@
   }
 }
 
+.AppNavbar {
+  background-color: #f99cab;
+}
+
 .container, .container-fluid {
   margin-top: 20px;
 }  

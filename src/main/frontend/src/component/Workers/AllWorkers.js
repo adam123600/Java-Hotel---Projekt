@@ -1,16 +1,18 @@
-import React, { Component } from "react";
+import React, { useState, Component } from "react";
 import WorkerService from "../../service/WorkerService";
 //import Menu from "../Menu"
 import Worker from "./Worker";
-import axios from 'axios';
+import { ListGroup, ListGroupItem, Collapse, Button, CardBody } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, CardText, Row, Col } from 'reactstrap';
 
-export default class AllWorkers extends React.Component {
+export default class AllWorkers extends Component {
     constructor(props) {
         super(props);
         this.state = {
             allWorkers: [],
             allRoles: [],
             allUsersNoLinks: [],
+            activeTab: 0,
         }
         WorkerService.getAllWorkers().then(result => {
             this.setState({allWorkers: result});
@@ -23,42 +25,66 @@ export default class AllWorkers extends React.Component {
         });
     }
 
+    showWorkers = () => {
+
+      return (
+        <div>
+            <Nav tabs> 
+              {this.state.allRoles.map((role,index) => {
+                {console.log("role: ",role,"index ",index)}
+                return (
+                  <NavItem>
+                    <NavLink
+                      className={({ active: this.state.activeTab == index })}
+                      onClick={() => { this.setState( {activeTab: index }) 
+                    }}>
+                      {WorkerService.roleNameToPolish(role.name)}
+                    </NavLink>
+                  </NavItem>
+                )
+              })}
+            </Nav>
+    
+              {this.state.allRoles.map((role, index) => {
+                return (
+                  <TabContent activeTab={this.state.activeTab}>
+                    <TabPane tabId={index}>
+                      <Row>
+                        <Col sm="12">
+                        <ListGroup>
+                                {this.state.allUsersNoLinks.map(user => {
+                                    return user.roles.map( r => {
+                                        if(r.name == role.name) {
+                                            return this.state.allWorkers.map( worker => {
+                                                if( worker.username == user.username) {
+                                                    return (
+                                                        <ListGroupItem>
+                                                            <Worker worker={worker} allRoles={this.state.allRoles}/>
+                                                        </ListGroupItem>
+                                                    )
+                                                }
+                                            })
+                                        }
+                                    }) 
+                                })}
+                            </ListGroup>
+                        </Col>
+                      </Row>
+                    </TabPane>
+                  </TabContent>
+                )
+              })}
+          </div>
+      )
+
+    }
+    
+
     render() {
-        const {allWorkers, allRoles} = this.state;
-
-        return(
-            <div className="main-container">
-
-
-                <div className="content">
-                    <h2>Pracownicy:</h2>
-
-                    {this.state.allRoles.map(role => {
-                        return (
-                            <div>
-                                <h1>{WorkerService.roleNameToPolish(role.name)}</h1>
-                                <ul>
-                                    {this.state.allUsersNoLinks.map(user => {
-                                        return user.roles.map( r => {
-                                            if(r.name == role.name) {
-                                                return allWorkers.map( worker => {
-                                                    if( worker.username == user.username) {
-                                                        return (
-                                                            <li key={worker._links.self}>
-                                                                <Worker worker={worker} allRoles={allRoles}/>
-                                                            </li>
-                                                        )
-                                                    }
-                                                })
-                                            }
-                                        }) 
-                                    })}
-                                </ul>
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
-        )
+      return(
+        <div>
+          {this.showWorkers()}
+        </div>
+      )
     }
 }
