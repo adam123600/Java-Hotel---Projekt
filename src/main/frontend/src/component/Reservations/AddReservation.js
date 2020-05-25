@@ -8,6 +8,7 @@ import CheckButton from "react-validation/build/button";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../LoginPage.css';
+import './Reservation.css';
 
 
 const required = value => {
@@ -180,12 +181,15 @@ export default class AddReservation extends Component {
     render(){
         return(
             
-
-            <Form className = "login-form"
+          <div className="my-reservation-container">
+            <Form className = "reservation-form"
             onSubmit={this.handleConfirmReservation}
             ref={c => {
               this.form = c;
             }}>
+              <div className="reservation-text">
+                <span>DODAJ REZERWACJE</span>
+              </div>
 
               <div className="my-form-group">
                 <label htmlFor="firstname" className="my-label">FIRST NAME</label>
@@ -199,7 +203,7 @@ export default class AddReservation extends Component {
                 />
               </div>
 
-              <div className="my-form-group">
+              <div className="my-reservation-group">
                 <label htmlFor="lastname" className="my-label">LAST NAME</label>
                 <Input
                   type="text"
@@ -211,7 +215,7 @@ export default class AddReservation extends Component {
                 />
               </div>
 
-              <div className="my-form-group">
+              <div className="my-date-group">
                 <label htmlFor="checkindate" className="my-label">CHECK IN DATE</label>
                 <DatePicker   
                 dateFormat='y-MM-dd'
@@ -223,7 +227,7 @@ export default class AddReservation extends Component {
                 />
               </div>
 
-              <div className="my-form-group">
+              <div className="my-date-group">
                 <label htmlFor="checkoutdate" className="my-label">CHECK OUT DATE</label>
                 <DatePicker 
                 dateFormat='y-MM-dd'
@@ -235,7 +239,7 @@ export default class AddReservation extends Component {
                 />
               </div>
 
-              <div className="my-form-group">
+              <div className="room-selection">
                   <label htmlFor="roomnumber" className="my-label">ROOM NUMBER</label>
                   <select className="form-control-sm" 
                   value = {this.state.roomId}
@@ -252,7 +256,7 @@ export default class AddReservation extends Component {
               </div>
 
 
-                <div className="my-form-group">
+                <div className="my-reservation-group">
                     <button
                     className="my-button login-button">
                         <span>ADD RESERVATION</span>
@@ -267,7 +271,7 @@ export default class AddReservation extends Component {
                 }}
               />
             </Form>
-      
+          </div>
      )
     }
 
