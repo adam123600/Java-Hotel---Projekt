@@ -10,7 +10,6 @@ export default class Worker extends React.Component {
 
         this.state = {
             renderEdit: false,
-            renderAdd: true,
             workerRole: "",
         }
         WorkerService.getWorkerRole(this.props.worker).then(result => {

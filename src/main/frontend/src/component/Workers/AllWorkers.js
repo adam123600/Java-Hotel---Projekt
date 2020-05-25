@@ -30,7 +30,8 @@ export default class AllWorkers extends React.Component {
             <div className="main-container">
                 <div className="content">
                     <button className="btn btn-primary" style={{marginTop: 25, marginBottom : 25}} onClick={this.renderAdd}>Dodaj nowego użytkownika</button>
-                    {this.state.renderAdd && <AddWorker allRoles={this.props.allRoles} href={this.props.roles._links.self.href}/>}
+                    {this.state.renderAdd && <AddWorker allRoles={this.state.allRoles} />}
+                    {/*href={this.props.roles._links.self.href}/>}*/}
                     <h2>Pracownicy:</h2>
                     <ul>
                         {this.state.allWorkers.map(worker => (

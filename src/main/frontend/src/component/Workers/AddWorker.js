@@ -67,25 +67,22 @@ export default class AddWorker extends React.Component {
 
 
         this.state = {
-            /*username: "",
+            username: "",
             email: "",
             password: "",
-            role: "", //this.props.workerRole,*/
+            role: "", //this.props.workerRole,
             successful: false,
             message: "",
             roleHref: "",
-            /*firstname: "",
+            firstname: "",
             lastname: "",
-            phonenumber: "",
-            allRoles: []*/
+            phonenumber: ""
         };
 
-        WorkerService.getAllRoles().then(result => {
+       /* WorkerService.getAllRoles().then(result => {
             this.setState({allRoles: result});
-        });
+        });*/
     }
-
-
 
     onChangeUsername(e) {
         this.setState({
@@ -135,6 +132,12 @@ export default class AddWorker extends React.Component {
 
     handleRegister(e) {
         e.preventDefault();
+
+        this.setState({
+            message: "",
+            successful: false
+        });
+
         const addedWorker = {
             username: this.state.username,
             email: this.state.email,
@@ -143,28 +146,6 @@ export default class AddWorker extends React.Component {
             lastname: this.state.lastname,
             phonenumber: this.state.phonenumber
         };
-        console.log(addedWorker);
-        axios.post('api/users/', addedWorker, {headers: authHeader()});
-
-        const role = {
-            _links: {
-                roles: [
-                    {
-                        href: this.state.roleHref
-                    }
-                ]
-            }
-        };
-        console.log(role);
-        axios.post('api/users/roles/', role,{headers: authHeader()});
-        window.location.reload();
-/*
-        e.preventDefault();
-
-        this.setState({
-            message: "",
-            successful: false
-        });
 
         this.form.validateAll();
 
@@ -173,10 +154,9 @@ export default class AddWorker extends React.Component {
                 this.state.username,
                 this.state.email,
                 this.state.password,
-                this.state.role,
-                this.state.firstName,
-                this.state.lastName,
-                this.state.phoneNumber,
+                this.state.firstname,
+                this.state.lastname,
+                this.state.phonenumber
             ).then(
                 response => {
                     this.setState({
@@ -198,7 +178,46 @@ export default class AddWorker extends React.Component {
                     });
                 }
             );
-        }*/
+        }
+/*
+
+        this.form.validateAll();
+
+        const addedWorker = {
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            phonenumber: this.state.phonenumber
+        };
+        AuthService.register(
+            this.state.username,
+            this.state.email,
+            this.state.password,
+            this.state.firstname,
+            this.state.lastname,
+            this.state.phonenumber
+        );
+
+        console.log(addedWorker);
+        axios.put('api/users/', addedWorker, {headers: authHeader()});
+*/
+
+        const role = {
+            _links: {
+                roles: [
+                    {
+                        href: this.state.roleHref
+                    }
+                ]
+            }
+        };
+        console.log(role);
+        axios.put('api/users/' + addedWorker + '/roles', role,{headers: authHeader()});
+        window.location.reload();
+
+
     }
 
     openForm(){
@@ -212,10 +231,10 @@ export default class AddWorker extends React.Component {
     render() {
         return (
             <div>
-                <button className="btn btn-primary" style={{marginTop: 25}} onClick={this.openForm}>Dodaj nowego użytkownika</button>
+                {/*<button className="btn btn-primary" style={{marginTop: 25}} onClick={this.openForm}>Dodaj nowego użytkownika</button>*/}
 
-                <div class="form-group form-popup" id="add-user-form" style={{display: 'none'}}>
-                    <div class="card" style={{width: 500}}>
+                <div className="form-group form-popup" id="add-user-form" >
+                    <div className="card" style={{width: 500}}>
                         <Form
                             onSubmit={this.handleRegister}
 
@@ -236,7 +255,7 @@ export default class AddWorker extends React.Component {
                                     </div>
 
                                         <div className="form-group">
-                                            <label htmlFor="username">Imię</label>
+                                            <label htmlFor="firstname">Imię</label>
                                             <Input
                                                 type="text"
                                                 className="form-control"
@@ -248,7 +267,7 @@ export default class AddWorker extends React.Component {
                                         </div>
 
                                             <div className="form-group">
-                                                <label htmlFor="username">Nazwisko</label>
+                                                <label htmlFor="lastname">Nazwisko</label>
                                                 <Input
                                                     type="text"
                                                     className="form-control"
@@ -298,7 +317,7 @@ export default class AddWorker extends React.Component {
                                     <div className="form-group">
                                         <label htmlFor="role">Rola</label>
 
-                                        <select class="form-control form-control-sm" onChange={this.handleSelect}>
+                                        <select className="form-control form-control-sm" onChange={this.onChangeRole}>
                                              {this.props.allRoles.map(role => {
                                                 return <option key={role._links.self.href} value={role._links.self.href}>{WorkerService.roleNameToPolish(role.name)}</option>
                                                /* if(role.name == this.state.role)*/
