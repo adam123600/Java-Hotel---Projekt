@@ -241,7 +241,7 @@ export default class AddReservation extends Component {
 
               <div className="room-selection">
                   <label htmlFor="roomnumber" className="my-label">ROOM NUMBER</label>
-                  <select className="form-control-sm" 
+                  <select className="form-control-sm"  
                   value = {this.state.roomId}
                   onChange={this.handleRoomSelection} 
                   name="roomnumber" 
