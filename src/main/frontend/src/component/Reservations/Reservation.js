@@ -42,7 +42,7 @@ export default class Reservation extends Component{
 
     render() {
         return (
-            <div>
+            <div className="reservation-form">
                 <h5 className="my-label">Imię: {this.props.firstName}</h5>
                 <h5 className="my-label">Nazwisko: {this.props.lastName}</h5>
                 <h5 className="my-label">Numer pokoju: {this.props.room.roomName}</h5>
