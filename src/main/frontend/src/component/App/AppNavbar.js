@@ -1,5 +1,20 @@
 import React, { Component } from 'react';
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  NavbarText,
+  Button
+} from 'reactstrap';
+
 
 import AuthService from "../../service/AuthService";
 import { withRouter } from "react-router";
@@ -13,8 +28,6 @@ class AppNavbar extends Component {
 
     this.state = {
       isOpen: false,
-      showModeratorBoard: false,
-      showAdminBoard: false,
       currentUser: undefined
     };
 
@@ -26,8 +39,6 @@ class AppNavbar extends Component {
     if (user) {
       this.setState({
         currentUser: AuthService.getCurrentUser(),
-        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-        showAdminBoard: user.roles.includes("ROLE_ADMIN")
       });
     }
   }
@@ -43,98 +54,160 @@ class AppNavbar extends Component {
   }
 
   render() {
+    if (this.props.location.pathname != '/login' && this.props.location.pathname != '/') {
+      const {currentUser, showModeratorBoard, showAdminBoard} = this.state;
 
-    if(this.props.location.pathname != '/login' && this.props.location.pathname != '/' ){
-
-      const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
-
-    return (
-      <div>
-        <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/home">Home</NavbarBrand>
-          <NavbarToggler onClick={this.toggle}/>
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              {showModeratorBoard && (
-                <NavItem>
-                  <NavLink href="/mod">Moderator Board</NavLink>
-                </NavItem>
+      return (
+          <div>
+            <Navbar color="dark" dark expand="md">
+              <NavbarBrand href="/home">Strona Główna</NavbarBrand>
+              <NavbarToggler onClick={this.toggle}/>
+              <Collapse isOpen={this.state.isOpen} navbar>
+                <Nav className="mr-auto" navbar>
+                  {/*{{showModeratorBoard && (//TODO: Elementy Navbar'a raczej do usunięcia
+                  <NavItem>
+                    <NavLink href="/mod">Moderator Board</NavLink>
+                  </NavItem>
               )}
               {showAdminBoard && (
                 <NavItem>
-                  <NavLink href="/admin">Admin Board</NavLink>
+                <NavLink href="/admin">Admin Board</NavLink>
                 </NavItem>
+                )}}
+              {{currentUser && (
+                  <NavItem>
+                    <NavLink href="/user">User</NavLink>
+                  </NavItem>
               )}
               {currentUser && (
                 <NavItem>
-                  <NavLink href="/user">User</NavLink>
+                <NavLink href="/notifications">Powiadomienia</NavLink>
                 </NavItem>
-              )}
-              {currentUser && (
-                  <NavItem>
-                      <NavLink href="/itemstorage">Magazyn Przedmiotów</NavLink>
-                </NavItem>
-              )}
-              {currentUser && (
-                  <NavItem>
-                    <NavLink href="/pracownicy">Pracownicy</NavLink>
-                  </NavItem>
-              )}
-                {currentUser && (
-                  <NavItem>
-                      <NavLink href="/notifications">Powiadomienia</NavLink>
-                </NavItem>
-              )}
-              {currentUser && (
-                  <NavItem>
-                    <NavLink href="/rooms">Pokoje</NavLink>
-                  </NavItem>
-              )}
-              {currentUser && (
-                  <NavItem>
-                    <NavLink href="/guests">Goście</NavLink>
-                  </NavItem>
-              )}
-                {currentUser && (
-                  <NavItem>
-                    <NavLink href="/addreservation">Rezerwacje</NavLink>
-                  </NavItem>
-              )}
-            </Nav>
-        
-          {currentUser ? (
-              <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <NavLink href="/profile">
-                    {currentUser.username}
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/login" onClick={this.logOut}>
-                    Log out
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            ) : (
-              <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <NavLink href="/login">
-                    Login
-                  </NavLink>
-                </NavItem>
-
-                  <NavItem>
-                    <NavLink href="/register">
-                      Sign Up
-                    </NavLink>
-                  </NavItem>
+                )}}*/}
+                  {currentUser && (
+                      <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>
+                          Magazyn Przedmiotów
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                          <DropdownItem onClick={event => window.location.href = '/itemstorage'}>
+                            Stany magazynowe
+                          </DropdownItem>
+                          <DropdownItem divider/>
+                          <DropdownItem>
+                            Zamówienia
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </UncontrolledDropdown>
+                  )}
+                  {currentUser && (
+                      <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>
+                          Pracownicy
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                          <DropdownItem onClick={event => window.location.href = '/workers'}>
+                            Lista pracowników
+                          </DropdownItem>
+                          <DropdownItem divider/>
+                          <DropdownItem>
+                            Harmonogramy
+                          </DropdownItem>
+                          <DropdownItem divider/>
+                          <DropdownItem>
+                            Dodaj pracownika
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </UncontrolledDropdown>
+                  )}
+                  {currentUser && (
+                      <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>
+                          Rezerwacje
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                          <DropdownItem onClick={event => window.location.href = '/addreservation'}>
+                            Stwórz nową
+                          </DropdownItem>
+                          <DropdownItem divider/>
+                          <DropdownItem onClick={event => window.location.href = '/reservations'}>
+                            Wszystkie
+                          </DropdownItem>
+                          <DropdownItem divider/>
+                          <DropdownItem onClick={event => window.location.href = '/guests'}>
+                            Lista Gości
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </UncontrolledDropdown>
+                  )}
+                  {currentUser && (
+                      <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>
+                          Pokoje
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                          <DropdownItem onClick={event => window.location.href = '/rooms'}>
+                            Wszystkie Pokoje
+                          </DropdownItem>
+                          <DropdownItem divider/>
+                          <DropdownItem>
+                            Wyszukiwarka
+                          </DropdownItem>
+                          <DropdownItem divider/>
+                          <DropdownItem>
+                            Zgłoszenia
+                          </DropdownItem>
+                          <DropdownItem divider/>
+                          <DropdownItem>
+                            Sprzątanie
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </UncontrolledDropdown>
+                  )}
                 </Nav>
-              )}
-            </Collapse>
-          </Navbar>
-        </div>
+
+                {currentUser ? (
+                    <Nav className="ml-auto" navbar>
+                      <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>
+                          {currentUser.username}
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                          <DropdownItem>
+                            Mój Harmonogram
+                          </DropdownItem>
+                          <DropdownItem divider/>
+                          <DropdownItem>
+                            Ustal dyspozycyjność
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </UncontrolledDropdown>
+                      <NavItem>
+                        <NavLink href="/login" onClick={this.logOut}>
+                          Wyloguj
+                        </NavLink>
+                      </NavItem>
+                    </Nav>
+                ) : (
+                    <Nav className="ml-auto" navbar>
+                      <NavItem>
+                        <NavLink href="/login">
+                          Login
+                        </NavLink>
+                      </NavItem>
+
+                      <NavItem>
+                        <NavLink href="/register">
+                          Sign Up
+                        </NavLink>
+                      </NavItem>
+                    </Nav>
+                )}
+              </Collapse>
+            </Navbar>
+          </div>
       );
-    }else{
+    } else {
       return null;
     }
   }

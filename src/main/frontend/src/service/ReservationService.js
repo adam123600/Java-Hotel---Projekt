@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './AuthHeader';
 
-const API_URL = "/api/reservations/";
+const API_URL = "/api/reservations1/";
 
 class ReservationService {
 

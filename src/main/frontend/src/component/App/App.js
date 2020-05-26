@@ -23,14 +23,13 @@ import ForgotPassword from '../ForgotPassword';
 import AddGuest from "../Guests/AddGuest";
 import AddReservation from "../Reservations/AddReservation";
 import GuestDetails from "../Guests/GuestDetails";
-
+import AllReservations from "../Reservations/AllReservations";
 
 toast.configure();
 
 class App extends Component {
 
   render() {
-
     return (
       <Router>
         <AppNavbar/>
@@ -52,7 +51,7 @@ class App extends Component {
           <Route exact path="/guests" component={AllGuests}/>
           <Route path="/guests/:id" component={GuestDetails}/>
           <Route path="/addguest" component={AddGuest} />
-
+          <Route path="/reservations" component={AllReservations}/>
           <Route path="/addreservation" component={AddReservation}/>
         </Switch>
         </div>
