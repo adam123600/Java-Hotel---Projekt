@@ -3,7 +3,6 @@ import RoomService from "../../service/RoomService"
 import RoomThumbnail from "./RoomThumbnail"
 import SearchRoom from "../Search/SearchRoom";
 
-
 export default class AllRooms extends React.Component {
     constructor(props) {
         super(props);
