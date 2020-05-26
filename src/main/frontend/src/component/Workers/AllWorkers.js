@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import WorkerService from "../../service/WorkerService";
-//import Menu from "../Menu"
 import Worker from "./Worker";
 
 export default class AllWorkers extends React.Component {
