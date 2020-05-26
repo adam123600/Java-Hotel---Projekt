@@ -22,40 +22,38 @@ import ForgotPassword from '../ForgotPassword';
 import AddGuest from "../Guests/AddGuest";
 import AddReservation from "../Reservations/AddReservation";
 import GuestDetails from "../Guests/GuestDetails";
-
+import AllReservations from "../Reservations/AllReservations";
 
 toast.configure();
 
 class App extends Component {
 
   render() {
-
     return (
-      <Router>
-        <AppNavbar/>
-        <div className="new-container">
-        <Switch>
-          <Route exact path="/home" component={Home} />
-          <Route exact path={["/", "/login"]} component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/profile" component={Profile} />
-          <Route path="/user" component={BoardUser} />
-          <Route path="/mod" component={BoardModerator} />
-          <Route path="/admin" component={BoardAdmin} />
-          <Route path="/itemstorage" component={ItemStorage} />
-          <Route path="/forgotpassword" component={ForgotPassword}/>
-          <Route path="/notifications" component={Notification}/>
-          <Route path="/pracownicy" component={AllWorkers} />
-          <Route path="/rooms" component={AllRooms} />
-          <Route exact path="/guests" component={AllGuests}/>
-          <Route path="/guests/:id" component={GuestDetails}/>
-          <Route path="/addguest" component={AddGuest} />
-
-          <Route path="/addreservation" component={AddReservation}/>
-        </Switch>
-        </div>
-
-      </Router>
+        <Router>
+          <AppNavbar/>
+          <div className="new-container">
+            <Switch>
+              <Route exact path="/home" component={Home}/>
+              <Route exact path={["/", "/login"]} component={Login}/>
+              <Route exact path="/register" component={Register}/>
+              <Route exact path="/profile" component={Profile}/>
+              <Route path="/user" component={BoardUser}/>
+              <Route path="/mod" component={BoardModerator}/>
+              <Route path="/admin" component={BoardAdmin}/>
+              <Route path="/itemstorage" component={ItemStorage}/>
+              <Route path="/forgotpassword" component={ForgotPassword}/>
+              <Route path="/notifications" component={Notification}/>
+              <Route path="/pracownicy" component={AllWorkers}/>
+              <Route path="/rooms" component={AllRooms}/>
+              <Route exact path="/guests" component={AllGuests}/>
+              <Route path="/guests/:id" component={GuestDetails}/>
+              <Route path="/addguest" component={AddGuest}/>
+              <Route path="/reservations" component={AllReservations}/>
+              <Route path="/addreservation" component={AddReservation}/>
+            </Switch>
+          </div>
+        </Router>
     )
   }
 }

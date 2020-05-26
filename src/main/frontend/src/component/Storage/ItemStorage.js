@@ -37,7 +37,7 @@ export default class ItemStorage extends Component {
         const user = AuthService.getCurrentUser();
         if (user) {
             this.setState({
-                showAddItemButton: user.roles.includes("ROLE_MANAGER"), //TODO: Podmien na role managera!
+                showAddItemButton: user.roles.includes("ROLE_MANAGER"),
             });
         }
     }
