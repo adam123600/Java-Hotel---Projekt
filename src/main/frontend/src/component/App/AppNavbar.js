@@ -106,7 +106,7 @@ class AppNavbar extends Component {
                           Pracownicy
                         </DropdownToggle>
                         <DropdownMenu right>
-                          <DropdownItem onClick={event => window.location.href = '/pracownicy'}>
+                          <DropdownItem onClick={event => window.location.href = '/workers'}>
                             Lista pracowników
                           </DropdownItem>
                           <DropdownItem divider/>

@@ -44,7 +44,7 @@ class App extends Component {
               <Route path="/itemstorage" component={ItemStorage}/>
               <Route path="/forgotpassword" component={ForgotPassword}/>
               <Route path="/notifications" component={Notification}/>
-              <Route path="/pracownicy" component={AllWorkers}/>
+              <Route path="/workers" component={AllWorkers}/>
               <Route path="/rooms" component={AllRooms}/>
               <Route exact path="/guests" component={AllGuests}/>
               <Route path="/guests/:id" component={GuestDetails}/>

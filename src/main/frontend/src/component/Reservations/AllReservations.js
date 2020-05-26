@@ -1,16 +1,10 @@
 import React, {Component} from "react";
 import ReservationService from "../../service/ReservationService";
 import '../LoginPage.css';
+import './Reservation.css'
+import {toast} from "react-toastify";
+import Reservation from "./Reservation";
 
-const required = value => {
-    if (!value) {
-        return (
-            <div className="my-alert">
-                This field is required!
-            </div>
-        );
-    }
-};
 
 export default class AllReservations extends Component{
     constructor(props) {
@@ -18,8 +12,6 @@ export default class AllReservations extends Component{
 
         this.state = {
             allReservations: [],
-            message: "",
-            success : false,
             toastId : null,
         }
 
@@ -36,14 +28,29 @@ export default class AllReservations extends Component{
                 (error.response && error.response.data && error.response.data.message) ||
                 error.message ||
                 error.toString();
+
+            if (!toast.isActive(this.state.toastId)) {
+                this.setState({
+                    toastId: toast.error("Error: " + resMessage, {
+                        position: toast.POSITION.BOTTOM_CENTER,
+                        autoClose: false
+                    })
+                })
+            }
         });
     }
 
     render() {
         return (
-            <h1>Pustka! --- InProgress :D</h1>
+        <div className="my-reservation-container">
+            <div className="reservation-text">
+                <span>LISTA REZERWACJI</span>
+            </div>
+            {this.state.allReservations.map((reservation, index) => {
+                return <Reservation key={index} {...reservation} />
+            })}
+        </div>
         );
-
     }
 
 }
