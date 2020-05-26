@@ -34,15 +34,15 @@ export default class Item extends Component{
 
     checkPermissionToEditDeleteButton = (roles) => {
         const category = this.props.category[0].category;
-        return (roles.includes("ROLE_MANAGER")  //TODO: Podmien na role managera!
+        return (roles.includes("ROLE_MANAGER")
             || (roles.includes("ROLE_REPAIRMAN") &&
                 category.includes("CAT_WORKSHOP"))
             || (roles.includes("ROLE_CLEANER") &&
                 category.includes("CAT_HYGIENE"))
             || (roles.includes("ROLE_KITCHEN_MANAGER") &&
                 category.includes("CAT_FOOD"))
-            || ((roles.includes("ROLE_RECEPTIONIST") || roles.includes("ROLE_ACCOUNTANT")) &&
-                category.includes("CAT_OFFICE")));
+            || (roles.includes("ROLE_ACCOUNTANT")) &&
+                category.includes("CAT_OFFICE"));
     }
 
     onEditBtnClick = () => {
