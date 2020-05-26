@@ -2,6 +2,14 @@ import axios from 'axios';
 import authHeader from './AuthHeader';
 
 class WorkerService {
+    deleteWorker(worker) {
+        axios.delete(worker._links.self.href).then(response => {
+            console.log(response);
+        }).catch(err => {
+            console.log(err)
+        });
+    }
+
     getAllWorkers() {
         return axios.get("/api/users").then(response => {
             console.log(response.data);
@@ -23,24 +31,18 @@ class WorkerService {
         })
     }
 
-    deleteUser(id) {
-        axios.delete("/api/users/" + id).then(function (response) {
-            console.log(response);
-        }).catch(err => {
-            console.log(err)
-        });
-    }
+
 
     roleNameToPolish(roleName) {
         switch(roleName) {
-            case 'ROLE_RECEPTIONIST': return 'Recepcjonista';
-            case 'ROLE_ACCOUNTANT': return 'Księgowy';
-            case 'ROLE_CLEANER': return 'Sprzątacz';
-            case 'ROLE_BUTLER': return'Lokaj';
-            case 'ROLE_MANAGER': return 'Menadżer';
-            case 'ROLE_KITCHEN_MANAGER': return 'Menadżer kuchni';
-            case 'ROLE_REPAIRMAN': return 'Konserwator';
-            default: return roleName;
+            case 'ROLE_RECEPTIONIST':       return 'Recepcjonista';
+            case 'ROLE_ACCOUNTANT':         return 'Księgowy';
+            case 'ROLE_CLEANER':            return 'Sprzątacz';
+            case 'ROLE_BUTLER':             return'Lokaj';
+            case 'ROLE_MANAGER':            return 'Menadżer';
+            case 'ROLE_KITCHEN_MANAGER':    return 'Menadżer kuchni';
+            case 'ROLE_REPAIRMAN':          return 'Konserwator';
+            default:                        return roleName;
         }
     }
 }

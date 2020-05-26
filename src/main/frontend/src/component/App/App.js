@@ -14,6 +14,7 @@ import ItemStorage from "../Storage/ItemStorage";
 import AllWorkers from "../Workers/AllWorkers";
 import Notification from "../Notification";
 import AllRooms from "../Rooms/AllRooms";
+import Room from "../Rooms/Room";
 import AllGuests from "../Guests/AllGuests";
 
 import { toast } from 'react-toastify';
@@ -46,7 +47,8 @@ class App extends Component {
           <Route path="/forgotpassword" component={ForgotPassword}/>
           <Route path="/notifications" component={Notification}/>
           <Route path="/pracownicy" component={AllWorkers} />
-          <Route path="/rooms" component={AllRooms} />
+          <Route exact path="/rooms" component={AllRooms} />
+          <Route path="/rooms/:roomName" component={Room} />
           <Route exact path="/guests" component={AllGuests}/>
           <Route path="/guests/:id" component={GuestDetails}/>
           <Route path="/addguest" component={AddGuest} />

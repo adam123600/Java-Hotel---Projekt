@@ -9,7 +9,6 @@ export default class AllWorkers extends React.Component {
         this.state = {
             allWorkers: [],
             allRoles: [],
-            deleteWorker : this.deleteWorker.bind(this)
         }
         WorkerService.getAllWorkers().then(result => {
             this.setState({allWorkers: result});
@@ -17,14 +16,6 @@ export default class AllWorkers extends React.Component {
         WorkerService.getAllRoles().then(result => {
             this.setState({allRoles: result});
         });
-    }
-
-    deleteWorker(worker){
-        var str = worker._links.self.href;
-        var re = /[0-9]*$/;
-        var id = str.match(re).toString();
-        WorkerService.deleteUser(id);
-        window.location.reload();
     }
 
     render() {
@@ -36,7 +27,7 @@ export default class AllWorkers extends React.Component {
                         {this.state.allWorkers.map(worker => (
                             <li key={worker._links.self}>
                                 <Worker worker={worker} allRoles={this.state.allRoles}/>
-                                <button onClick={() => this.state.deleteWorker(worker)}>Usuń pracownika</button>
+                                <button onClick={() => { WorkerService.deleteWorker(worker); window.location.reload(); } }>Usuń pracownika</button>
                             </li>
                         ))}
                     </ul>
