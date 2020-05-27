@@ -1,8 +1,8 @@
 import React, {useState, Component} from "react";
 import WorkerService from "../../service/WorkerService";
 import Worker from "./Worker";
-import {ListGroup, ListGroupItem, Collapse, Button, CardBody} from 'reactstrap';
-import {TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, CardText, Row, Col} from 'reactstrap';
+import {ListGroup, ListGroupItem} from 'reactstrap';
+import {TabContent, TabPane, Nav, NavItem, NavLink, Row, Col} from 'reactstrap';
 
 export default class AllWorkers extends Component {
     constructor(props) {
@@ -78,7 +78,6 @@ export default class AllWorkers extends Component {
                 })}
             </div>
         )
-
     }
 
 
@@ -88,22 +87,5 @@ export default class AllWorkers extends Component {
                 {this.showWorkers()}
             </div>
         )
-        /*    render() {
-                return(
-                    <div className="main-container">
-                        <div className="content">
-                            <h2>Pracownicy:</h2>
-                            <ul>
-                                {this.state.allWorkers.map(worker => (
-                                    <li key={worker._links.self}>
-                                        <Worker worker={worker} allRoles={this.state.allRoles}/>
-                                        <button onClick={() => { WorkerService.deleteWorker(worker); window.location.reload(); } }>Usuń pracownika</button>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                )
-            }*/
     }
 }

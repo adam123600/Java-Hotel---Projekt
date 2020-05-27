@@ -91,6 +91,14 @@ export default class Worker extends React.Component {
                             </ModalFooter>
                         </Modal>
                     </td>
+                    { isManager &&
+                        <td>
+                            <Button style={{backgroundColor: '#f99cab'}} 
+                                    onClick={() => { WorkerService.deleteWorker(this.props.worker); window.location.reload(); } }>
+                                        Usuń pracownika
+                            </Button>
+                        </td>
+                    }
                 </tbody>
             </Table>
             
