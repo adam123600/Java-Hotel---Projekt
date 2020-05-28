@@ -36,11 +36,6 @@ public class NotificationController {
         Notification notification = new Notification(loginRequest.getUsername(), notificationTypeRepository.findByType("RES_USER_PASSWORD"));
         notificationRepository.save(notification);
 
-        // To było w celach testowych:
-        //Notification not2 = new Notification(loginRequest.getUsername(), notificationTypeRepository.findByType("FOOD_ENDED"));
-        //notificationRepository.save(not2);
-
-
         return ResponseEntity.ok(new MessageResponse("Request was sent successfully"));
     }
 
@@ -54,6 +49,11 @@ public class NotificationController {
     @GetMapping("type/{notTypeId}")
     public List<Notification> getAllNotificationsByNotificationTypeId(@PathVariable Long notTypeId){
         return notificationRepository.findByNotType_id(notTypeId);
+    }
+
+    @GetMapping("room/{roomId}")
+    public List<Notification> getAllNotificationsByRoomId(@PathVariable Long roomId){
+        return notificationRepository.findByRoom_id(roomId);
     }
 
     @GetMapping({"id"})
