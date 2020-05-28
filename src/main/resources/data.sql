@@ -5,6 +5,8 @@ INSERT IGNORE INTO roles(id, name) VALUES (7, 'ROLE_BUTLER');
 INSERT IGNORE INTO roles(id, name) VALUES (8, 'ROLE_MANAGER');
 INSERT IGNORE INTO roles(id, name) VALUES (9, 'ROLE_KITCHEN_MANAGER');
 INSERT IGNORE INTO roles(id, name) VALUES (10, 'ROLE_REPAIRMAN');
+INSERT IGNORE INTO users(id, email, firstname, lastname, password, phonenumber, username) VALUES (3,"ksiegowy@ksiegowy.pl", "Radosław", "Kotarski", "Ciekawe czy sie zahashuje", 666777999, "UserKsiegowy");
+INSERT IGNORE INTO user_roles(user_id, role_id) VALUES (3, 5);
 
 INSERT IGNORE INTO category_of_item (id, category) VALUES (1, 'CAT_FOOD');
 INSERT IGNORE INTO category_of_item (id, category) VALUES (2, 'CAT_OFFICE');
@@ -25,8 +27,8 @@ INSERT IGNORE INTO item_category (item_id, category_id) VALUES (3, 1);
 INSERT IGNORE INTO item_category (item_id, category_id) VALUES (4, 2);
 INSERT IGNORE INTO item_category (item_id, category_id) VALUES (5, 2);
 INSERT IGNORE INTO item_category (item_id, category_id) VALUES (6, 2);
-INSERT IGNORE INTO item_category (item_id, category_id) VALUES (8, 3);
 INSERT IGNORE INTO item_category (item_id, category_id) VALUES (7, 4);
+INSERT IGNORE INTO item_category (item_id, category_id) VALUES (8, 3);
 
 INSERT IGNORE INTO notificationtypes (id, type) VALUES (1, 'RES_USER_PASSWORD');
 INSERT IGNORE INTO notificationtypes (id, type) VALUES (2, 'FOOD_ENDED');
@@ -35,7 +37,8 @@ INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VAL
 INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (2,"Recepcjonista",3, 1, "Kolejny brud");
 INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (3,"Recepcjonista",3, 1, "I jeszcze troszke");
 INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (4,"Recepcjonista",3, 2, "Brud brud brud");
-INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (2,"admin",2);
+INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (5,"admin",2);
+INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (6,"Nazwa użytkownika restującego hasło",1);
 
 INSERT IGNORE INTO standard_of_room(id, max_capacity, name, price) VALUES (1, 1, 'Jedynka', 100.0);
 INSERT IGNORE INTO standard_of_room(id, max_capacity, name, price) VALUES (2, 2, 'Dwójka', 180.0);
