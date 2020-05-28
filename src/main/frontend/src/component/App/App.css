@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -125,3 +126,24 @@ label {
 .roomThumbnail.free:hover {
   background-color: #64DC00;
 }
+
+.dropdown-menu {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+}
+
+.dropdown-item:hover {
+  background-color: #ffe1e6 !important;
+}
+
+.dropdown-item:focus {
+  outline: none !important;
+}
+
+.dropdown-item {
+  color: black !important;
+  background-color: transparent !important;
+}
+

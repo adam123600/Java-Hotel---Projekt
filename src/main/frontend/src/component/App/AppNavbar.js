@@ -69,21 +69,6 @@ class AppNavbar extends Component {
                         <NavbarToggler onClick={this.toggle}/>
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="mr-auto" navbar>
-                                {/*{{showModeratorBoard && (//TODO: Elementy Navbar'a raczej do usunięcia
-                                        <NavItem>
-                                            <NavLink href="/mod">Moderator Board</NavLink>
-                                        </NavItem>
-                                    )}
-                                    {showAdminBoard && (
-                                        <NavItem>
-                                        <NavLink href="/admin">Admin Board</NavLink>
-                                        </NavItem>
-                                        )}}
-                                    {{currentUser && (
-                                        <NavItem>
-                                            <NavLink href="/user">User</NavLink>
-                                        </NavItem>
-                                    )}*/}
                                 {currentUser && (
                                     <NavItem>
                                         <NavLink href="/notifications">Powiadomienia</NavLink>
@@ -98,7 +83,6 @@ class AppNavbar extends Component {
                                             <DropdownItem onClick={event => window.location.href = '/itemstorage'}>
                                                 Stany magazynowe
                                             </DropdownItem>
-                                            <DropdownItem divider/>
                                             <DropdownItem>
                                                 Zamówienia
                                             </DropdownItem>
@@ -114,11 +98,9 @@ class AppNavbar extends Component {
                                             <DropdownItem onClick={event => window.location.href = '/workers'}>
                                                 Lista pracowników
                                             </DropdownItem>
-                                            <DropdownItem divider/>
                                             <DropdownItem>
                                                 Harmonogramy
                                             </DropdownItem>
-                                            <DropdownItem divider/>
                                             <DropdownItem>
                                                 Dodaj pracownika
                                             </DropdownItem>
@@ -135,11 +117,9 @@ class AppNavbar extends Component {
                                                 onClick={event => window.location.href = '/addreservation'}>
                                                 Stwórz nową
                                             </DropdownItem>
-                                            <DropdownItem divider/>
                                             <DropdownItem onClick={event => window.location.href = '/reservations'}>
                                                 Wszystkie
                                             </DropdownItem>
-                                            <DropdownItem divider/>
                                             <DropdownItem onClick={event => window.location.href = '/guests'}>
                                                 Lista Gości
                                             </DropdownItem>
@@ -152,18 +132,12 @@ class AppNavbar extends Component {
                                             Pokoje
                                         </DropdownToggle>
                                         <DropdownMenu right>
-                                            <DropdownItem onClick={event => window.location.href = '/rooms'}>
+                                            <DropdownItem onClick={event => window.location.href = '/rooms'}  >
                                                 Wszystkie Pokoje
                                             </DropdownItem>
-                                            <DropdownItem divider/>
-                                            <DropdownItem>
-                                                Wyszukiwarka
-                                            </DropdownItem>
-                                            <DropdownItem divider/>
                                             <DropdownItem>
                                                 Zgłoszenia
                                             </DropdownItem>
-                                            <DropdownItem divider/>
                                             <DropdownItem>
                                                 Sprzątanie
                                             </DropdownItem>
@@ -182,7 +156,6 @@ class AppNavbar extends Component {
                                             <DropdownItem>
                                                 Mój Harmonogram
                                             </DropdownItem>
-                                            <DropdownItem divider/>
                                             <DropdownItem>
                                                 Ustal dyspozycyjność
                                             </DropdownItem>
