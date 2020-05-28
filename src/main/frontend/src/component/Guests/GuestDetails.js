@@ -1,5 +1,7 @@
 import * as React from "react";
 import GuestService from "../../service/GuestService";
+import {ListGroup, ListGroupItem, Button} from 'reactstrap';
+//import './GuestDetails.css';
 
 export default class GuestDetails extends React.Component{
 
@@ -29,14 +31,18 @@ export default class GuestDetails extends React.Component{
 
     render() {
             return(
-                <div>
-                    <h2>Imię: {this.state.guestInfo.firstName}</h2>
-                    <h2>Nazwisko: {this.state.guestInfo.lastName}</h2>
-                    <h3>Data zameldowania: {this.state.guestInfo.accommodationDate}</h3>
-                    <h3>Data wymeldowania: {this.state.guestInfo.checkOutDate}</h3>
-                    <button style={{marginRight: "7px"}}>Rachunek</button>
-                    <button style={{marginLeft: "7px"}}>Wymelduj</button>
-                </div>
+                <ListGroup className="w-25" style={{position: 'absolute', top: '25%', left: '40%'}}>
+                    <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Imię</ListGroupItem>
+                    <ListGroupItem>{this.state.guestInfo.firstName}</ListGroupItem>
+                    <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Nazwisko</ListGroupItem>
+                    <ListGroupItem>{this.state.guestInfo.lastName}</ListGroupItem>
+                    <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Data zameldowania</ListGroupItem>
+                    <ListGroupItem>{this.state.guestInfo.accommodationDate}</ListGroupItem>
+                    <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Data wymeldowania</ListGroupItem>
+                    <ListGroupItem>{this.state.guestInfo.checkOutDate}</ListGroupItem>
+                    <Button style={{backgroundColor: '#f99cab', border: 'none'}}>Rachunek</Button>
+                    <Button style={{backgroundColor: '#f99cab', border: 'none', marginTop: '2px'}}>Wymelduj</Button>
+                </ListGroup>
             );
             //TODO: obsługa tych dwóch przycisków
         }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GuestService from "../../service/GuestService";
 import GuestDetails from "./GuestDetails";
 import {Link, NavLink} from "react-router-dom";
+import { Button } from "reactstrap";
 
 export  default class Guest extends React.Component {
     constructor(props) {
@@ -35,7 +36,7 @@ export  default class Guest extends React.Component {
                     pathname:`/guests/${this.state.guestID}`,
                     props:{guest: this.props.guest}
                             }}>
-                    <button>Szczegółowe dane</button>
+                    <Button style={{backgroundColor: '#f99cab'}}>Szczegółowe dane</Button>
                 </Link>
             </div>
         )
