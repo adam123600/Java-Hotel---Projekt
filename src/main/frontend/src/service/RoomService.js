@@ -42,6 +42,13 @@ class RoomService {
             return response.data._embedded.guests;
         })
     }
+
+    getAllRoomsByFloor(floor) {
+        return axios.get("/api/rooms/search/findByRoomNameStartsWith?str=" + floor).then(response => {
+            //console.log(response.data);
+            return response.data._embedded.rooms;
+        })
+    }
 }
 
 export default new RoomService();

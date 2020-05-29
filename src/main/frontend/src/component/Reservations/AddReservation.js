@@ -203,7 +203,7 @@ export default class AddReservation extends Component {
                             value={this.state.checkOutDate}
                             selected={this.state.checkOutDate}
                             onChange={this.onChangeCheckOutDate}
-                            minDate={new Date()}
+                            minDate={this.state.checkInDate}
                             name="checkoutdate"
                         />
                     </div>

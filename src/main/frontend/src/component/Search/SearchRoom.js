@@ -9,17 +9,6 @@ export default class SearchRoom extends React.Component {
         this.state = {
             input: "",
         }
-
-        this.handleChange = this.handleChange.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange(event) {
-        console.log(event.target.value)
-        this.setState({
-            input: event.target.value,
-            renderRoom: false,
-        })
     }
 
     handleSubmit = event =>  {
@@ -35,7 +24,7 @@ export default class SearchRoom extends React.Component {
             <div>
                 <div>
                 <form onSubmit={this.handleSubmit}>
-                    <label>Podaj numer pokoju:</label>
+                    <label style={{padding: '5px 12px 5px'}}>Podaj numer pokoju:</label>
                     <input type="text" name="input" value={this.state.input} onChange={event => {event.preventDefault(); this.setState({input: event.target.value})}}/>
                     <input type="submit" value={'Szukaj'}/>
                 </form>

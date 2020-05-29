@@ -10,9 +10,25 @@ export default class AllRooms extends React.Component {
             allRooms: [],
             onlyEmpty: true,
         }
-        RoomService.getAllRooms().then(result => {
-            this.setState({allRooms: result})
+        RoomService.getAllRooms().then(res => {
+            this.setState({allRooms: res})
         });
+
+        this.handleSelect = this.handleSelect.bind(this);
+    }
+
+    handleSelect(event) {
+        if(event.target.value === "all") {
+            RoomService.getAllRooms().then(res => {
+                this.setState({allRooms: res})
+            });
+        }
+
+        else {
+            RoomService.getAllRoomsByFloor(event.target.value).then(res => {
+                this.setState({allRooms: res})
+            })
+        }
     }
 
     render() {
@@ -38,8 +54,17 @@ export default class AllRooms extends React.Component {
             <div className="main-container">
                 <div className="content">
                     <SearchRoom/>
-                    <input type="checkbox" onClick={() => this.setState({onlyEmpty: !this.state.onlyEmpty})}></input>
-                    <label>Tylko wolne pokoje</label>
+                    <input className="checkbox" type="checkbox" onClick={() => this.setState({onlyEmpty: !this.state.onlyEmpty})}></input>
+                    <label style={{padding: '5px 12px 5px'}}>Tylko wolne pokoje</label>
+                    <label style={{padding: '5px 12px 5px 30px'}}>Piętro:</label>
+                    <select onChange={this.handleSelect}>
+                        <option value="all" selected>Wszystkie</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
                     {roomThumbnails}
                 </div>
             </div>

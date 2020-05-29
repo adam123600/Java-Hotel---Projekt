@@ -14,4 +14,5 @@ public interface RoomRepository extends JpaRepository<Room, Long>{
     List<Room> findByRoomStandard_id(Long RoomStandard_id);
     Optional<Room> findByRoomName(String roomName);
     Optional<List<Room>> findByCurrentNumberOfGuests(Integer num);
+    Optional<List<Room>> findByRoomNameStartsWith(String str);        // do szukania pokoi po piętrach
 }
