@@ -14,7 +14,8 @@ export  default class Guest extends React.Component {
         }
 
         this.renderDetails = this.renderDetails.bind(this);
-        this.getGuestId = this.getGuestId(this);
+        this.getGuestId = this.getGuestId.bind(this);
+        
     }
 
     getGuestId = () => {
@@ -26,6 +27,7 @@ export  default class Guest extends React.Component {
     renderDetails() {
         this.setState({renderDetails: !this.state.renderDetails});
     }
+
 
     render() {
         return (

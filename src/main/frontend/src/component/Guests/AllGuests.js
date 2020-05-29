@@ -7,13 +7,13 @@ export default class AllGuests extends React.Component{
     constructor(props) {
             super(props);
             this.state = {
-                allGuests: []
+                allGuests: [],
             }
         }
 
-
     componentDidMount() {
-    GuestService.getAllGuests().then(
+        
+        GuestService.getAllGuests().then(
         response => {
             this.setState( {
                 allGuests: response
@@ -21,9 +21,10 @@ export default class AllGuests extends React.Component{
         }
     )
     }
-
+   
     render() {
         return(
+            
             <div className="main-container">
                 <div className="content">
                     <h2>Goście:</h2>
@@ -32,7 +33,7 @@ export default class AllGuests extends React.Component{
                             this.state.allGuests.map(
                                 guest => (
                                     <li key={guest.firstName}>
-                                        <Guest guest={guest}/>
+                                        <Guest guest={guest} />
                                     </li>
                                 )
                             )
