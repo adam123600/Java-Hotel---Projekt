@@ -30,6 +30,16 @@ INSERT IGNORE INTO item_category (item_id, category_id) VALUES (6, 2);
 INSERT IGNORE INTO item_category (item_id, category_id) VALUES (7, 4);
 INSERT IGNORE INTO item_category (item_id, category_id) VALUES (8, 3);
 
+INSERT IGNORE INTO servicetypes (id, type, price) VALUES (1, 'DUPECZKI', 350);
+INSERT IGNORE INTO servicetypes (id, type, price) VALUES (2, 'WODECZKA', 50.5);
+INSERT IGNORE INTO servicetypes (id, type, price) VALUES (3, 'KOKOLINA', 99.99);
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (1, 3, 1, 'Kilogram poprosze');
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (2, 2, 2, '2 Litry poprosze');
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (3, 1, 1, '2 by byly');
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (4, 1, 1, '2 by byly');
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (5, 1, 1, '2 by byly');
+
+
 INSERT IGNORE INTO notificationtypes (id, type) VALUES (1, 'RES_USER_PASSWORD');
 INSERT IGNORE INTO notificationtypes (id, type) VALUES (2, 'FOOD_ENDED');
 INSERT IGNORE INTO notificationtypes (id, type) VALUES (3, 'ROOM_CLEANING');
