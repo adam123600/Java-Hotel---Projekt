@@ -8,46 +8,49 @@ export default class AllRooms extends React.Component {
         super(props);
         this.state = {
             allRooms: [],
-            onlyEmpty: true,
+            allStandards: [],
+            onlyEmpty: false,
+            floorRegex: ".*",
+            standardRegex: ".*",
         }
-        RoomService.getAllRooms().then(res => {
-            this.setState({allRooms: res})
+        RoomService.getAllRooms4().then(res => {
+            this.setState({allRooms: res});
+            console.log(res);
         });
 
-        this.handleSelect = this.handleSelect.bind(this);
+        RoomService.getAllStandards().then(res => {
+            this.setState({allStandards: res});
+        });
+
+        this.handleSelectFloor = this.handleSelectFloor.bind(this);
+        this.handleSelectStandard = this.handleSelectStandard.bind(this);
     }
 
-    handleSelect(event) {
-        if(event.target.value === "all") {
-            RoomService.getAllRooms().then(res => {
-                this.setState({allRooms: res})
-            });
-        }
-
-        else {
-            RoomService.getAllRoomsByFloor(event.target.value).then(res => {
-                this.setState({allRooms: res})
-            })
-        }
+    handleSelectFloor(event) {
+        this.setState({floorRegex: event.target.value});
     }
+
+    handleSelectStandard(event) {
+        this.setState({standardRegex: event.target.value});
+    }
+
 
     render() {
-        let roomThumbnails;
-        if(this.state.onlyEmpty) {
-            roomThumbnails = this.state.allRooms.map(room => (
-                    <div key={room.id}>
-                        <RoomThumbnail room={room}/>
-                    </div>
-                ))
-        }
-        else
-        {
-            roomThumbnails = this.state.allRooms.map(room => (
-                <div key={room.id}>
-                    {room.currentNumberOfGuests == 0 && <RoomThumbnail room={room}/>}
-                </div>
-            ))
-        }
+        let roomThumbnails = this.state.allRooms.filter(room => {
+            if(this.state.onlyEmpty) {
+                return room.currentNumberOfGuests == 0;
+            }
+            else
+                return room;
+        }).filter(room => {
+            return room.roomName.match(this.state.floorRegex);
+        }).filter(room => {
+            return room.roomStandard.name.match(this.state.standardRegex);
+        }).map(room => (
+            <div key={room.id}>
+                <RoomThumbnail room={room}/>
+            </div>
+        ));
 
 
         return(
@@ -57,13 +60,20 @@ export default class AllRooms extends React.Component {
                     <input className="checkbox" type="checkbox" onClick={() => this.setState({onlyEmpty: !this.state.onlyEmpty})}></input>
                     <label style={{padding: '5px 12px 5px'}}>Tylko wolne pokoje</label>
                     <label style={{padding: '5px 12px 5px 30px'}}>Piętro:</label>
-                    <select onChange={this.handleSelect}>
-                        <option value="all" selected>Wszystkie</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                    <select onChange={this.handleSelectFloor}>
+                        <option value=".*" selected>Wszystkie</option>
+                        <option value="^1">1</option>
+                        <option value="^2">2</option>
+                        <option value="^3">3</option>
+                        <option value="^4">4</option>
+                        <option value="^5">5</option>
+                    </select>
+                    <label style={{padding: '5px 12px 5px 30px'}}>Standard:</label>
+                    <select onChange={this.handleSelectStandard}>
+                        <option value=".*" selected>Dowolny</option>
+                        {this.state.allStandards.map(standard => (
+                            <option value={standard.name}>{standard.name}</option>
+                        ))}
                     </select>
                     {roomThumbnails}
                 </div>

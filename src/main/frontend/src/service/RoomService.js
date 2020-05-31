@@ -17,6 +17,12 @@ class RoomService {
         return axios.get("/api/rooms1", {headers: authHeader()});
     }
 
+    getAllRooms4() {
+        return axios.get("/api/rooms1").then(response => {
+            return response.data;
+        })
+    }
+
     getAllRooms2(){
         //return axios.get(API_URL, {headers: authHeader()});
         return axios.get("/api/rooms").then(response => {
@@ -32,8 +38,8 @@ class RoomService {
     }
 
     getRoomOccupancyImg(room) {
-        return this.getRoomStandard(room).then(res => {
-            return (img + room.currentNumberOfGuests + res.max_capacity + '.png');
+        return this.getRoomStandard(room).then(response => {
+            return (img + room.currentNumberOfGuests + response.max_capacity + '.png');
         });
     }
 
@@ -43,10 +49,9 @@ class RoomService {
         })
     }
 
-    getAllRoomsByFloor(floor) {
-        return axios.get("/api/rooms/search/findByRoomNameStartsWith?str=" + floor).then(response => {
-            //console.log(response.data);
-            return response.data._embedded.rooms;
+    getAllStandards() {
+        return axios.get("/api/roomStandards").then(response => {
+            return response.data._embedded.roomStandards;
         })
     }
 }
