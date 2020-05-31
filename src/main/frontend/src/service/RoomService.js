@@ -17,10 +17,10 @@ class RoomService {
         return axios.get("/api/rooms1", {headers: authHeader()});
     }
 
-    getAllRooms4() {
+    getAllRooms1() {
         return axios.get("/api/rooms1").then(response => {
             return response.data;
-        })
+        });
     }
 
     getAllRooms2(){
@@ -38,8 +38,8 @@ class RoomService {
     }
 
     getRoomOccupancyImg(room) {
-        return this.getRoomStandard(room).then(response => {
-            return (img + room.currentNumberOfGuests + response.max_capacity + '.png');
+        return this.getRoomStandard(room).then(res => {
+            return (img + room.currentNumberOfGuests + res.max_capacity + '.png');
         });
     }
 

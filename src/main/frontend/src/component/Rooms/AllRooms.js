@@ -13,7 +13,7 @@ export default class AllRooms extends React.Component {
             floorRegex: ".*",
             standardRegex: ".*",
         }
-        RoomService.getAllRooms4().then(res => {
+        RoomService.getAllRooms1().then(res => {
             this.setState({allRooms: res});
             console.log(res);
         });
@@ -34,14 +34,13 @@ export default class AllRooms extends React.Component {
         this.setState({standardRegex: event.target.value});
     }
 
-
     render() {
+
         let roomThumbnails = this.state.allRooms.filter(room => {
-            if(this.state.onlyEmpty) {
+            if(this.state.onlyEmpty)
                 return room.currentNumberOfGuests == 0;
-            }
             else
-                return room;
+                return true;
         }).filter(room => {
             return room.roomName.match(this.state.floorRegex);
         }).filter(room => {
@@ -51,7 +50,6 @@ export default class AllRooms extends React.Component {
                 <RoomThumbnail room={room}/>
             </div>
         ));
-
 
         return(
             <div className="main-container">
