@@ -39,33 +39,11 @@ INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (3, 1, 1,
 INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (4, 1, 1, '2 by byly');
 INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (5, 1, 1, '2 by byly');
 
-
-INSERT IGNORE INTO notificationtypes (id, type) VALUES (1, 'RES_USER_PASSWORD');
-INSERT IGNORE INTO notificationtypes (id, type) VALUES (2, 'FOOD_ENDED');
-INSERT IGNORE INTO notificationtypes (id, type) VALUES (3, 'ROOM_CLEANING');
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (1,"Recepcjonista",3, 1, "Rozlane cus tam");
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (2,"Recepcjonista",3, 1, "Kolejny brud");
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (3,"Recepcjonista",3, 1, "I jeszcze troszke");
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (4,"Recepcjonista",3, 2, "Brud brud brud");
-INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (5,"admin",2);
-INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (6,"Nazwa użytkownika restującego hasło",1);
-
 INSERT IGNORE INTO standard_of_room(id, max_capacity, name, price) VALUES (1, 1, 'Jedynka', 100.0);
 INSERT IGNORE INTO standard_of_room(id, max_capacity, name, price) VALUES (2, 2, 'Dwójka', 180.0);
 INSERT IGNORE INTO standard_of_room(id, max_capacity, name, price) VALUES (3, 3, 'Trójka', 300.0);
 INSERT IGNORE INTO standard_of_room(id, max_capacity, name, price) VALUES (4, 5, 'Apartament', 450.0);
-INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (1, DATE '2020-05-23', 'Jan', 'Kowalski', DATE '2020-05-15', 1);
-INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (2, DATE '2020-05-30', 'Darek', 'Dariusz', DATE '2020-05-24', 1);
-INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (3, DATE '2020-05-21', 'Tedeo', 'Tadeo', DATE '2020-05-18', 2);
-INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (4, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 2);
-INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (5, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 3);
-INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (6, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 4);
-INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (7, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 5);
-INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (8, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 6);
-INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (9, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 7);
-INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (1, DATE '2020-05-15', DATE '2020-05-23', 'Jan', 'Kowalski', 1 );
-INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (2, DATE '2020-05-24', DATE '2020-05-30', 'Darek', 'Dariusz', 1 );
-INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (3, DATE '2020-05-18', DATE '2020-05-21', 'Tedeo', 'Tadeo', 2 );
+
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (1, 182.42, 1, '1001', 1);
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (2, 342.18, 2, '1002', 4);
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (3, 342.18, 2, '1003', 2);
@@ -82,3 +60,27 @@ INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, stan
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (14, 342.18, 2, '4002', 2);
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (15, 10556.0, 5, '5001', 4);
 INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, standard_id) VALUES (16, 3400.0, 2, '5002', 4);
+
+INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (1, DATE '2020-05-23', 'Jan', 'Kowalski', DATE '2020-05-15', 1);
+INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (2, DATE '2020-05-30', 'Darek', 'Dariusz', DATE '2020-05-24', 1);
+INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (3, DATE '2020-05-21', 'Tedeo', 'Tadeo', DATE '2020-05-18', 2);
+INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (4, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 2);
+INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (5, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 3);
+INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (6, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 4);
+INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (7, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 5);
+INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (8, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 6);
+INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (9, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 7);
+
+INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (1, DATE '2020-05-15', DATE '2020-05-23', 'Jan', 'Kowalski', 1 );
+INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (2, DATE '2020-05-24', DATE '2020-05-30', 'Darek', 'Dariusz', 2 );
+INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (3, DATE '2020-05-18', DATE '2020-05-21', 'Tedeo', 'Tadeo', 2 );
+
+INSERT IGNORE INTO notificationtypes (id, type) VALUES (1, 'RES_USER_PASSWORD');
+INSERT IGNORE INTO notificationtypes (id, type) VALUES (2, 'FOOD_ENDED');
+INSERT IGNORE INTO notificationtypes (id, type) VALUES (3, 'ROOM_CLEANING');
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (1,"Recepcjonista",3, 1, "Rozlane cus tam");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (2,"Recepcjonista",3, 1, "Kolejny brud");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (3,"Recepcjonista",3, 1, "I jeszcze troszke");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (4,"Recepcjonista",3, 2, "Brud brud brud");
+INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (5,"admin",2);
+INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (6,"Nazwa użytkownika restującego hasło",1);
