@@ -15,7 +15,7 @@
     flex-direction: column;
     padding: 20px;
     align-items: center;
-    justify-content: center;;
+    justify-content: center;
     border-width: thick;
     border-color:  #f3c2c7;
   }
@@ -56,4 +56,42 @@
     justify-content: space-between;
     width:300px;
     padding-bottom: 20px;  
+  }
+
+  /*******************
+  Klasy do widoku wszystkich rezerwacji
+   */
+
+  .allreservations-header {
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 30px;
+    font-weight: 600;
+    font-size: 40px;
+    color: #f99cab;
+  }
+
+  .allreservations-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .allreservations-reservation{
+    display: flex;
+    margin: 20px;
+    padding: 10px;
+    flex-direction: column;
+    border-style: solid;
+    border-color: #f99cab;
+  }
+  .allreservations-label{
+    color: #626262;
+  }
+
+  .allreservations-startdate{
+    color: #045913;
+  }
+
+  .allreservations-enddate{
+    color: #dc4d4d;
   }

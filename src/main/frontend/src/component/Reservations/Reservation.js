@@ -42,13 +42,13 @@ export default class Reservation extends Component{
 
     render() {
         return (
-            <div className="reservation-form">
-                <h5 className="my-label">Imię: {this.props.firstName}</h5>
-                <h5 className="my-label">Nazwisko: {this.props.lastName}</h5>
-                <h5 className="my-label">Numer pokoju: {this.props.room.roomName}</h5>
-                <h5 className="my-label">Standard pokoju: {this.props.room.roomStandard.name}</h5>
-                <h5 className="my-label">Początek rezerwacji: {this.props.startDate}</h5>
-                <h5 className="my-label">Koniec rezerwacji: {this.props.endDate}</h5>
+            <div className="allreservations-reservation">
+                <h5 className="my-label"><span className="allreservations-label">Imię: </span>{this.props.firstName}</h5>
+                <h5 className="my-label"><span className="allreservations-label">Nazwisko: </span>{this.props.lastName}</h5>
+                <h5 className="my-label"><span className="allreservations-label">Numer pokoju: </span>{this.props.room.roomName}</h5>
+                <h5 className="my-label"><span className="allreservations-label">Standard pokoju: </span>{this.props.room.roomStandard.name}</h5>
+                <h5 className="my-label"><span className="allreservations-label">Początek rezerwacji: </span><span className="allreservations-startdate">{this.props.startDate}</span></h5>
+                <h5 className="my-label"><span className="allreservations-label">Koniec rezerwacji: </span><span className="allreservations-enddate">{this.props.endDate}</span></h5>
                 <button className="my-button login-button" onClick={this.onButtonClick}>Zamelduj</button>
             </div>
         )

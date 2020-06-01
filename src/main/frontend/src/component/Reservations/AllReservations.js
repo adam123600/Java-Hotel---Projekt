@@ -42,13 +42,15 @@ export default class AllReservations extends Component{
 
     render() {
         return (
-        <div className="my-reservation-container">
-            <div className="reservation-text">
-                <span>LISTA REZERWACJI</span>
+        <div>
+            <div className="allreservations-header">
+                LISTA REZERWACJI
             </div>
-            {this.state.allReservations.map((reservation, index) => {
-                return <Reservation key={index} {...reservation} />
-            })}
+            <div className="allreservations-container">
+                {this.state.allReservations.map((reservation, index) => {
+                    return <Reservation key={index} {...reservation} />
+                })}
+            </div>
         </div>
         );
     }
