@@ -1,8 +1,6 @@
 package com.hotel.model;
 
-import javax.persistence.Entity;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity(name = "Service")

@@ -9,15 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- *  /api/services               all services
- *  /api/services/types         all types of service
- *  /api/services/type/{id}     type of {id} service
+ *  /api/services1               all services
+ *  /api/services1/types         all types of service
+ *  /api/services1/type/{id}     type of {id} service
+ *  /api/services1/room/{id}     all services assigned to room given by id
  */
 
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/services")
+@RequestMapping("/api/services1")
 public class ServiceController {
 
     @Autowired

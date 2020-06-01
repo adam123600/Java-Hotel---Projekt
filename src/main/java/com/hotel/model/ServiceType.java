@@ -1,14 +1,8 @@
 package com.hotel.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
 
-import javax.persistence.Entity;
 import javax.persistence.*;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import java.util.List;
 
 @Entity( name = "ServiceType")

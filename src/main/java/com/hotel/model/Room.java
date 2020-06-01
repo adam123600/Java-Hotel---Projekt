@@ -51,10 +51,14 @@ public class Room {
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
     private List<Notification> notifications;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+    private List<Service> services;
+
     public Room() {
     }
 
-    public Room(Long id, @Size(max = 10) @NotBlank String roomName, Integer currentNumberOfGuests, Float balance, RoomStandard roomStandard, List<Reservation> reservations, List<Guest> guests, List<Notification> notifications) {
+    public Room(Long id, @Size(max = 10) @NotBlank String roomName, Integer currentNumberOfGuests, Float balance, RoomStandard roomStandard, List<Reservation> reservations, List<Guest> guests, List<Notification> notifications, List<Service> services) {
         this.id = id;
         this.roomName = roomName;
         this.currentNumberOfGuests = currentNumberOfGuests;
@@ -63,6 +67,7 @@ public class Room {
         this.reservations = reservations;
         this.guests = guests;
         this.notifications = notifications;
+        this.services = services;
     }
 
     public Long getId() {
@@ -127,5 +132,13 @@ public class Room {
 
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 }
