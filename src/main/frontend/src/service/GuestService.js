@@ -24,6 +24,14 @@ class GuestService {
             .catch(err=>{console.log(err)});
     }
 
+    getGuestRoomById(id){
+        return axios.get(API_URL + id + "/room",{headers: authHeader()})
+            .then(response => {
+                return response.data;
+            })
+            .catch(err=>{console.log(err)});
+    }
+
     deleteGuestById(id){
         return axios.delete(API_URL + id, {headers: authHeader()}).catch( err => { console.log(err) });
     }

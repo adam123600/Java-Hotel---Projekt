@@ -54,6 +54,18 @@ class RoomService {
             return response.data._embedded.roomStandards;
         })
     }
+
+    getRoomById(id){
+        return axios.get("/api/rooms/" + id,{headers: authHeader()}).then(response => {
+                return response.data;
+            })
+            .catch(err => console.log(err));
+    }
+
+    updateRoomById(id, newRoom){
+        return axios.put("/api/rooms/" + id, newRoom, {headers: authHeader()})
+            .catch(err => console.log(err));
+    }
 }
 
 export default new RoomService();

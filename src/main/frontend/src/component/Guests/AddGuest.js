@@ -14,6 +14,7 @@ export default class AddGuest extends Component {
             check_out_date: new Date(),
             hrefRoom: "",
             all_rooms: [],
+            newGuestRoom: [],
         }
         this.handleSelect = this.handleSelect.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,7 +26,8 @@ export default class AddGuest extends Component {
                 console.log(response);
                 this.setState({
                     all_rooms: response,
-                    hrefRoom: response[0]._links.self.href
+                    hrefRoom: response[0]._links.self.href,
+                    newGuestRoom: response[0]
                 });
             },
             error => {
@@ -49,7 +51,16 @@ export default class AddGuest extends Component {
             lastName: this.state.last_name,
             room: this.state.hrefRoom
         };
-        console.log(newGuest);
+        const guestRoom = {
+            roomName: this.state.newGuestRoom.roomName,
+            currentNumberOfGuests: this.state.newGuestRoom.currentNumberOfGuests+1,
+            balance: this.state.newGuestRoom.balance,
+            roomStandard: this.state.newGuestRoom.roomStandard,
+            notifications: this.state.newGuestRoom.notifications,
+            reservations: this.state.newGuestRoom.reservations,
+            guests: this.state.newGuestRoom.guests,
+        }
+        RoomService.updateRoomById(this.state.newGuestRoom.id, guestRoom);
         GuestService.createNewGuest(newGuest);
     }
 
@@ -57,13 +68,19 @@ export default class AddGuest extends Component {
         this.setState({
             hrefRoom: event.target.value
         });
+        let newGuestRoomId = event.target.value.match(/[0-9]*$/).toString();
+        RoomService.getRoomById(newGuestRoomId).then( result => {
+            this.setState({
+                newGuestRoom: result,
+            })
+        });
         console.log(event.target.value);
         console.log(this.state.hrefRoom);
     }
 
     render() {
         return (
-            <div onSubmit={this.handleSubmit} style={{margin: '10px'}}>
+            <div onSubmit={this.handleSubmit()} style={{margin: '10px'}}>
                     <form style={{display: 'inline'}}>
                     <h3>Dodajesz gościa:</h3>
                     <label htmlFor={'guestfirst_name'}>Imię:</label>

@@ -2,6 +2,7 @@ import * as React from "react";
 import GuestService from "../../service/GuestService";
 import {ListGroup, ListGroupItem, Button} from 'reactstrap';
 import { Redirect, Link } from "react-router-dom";
+import RoomService from "../../service/RoomService";
 
 export default class GuestDetails extends React.Component{
 
@@ -11,30 +12,51 @@ export default class GuestDetails extends React.Component{
             this.state = {
                 guestInfo: [],
                 redirect: false,
+                roomOfGuest: [],
             }
         }
 
         componentDidMount() {
             if(!this.props.location.props){
-                let link = window.location.href;//pobieramy id z linku
-                GuestService.getGuestById(link.match(/[0-9]*$/).toString()).then(result =>{
+                let id = window.location.href.match(/[0-9]*$/).toString();//pobieramy id z linku
+                GuestService.getGuestById(id).then(result =>{
                     this.setState({
                         guestInfo: result,
                     })
                 });
-            }
+                GuestService.getGuestRoomById(id).then( room => {
+                    this.setState({
+                        roomOfGuest: room,
+                    })});
+                }
+
             else{
                 this.setState({
                     guestInfo: this.props.location.props.guest,
-                })
+                });
+                GuestService.getGuestRoomById(this.props.location.props.guest.id).then( room => {
+                    this.setState({
+                        roomOfGuest: room,
+                    })});
             }
         }
         
         onCheckoutGuest = () =>{
+            console.log(this.state.roomOfGuest);
+            const guestRoom = {
+                roomName: this.state.roomOfGuest.roomName,
+                currentNumberOfGuests: this.state.roomOfGuest.currentNumberOfGuests-1,
+                balance: this.state.roomOfGuest.balance,
+                roomStandard: this.state.roomOfGuest.roomStandard,
+                notifications: this.state.roomOfGuest.notifications,
+                reservations: this.state.roomOfGuest.reservations,
+                guests: this.state.roomOfGuest.guests,
+            }
+            RoomService.updateRoomById(this.state.roomOfGuest.id,guestRoom);
             GuestService.deleteGuestById(this.state.guestInfo.id);
             this.setState({
                 redirect: true,
-            })
+            });
         }
 
     render() {
