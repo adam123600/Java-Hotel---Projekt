@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import RoomService from "../../service/RoomService"
 import SearchRoomService from "../../SearchEngine/SearchRoomService"
+import {Button, Modal, ModalBody, ModalHeader} from "reactstrap";
 
 export default class Room extends React.Component {
     constructor(props) {
@@ -9,8 +10,10 @@ export default class Room extends React.Component {
             room: {},
             img: "",
             guests: [],
+            modal: false,
         }
 
+        this.handleCheckout = this.handleCheckout.bind(this);
     }
     componentDidMount() {
         // jeśli strona została otwarta przez wpisanie linku na sztywno w pasek adresu
@@ -46,6 +49,11 @@ export default class Room extends React.Component {
         }
     }
 
+    handleCheckout(guest) {
+        this.setState({modal: !this.state.modal});
+        console.log(guest.firstName);
+    }
+
     render() {
         return(
 
@@ -55,22 +63,38 @@ export default class Room extends React.Component {
                 <img src={this.state.img}/>
                 <h2>Aktualny rachunek: {this.state.room.balance} zł</h2>
                 {this.state.guests.length > 0 &&
-                    <div> {/* trzeba css ogarnąć :D */}
-                        <h2>Goście:</h2>
-                        <table style={{width: '80%'}}>
-                            <tr>
-                                <th>Gość</th>
-                                <th>Data zakwaterowania</th>
-                                <th>Planowana data wykwaterowania</th>
-                            </tr>
-                            {this.state.guests.map(guest => (
+                <div> {/* trzeba css ogarnąć :D */}
+                    <h2>Goście:</h2>
+                    <table style={{width: '80%'}}>
+                        <tr>
+                            <th>Gość</th>
+                            <th>Data zakwaterowania</th>
+                            <th>Planowana data wykwaterowania</th>
+                        </tr>
+                        {this.state.guests.map(guest => (
                             <tr key={guest.id}>
                                 <td>{`${guest.firstName} ${guest.lastName}`}</td>
                                 <td>{guest.accommodationDate}</td>
                                 <td>{guest.checkOutDate}</td>
+                                <td>
+                                    <Button style={{backgroundColor: '#f99cab'}} onClick={() => { this.setState( {modal: !this.state.modal })}}>
+                                        Wymelduj
+                                    </Button>
+                                    <Modal isOpen={this.state.modal} toggle={() => { this.setState( {modal: !this.state.modal })}}>
+                                        <ModalHeader toggle={() => { this.setState( {modal: !this.state.modal })}}>Czy na pewno</ModalHeader>
+                                        <ModalBody>
+                                            Czy na pewno wymeldować gościa: <br/>
+                                            {guest.firstName} {guest.lastName}? <br/>
+                                            <Button style={{backgroundColor: '#f99cab', margin: '20px', width: '100px'}} onClick={() => this.handleCheckout(guest)}>Tak</Button>
+                                            <Button style={{backgroundColor: '#f99cab', margin: '20px', width: '100px'}} onClick={() => { this.setState( {modal: !this.state.modal })}}>Nie</Button>
+                                        </ModalBody>
+                                    </Modal>
+                                </td>
                             </tr> ))}
-                        </table>
-                    </div>}
+                    </table>
+                    <Button style={{backgroundColor: '#f99cab', margin: '50px 30px', width: '150px'}}>Dodaj gościa</Button>
+                    <Button style={{backgroundColor: '#f99cab', margin: '50px 30px', width: '150px'}}>Rachunek pokoju</Button>
+                </div>}
 
             </div>
         )

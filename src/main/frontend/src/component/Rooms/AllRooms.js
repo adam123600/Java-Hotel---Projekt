@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import RoomService from "../../service/RoomService"
 import RoomThumbnail from "./RoomThumbnail"
 import SearchRoom from "../Search/SearchRoom";
+import DatePicker from "react-date-picker";
 
 export default class AllRooms extends React.Component {
     constructor(props) {
@@ -12,18 +13,24 @@ export default class AllRooms extends React.Component {
             onlyEmpty: false,
             floorRegex: ".*",
             standardRegex: ".*",
+            minDate: new Date(),
+            checkInDate:  new Date(),
+            checkOutDate: new Date(),
         }
         RoomService.getAllRooms1().then(res => {
             this.setState({allRooms: res});
-            console.log(res);
         });
 
         RoomService.getAllStandards().then(res => {
             this.setState({allStandards: res});
         });
 
+        console.log('data');
+        console.log(this.state.minDate);
+
         this.handleSelectFloor = this.handleSelectFloor.bind(this);
         this.handleSelectStandard = this.handleSelectStandard.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
     }
 
     handleSelectFloor(event) {
@@ -32,6 +39,10 @@ export default class AllRooms extends React.Component {
 
     handleSelectStandard(event) {
         this.setState({standardRegex: event.target.value});
+    }
+
+    handleDateChange(event) {
+        this.setState({[event.target.name]: event.target.value});
     }
 
     render() {
@@ -73,6 +84,27 @@ export default class AllRooms extends React.Component {
                             <option value={standard.name}>{standard.name}</option>
                         ))}
                     </select>
+                    <br/>
+                    <label style={{padding: '5px 12px 5px 30px'}}>TO JESZCZE NIE DZIAŁA Dostępny od:</label>
+                    <DatePicker
+                        dateFormat='y-MM-dd'
+                        name="checkInDate"
+                        value={this.state.checkOutDate}
+                        selected={this.state.checkOutDate}
+                        onChange={this.onChangeCheckInDate}
+                        minDate={this.state.checkInDate}
+                        name="checkoutdate"
+                    />
+                    <label style={{padding: '5px 12px 5px 30px'}}>Dostępny do:</label>
+                    <DatePicker
+                        dateFormat='y-MM-dd'
+                        name="checkOutDate"
+                        value={this.state.checkOutDate}
+                        selected={this.state.checkOutDate}
+                        onChange={this.handleDateChange}
+                        minDate={this.state.checkInDate}
+                        name="checkoutdate"
+                    />
                     {roomThumbnails}
                 </div>
             </div>
