@@ -4,6 +4,7 @@ import '../Login/LoginPage.css';
 import './Reservation.css'
 import AuthService from "../../service/AuthService";
 import AddGuest from "../Guests/AddGuest";
+import Modal from "reactstrap/es/Modal";
 
 export default class Reservation extends Component{
     constructor(props) {
@@ -17,8 +18,8 @@ export default class Reservation extends Component{
             startDate: 0,
             endDate:  0,
             toastId : null,
+            modal: false
         }
-
     }
 
     componentDidMount() {
@@ -37,7 +38,9 @@ export default class Reservation extends Component{
     }
 
     onButtonClick = () => {
-
+        this.setState({
+            modal: !this.state.modal
+        })
     };
 
     render() {
@@ -50,6 +53,9 @@ export default class Reservation extends Component{
                 <h5 className="my-label"><span className="allreservations-label">Początek rezerwacji: </span><span className="allreservations-startdate">{this.props.startDate}</span></h5>
                 <h5 className="my-label"><span className="allreservations-label">Koniec rezerwacji: </span><span className="allreservations-enddate">{this.props.endDate}</span></h5>
                 <button className="my-button login-button" onClick={this.onButtonClick}>Zamelduj</button>
+                <Modal isOpen={this.state.modal} toggle={this.onButtonClick}>
+                    <AddGuest reservation={this.state}/>
+                </Modal>
             </div>
         )
     }

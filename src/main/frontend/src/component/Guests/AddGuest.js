@@ -21,13 +21,19 @@ export default class AddGuest extends Component {
     }
 
     componentDidMount() {
+        this.setState({
+            first_name: this.props.reservation.firstName,
+            last_name: this.props.reservation.lastName,
+            newGuestRoom: this.props.reservation.room,
+            accommodation_date: new Date(this.props.reservation.startDate),
+            check_out_date: new Date(this.props.reservation.endDate)
+        })
+
         RoomService.getAllRooms().then(
             response => {
-                console.log(response);
                 this.setState({
                     all_rooms: response,
                     hrefRoom: response[0]._links.self.href,
-                    newGuestRoom: response[0]
                 });
             },
             error => {
@@ -74,8 +80,6 @@ export default class AddGuest extends Component {
                 newGuestRoom: result,
             })
         });
-        console.log(event.target.value);
-        console.log(this.state.hrefRoom);
     }
 
     render() {
@@ -95,8 +99,15 @@ export default class AddGuest extends Component {
                     <select className="form-control-sm" onChange={event => this.handleSelect(event)} name={'roomNumber'} style={{textAlignLast: 'center'}}>
                     {
                         this.state.all_rooms.map(room => {
-                            return <option key={room._links.self.href}
-                                           value={room._links.self.href}>{room.roomName}</option>
+                            if (room.roomName === this.state.newGuestRoom.roomName)
+                            {
+                                return <option key={room._links.self.href}
+                                               value={room._links.self.href} selected>{room.roomName}</option>
+                            }else
+                            {
+                                return <option key={room._links.self.href}
+                                               value={room._links.self.href}>{room.roomName}</option>
+                            }
                         })
                     }
                     </select><br/>
