@@ -141,7 +141,7 @@ export default class AllReservations extends Component{
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>Nazwisko:</InputGroupText>
                                         </InputGroupAddon>
-                                        <Input type="text" name="inputLastame" value={lastNameRegex} onChange={this.handleSearchByLastName}/>
+                                        <Input type="text" name="inputLastName" value={lastNameRegex} onChange={this.handleSearchByLastName}/>
                                     </InputGroup>          
                                     <br/>
                                     <Button style={{backgroundColor: '#f99cab'}} onClick={() => { this.setState( {filterByDateModal: !filterByDateModal })}}>
