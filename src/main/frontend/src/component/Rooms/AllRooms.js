@@ -13,6 +13,7 @@ export default class AllRooms extends React.Component {
             onlyEmpty: false,
             floorRegex: ".*",
             standardRegex: ".*",
+            filterOnDate: false,
             minDate: new Date(),
             checkInDate:  new Date(),
             checkOutDate: new Date(),
@@ -46,6 +47,7 @@ export default class AllRooms extends React.Component {
     }
 
     render() {
+        let datePickerStyle = this.state.filterOnDate ? {} : {opacity: '0.4'};
 
         let roomThumbnails = this.state.allRooms.filter(room => {
             if(this.state.onlyEmpty)
@@ -85,26 +87,30 @@ export default class AllRooms extends React.Component {
                         ))}
                     </select>
                     <br/>
-                    <label style={{padding: '5px 12px 5px 30px'}}>TO JESZCZE NIE DZIAŁA Dostępny od:</label>
-                    <DatePicker
-                        dateFormat='y-MM-dd'
-                        name="checkInDate"
-                        value={this.state.checkOutDate}
-                        selected={this.state.checkOutDate}
-                        onChange={this.onChangeCheckInDate}
-                        minDate={this.state.checkInDate}
-                        name="checkoutdate"
-                    />
-                    <label style={{padding: '5px 12px 5px 30px'}}>Dostępny do:</label>
-                    <DatePicker
-                        dateFormat='y-MM-dd'
-                        name="checkOutDate"
-                        value={this.state.checkOutDate}
-                        selected={this.state.checkOutDate}
-                        onChange={this.handleDateChange}
-                        minDate={this.state.checkInDate}
-                        name="checkoutdate"
-                    />
+                    <br/>
+                    To jeszcze nie działa!!!
+                    <br/>
+                    <input className="checkbox" type="checkbox" onClick={() => this.setState({filterOnDate: !this.state.filterOnDate})}></input>
+                    <label style={{padding: '5px 12px 5px'}}>Filtruj po dostępności</label>
+                    <label style={datePickerStyle}>
+                    <label style={{padding: '5px 12px 5px 30px'}}>Dostępny od:</label>
+                        <DatePicker
+                            dateFormat='y-MM-dd'
+                            style={{opacity: '0.3'}}
+                            value={this.state.checkInDate}
+                            selected={this.state.checkInDate}
+                            onChange={val => this.setState({checkInDate: val})}
+                            minDate={this.state.minDate}
+                        />
+                        <label style={{padding: '5px 12px 5px 30px'}}>Dostępny do:</label>
+                        <DatePicker
+                            dateFormat='y-MM-dd'
+                            value={this.state.checkOutDate}
+                            selected={this.state.checkOutDate}
+                            onChange={val => this.setState({checkOutDate: val})}
+                            minDate={this.state.checkInDate}        // bo data wymeldowania nie może być wczesniejsza niż data zameldowania
+                        />
+                    </label>
                     {roomThumbnails}
                 </div>
             </div>
