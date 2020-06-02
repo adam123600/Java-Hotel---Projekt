@@ -40,15 +40,8 @@ export default class Worker extends React.Component {
 
         const { isManager, currentUser, modal } = this.state;
         return(
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Imię</th>
-                        <th>Nazwisko</th>
-                        <th>Dane</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <tr>
+                
                     <td>{this.props.worker.firstname}</td>
                     <td>{this.props.worker.lastname}</td>
                     <td>
@@ -75,6 +68,7 @@ export default class Worker extends React.Component {
                                 { (isManager || 
                                     (currentUser.username == this.props.worker.username)
                                     ) 
+                                    && !this.state.renderEdit
                                     && (
                                         <table>
                                                 <tr>
@@ -99,8 +93,8 @@ export default class Worker extends React.Component {
                             </Button>
                         </td>
                     }
-                </tbody>
-            </Table>
+               
+            </tr>
             
         )
     }

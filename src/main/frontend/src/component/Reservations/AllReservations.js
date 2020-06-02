@@ -5,8 +5,8 @@ import './Reservation.css'
 import {toast} from "react-toastify";
 import Reservation from "./Reservation";
 import DatePicker from "react-date-picker";
-
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Collapse, CardBody, Card, 
+        Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
 
 
 export default class AllReservations extends Component{
@@ -16,6 +16,7 @@ export default class AllReservations extends Component{
         this.state = {
             allReservations: [],
             toastId : null,
+            filterReservationModal: false,
             firstNameRegex: "",
             lastNameRegex: "",
             filterByDate: false,
@@ -29,6 +30,7 @@ export default class AllReservations extends Component{
         this.handleSearchByLastName = this.handleSearchByLastName.bind(this);
         this.handleSearchByDate = this.handleSearchByDate.bind(this);
         this.resetSearchByDate = this.resetSearchByDate.bind(this);
+        this.resetFilters = this.resetFilters.bind(this);
     }
 
     handleSearchByFirstName(event) {
@@ -57,6 +59,16 @@ export default class AllReservations extends Component{
         });
     }
 
+    resetFilters() {
+        this.setState({
+            firstNameRegex: "",
+            lastNameRegex: "",
+            filterByDate: false,
+            checkInDate:  new Date(),
+            checkOutDate: new Date(),
+        })
+    }
+
 
     componentDidMount() {
         ReservationService.getAllReservations().then(
@@ -82,8 +94,8 @@ export default class AllReservations extends Component{
     }
 
     render() {
-        const {allReservations, firstNameRegex, lastNameRegex, checkInDate, minDate,
-            checkOutDate, filterByDate, filterByDateModal } = this.state;
+        const {allReservations, firstNameRegex, lastNameRegex, checkInDate, 
+            checkOutDate, filterByDate, filterByDateModal, filterReservationModal } = this.state;
         
         let filtredReservations = allReservations.filter(reservation => {
             return reservation.firstName.match(firstNameRegex);
@@ -109,52 +121,87 @@ export default class AllReservations extends Component{
             <div>
                 <div className="allreservations-header">
                     LISTA REZERWACJI
+                </div> 
+                <div>
+                    <Button style={{backgroundColor: '#f99cab'}} onClick={() => { this.setState( {filterReservationModal: !filterReservationModal })}}>
+                        Filtruj rezerwacje
+                    </Button>
+                    <Collapse isOpen={filterReservationModal}>
+                        <Card>
+                            <CardBody>
+                                <div>
+                                    <InputGroup>
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>Imię</InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input type="text" name="inputFirstName"  value={firstNameRegex} onChange={this.handleSearchByFirstName}/>
+                                    </InputGroup>
+                                    <br/>
+                                    <InputGroup>
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>Nazwisko:</InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input type="text" name="inputLastame" value={lastNameRegex} onChange={this.handleSearchByLastName}/>
+                                    </InputGroup>          
+                                    <br/>
+                                    <Button style={{backgroundColor: '#f99cab'}} onClick={() => { this.setState( {filterByDateModal: !filterByDateModal })}}>
+                                        Filtruj po dacie
+                                    </Button>
+                                    {'  '}
+                                    <Button color="danger" onClick={this.resetFilters}>
+                                        Resetuj filtry
+                                    </Button>
+
+                                    <Modal isOpen={filterByDateModal} toggle={() => { this.setState( {filterByDateModal: !filterByDateModal })}}>
+                                        <ModalHeader toggle={() => { this.setState( {filterByDateModal: !filterByDateModal })}}>Wybierz daty</ModalHeader>
+                                        <ModalBody>
+                                            <div>
+                                                <InputGroup>
+                                                    <InputGroupAddon addonType="prepend">
+                                                        <InputGroupText>Od</InputGroupText>
+                                                    </InputGroupAddon>
+                                                    <DatePicker
+                                                        dateFormat='yyyy-MM-dd'
+                                                        value={checkInDate}    
+                                                        selected={checkInDate}
+                                                        onChange={val => this.setState({
+                                                            checkInDate: new Date(val),
+                                                            checkOutDate: new Date(val)
+                                                        })}
+                                                    />
+                                                </InputGroup>
+                                                <br/>
+                                                <InputGroup>
+                                                    <InputGroupAddon addonType="prepend">
+                                                        <InputGroupText>Do</InputGroupText>
+                                                    </InputGroupAddon>
+                                                    <DatePicker
+                                                        dateFormat='yyyy-MM-dd'
+                                                        value={checkOutDate}
+                                                        selected={checkOutDate}
+                                                        minDate={checkInDate}
+                                                        onChange={val => this.setState({
+                                                            checkOutDate: new Date(val)
+                                                        })}    
+                                                    />
+                                                </InputGroup>
+                                            </div>
+                                        </ModalBody>
+                                        <ModalFooter>
+                                            <Button color="success" onClick={this.handleSearchByDate}>
+                                                Zatwierdź
+                                            </Button>
+                                            {'  '}
+                                            <Button color="danger" onClick={this.resetSearchByDate}>
+                                                Resetuj daty
+                                            </Button>
+                                        </ModalFooter>
+                                    </Modal>
+                                </div>
+                            </CardBody>
+                        </Card>
+                    </Collapse>
                 </div>
-                <label style={{padding: '5px 12px 5px'}}>Filtruj rezerwacje:</label>
-
-                <label style={{padding: '5px 12px 5px'}}>Imię:</label>
-                <input type="text" name="inputFirstName"  value={firstNameRegex} onChange={this.handleSearchByFirstName}/>
-
-                <label style={{padding: '5px 12px 5px'}}>Nazwisko:</label>
-                <input type="text" name="inputLastame" value={lastNameRegex} onChange={this.handleSearchByLastName}/>
-
-                <Button style={{backgroundColor: '#f99cab'}} onClick={() => { this.setState( {filterByDateModal: !filterByDateModal })}}>
-                    Filtruj po dacie
-                </Button>
-
-                <Modal isOpen={filterByDateModal} toggle={() => { this.setState( {filterByDateModal: !filterByDateModal })}}>
-                    <ModalHeader toggle={() => { this.setState( {filterByDateModal: !filterByDateModal })}}>Wybierz daty</ModalHeader>
-                    <ModalBody>
-                           <label style={{padding: '5px 12px 5px 30px'}}>Szukaj od:</label>
-                            <DatePicker
-                                dateFormat='yyyy-MM-dd'
-                                value={checkInDate}    
-                                selected={checkInDate}
-                                onChange={val => this.setState({
-                                    checkInDate: new Date(val),
-                                    checkOutDate: new Date(val)
-                                })}
-                            />
-                        <label style={{padding: '5px 12px 5px 30px'}}>Szukaj do:</label>
-                            <DatePicker
-                                dateFormat='yyyy-MM-dd'
-                                value={checkOutDate}
-                                selected={checkOutDate}
-                                minDate={checkInDate}
-                                onChange={val => this.setState({
-                                    checkOutDate: new Date(val),
-                                })}    
-                            />
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button style={{backgroundColor: '#f99cab'}} onClick={this.handleSearchByDate}>
-                            Zatwierdź
-                        </Button>
-                        <Button color="danger" onClick={this.resetSearchByDate}>
-                            Resetuj daty
-                        </Button>
-                    </ModalFooter>
-                </Modal>
 
                 <div className="allreservations-container">
                     {filtredReservations}

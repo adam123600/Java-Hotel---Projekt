@@ -2,7 +2,7 @@ import React, {useState, Component} from "react";
 import WorkerService from "../../service/WorkerService";
 import Worker from "./Worker";
 import {ListGroup, ListGroupItem} from 'reactstrap';
-import {TabContent, TabPane, Nav, NavItem, NavLink, Row, Col} from 'reactstrap';
+import {TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Table} from 'reactstrap';
 
 export default class AllWorkers extends Component {
     constructor(props) {
@@ -52,24 +52,29 @@ export default class AllWorkers extends Component {
                             <TabPane tabId={index}>
                                 <Row>
                                     <Col sm="12">
-                                        <ListGroup>
-                                            {this.state.allUsersNoLinks.map(user => {
-                                                return user.roles.map(r => {
-                                                    if (r.name === role.name) {
-                                                        return this.state.allWorkers.map(worker => {
-                                                            if (worker.username === user.username) {
-                                                                return (
-                                                                    <ListGroupItem>
-                                                                        <Worker worker={worker}
+                                        <Table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Imię</th>
+                                                    <th>Nazwisko</th>
+                                                    <th>Dane</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {this.state.allUsersNoLinks.map(user => {
+                                                    return user.roles.map(r => {
+                                                        if (r.name === role.name) {
+                                                            return this.state.allWorkers.map(worker => {
+                                                                if (worker.username === user.username) {
+                                                                    return <Worker worker={worker} 
                                                                                 allRoles={this.state.allRoles}/>
-                                                                    </ListGroupItem>
-                                                                )
-                                                            }
-                                                        })
-                                                    }
-                                                })
-                                            })}
-                                        </ListGroup>
+                                                                }
+                                                            })
+                                                        }
+                                                    })
+                                                })}
+                                            </tbody>
+                                        </Table>
                                     </Col>
                                 </Row>
                             </TabPane>
