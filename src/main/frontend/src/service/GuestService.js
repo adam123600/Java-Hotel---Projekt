@@ -8,7 +8,7 @@ class GuestService {
 
     getAllGuests() {
         return axios.get("/api/guests").then(response => {
-            console.log(response.data);
+            //console.log(response.data);
             return response.data._embedded.guests;
         });
     }
