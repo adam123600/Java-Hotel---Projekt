@@ -2,7 +2,6 @@ import * as React from "react";
 import GuestService from "../../service/GuestService";
 import {ListGroup, ListGroupItem, Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import RoomService from "../../service/RoomService";
-import axios from "axios";
 
 export default class GuestDetails extends React.Component{
 
@@ -57,9 +56,6 @@ export default class GuestDetails extends React.Component{
             this.props.history.push('/guests');
         }
 
-        createAndDownloadPdf = () => {
-            axios.get('/createPdf', this.state.guestInfo)
-        }
     render() {
             return(
                 <ListGroup className="w-25" style={{ position: 'absolute', top: '25%', left: '40%', zIndex: '-1'}}>
@@ -71,7 +67,7 @@ export default class GuestDetails extends React.Component{
                     <ListGroupItem>{this.state.guestInfo.accommodationDate}</ListGroupItem>
                     <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Data wymeldowania</ListGroupItem>
                     <ListGroupItem>{this.state.guestInfo.checkOutDate}</ListGroupItem>
-                    <Button onClick={this.createAndDownloadPdf} style={{backgroundColor: '#f99cab', border: 'none'}}>Rachunek</Button>
+                    <Button style={{backgroundColor: '#f99cab', border: 'none'}}>Rachunek</Button>
                     <Button onClick={() => this.setState({modal: !this.state.modal})} style={{backgroundColor: '#f99cab', border: 'none', marginTop: '2px'}}>Wymelduj</Button>
                     <Modal isOpen={this.state.modal}>
                         <ModalHeader toggle={() => {this.setState({modal: !this.state.modal})}}>Czy na pewno</ModalHeader>
