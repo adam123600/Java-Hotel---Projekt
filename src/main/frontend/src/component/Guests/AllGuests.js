@@ -8,6 +8,7 @@ export default class AllGuests extends React.Component{
             super(props);
             this.state = {
                 allGuests: [],
+                unmount: false,
             }
         }
 
@@ -21,7 +22,18 @@ export default class AllGuests extends React.Component{
         }
     )
     }
-   
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.props.history.action.toString() === "PUSH"){
+            GuestService.getAllGuests().then(
+                response => {
+                    this.setState( {
+                        allGuests: response
+                    });
+                });
+        }
+    }
+
+
     render() {
         return(
             
@@ -32,7 +44,7 @@ export default class AllGuests extends React.Component{
                         {
                             this.state.allGuests.map(
                                 guest => (
-                                    <li key={guest.firstName}>
+                                    <li key={guest.id}>
                                         <Guest guest={guest} />
                                     </li>
                                 )

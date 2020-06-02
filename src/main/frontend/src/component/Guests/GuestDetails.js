@@ -1,6 +1,6 @@
 import * as React from "react";
 import GuestService from "../../service/GuestService";
-import {ListGroup, ListGroupItem, Button} from 'reactstrap';
+import {ListGroup, ListGroupItem, Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import { Redirect, Link } from "react-router-dom";
 import RoomService from "../../service/RoomService";
 
@@ -11,8 +11,9 @@ export default class GuestDetails extends React.Component{
 
             this.state = {
                 guestInfo: [],
-                redirect: false,
                 roomOfGuest: [],
+                redirect: false,
+                modal: false,
             }
         }
 
@@ -57,6 +58,7 @@ export default class GuestDetails extends React.Component{
             this.setState({
                 redirect: true,
             });
+            this.props.history.push('/guests');
         }
 
     render() {
@@ -71,15 +73,17 @@ export default class GuestDetails extends React.Component{
                     <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Data wymeldowania</ListGroupItem>
                     <ListGroupItem>{this.state.guestInfo.checkOutDate}</ListGroupItem>
                     <Button style={{backgroundColor: '#f99cab', border: 'none'}}>Rachunek</Button>
-                    <Button onClick={this.onCheckoutGuest} style={{backgroundColor: '#f99cab', border: 'none', marginTop: '2px'}}>Wymelduj</Button>
-                    {this.state.redirect && 
-                    <Redirect 
-                        to={{
-                            pathname: '../guests',
-                            
-                        }}/>}
+                    <Button onClick={() => this.setState({modal: !this.state.modal})} style={{backgroundColor: '#f99cab', border: 'none', marginTop: '2px'}}>Wymelduj</Button>
+                    <Modal isOpen={this.state.modal}>
+                        <ModalHeader toggle={() => {this.setState({modal: !this.state.modal})}}>Czy na pewno</ModalHeader>
+                        <ModalBody>
+                            Czy na pewno chcesz wymeldować gościa: <br/>
+                            {this.state.guestInfo.firstName} {this.state.guestInfo.lastName} ? <br/>
+                            <Button style={{backgroundColor: '#f99cab', margin: '20px', width: '100px'}} onClick={this.onCheckoutGuest}>Tak</Button>
+                            <Button style={{backgroundColor: '#f99cab', margin: '20px', width: '100px'}} onClick={() => { this.setState( {modal: !this.state.modal })}}>Nie</Button>
+                        </ModalBody>
+                    </Modal>
                 </ListGroup>
             );
-            //TODO: obsługa tych dwóch przycisków
         }
 }
