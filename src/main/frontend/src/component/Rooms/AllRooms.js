@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import RoomService from "../../service/RoomService"
 import RoomThumbnail from "./RoomThumbnail"
 import SearchRoom from "../Search/SearchRoom";
+import SearchGuestService from "../../SearchEngine/SearchGuestService";
 import DatePicker from "react-date-picker";
+import GuestService from "../../service/GuestService";
 
 export default class AllRooms extends React.Component {
     constructor(props) {
@@ -10,6 +12,7 @@ export default class AllRooms extends React.Component {
         this.state = {
             allRooms: [],
             allStandards: [],
+            allGuests: [],
             onlyEmpty: false,
             floorRegex: ".*",
             standardRegex: ".*",
@@ -26,12 +29,16 @@ export default class AllRooms extends React.Component {
             this.setState({allStandards: res});
         });
 
-        console.log('data');
-        console.log(this.state.minDate);
+        GuestService.getAllGuests1().then(res => {
+            this.setState({allGuests: res});
+        });
+
+        // żeby przy porównywaniu dat były takie same godziny (+2h bo strefa czasowa)
+        this.state.checkInDate.setHours(2,0,0,0);
+        this.state.checkOutDate.setHours(2,0,0,0);
 
         this.handleSelectFloor = this.handleSelectFloor.bind(this);
         this.handleSelectStandard = this.handleSelectStandard.bind(this);
-        this.handleDateChange = this.handleDateChange.bind(this);
     }
 
     handleSelectFloor(event) {
@@ -42,22 +49,44 @@ export default class AllRooms extends React.Component {
         this.setState({standardRegex: event.target.value});
     }
 
-    handleDateChange(event) {
-        this.setState({[event.target.name]: event.target.value});
-    }
 
     render() {
         let datePickerStyle = this.state.filterOnDate ? {} : {opacity: '0.4'};
 
-        let roomThumbnails = this.state.allRooms.filter(room => {
+        let roomThumbnails = this.state.allRooms.filter(room => {               // filtrowanie po tym czy pokój TERAZ pusty czy nie
             if(this.state.onlyEmpty)
                 return room.currentNumberOfGuests == 0;
             else
                 return true;
-        }).filter(room => {
+        }).filter(room => {                                                     // filtrowanie po piętrze (pierwsza cyfra numeru pokoju)
             return room.roomName.match(this.state.floorRegex);
-        }).filter(room => {
+        }).filter(room => {                                                     // filtrowanie po standardzie
             return room.roomStandard.name.match(this.state.standardRegex);
+        }).filter(room => {                                                     // filtrowanie po datach, w których pokój będzie pusty
+           if(this.state.filterOnDate) {
+               if(room.currentNumberOfGuests > 0) {                                 // jeśli w pokoju są teraz jacyś goście
+                   let guests = this.state.allGuests.filter(guest => {                  // tworzy tablicę tych gości/a w tym pokoju
+                       return room.id == guest.room.id;
+                   });
+                   if(guests.length > 1) {                                              // jeśli w pokoju jest więcej niż 1 gość, to sortuje malejąco po dacie wymeldowania
+                       guests.sort((a,b) => {
+                           if( a.checkOutDate > b.checkOutDate ) return -1;
+                           if( a.checkOutDate < b.checkOutDate ) return 1;
+                           return 0;
+                       });
+                   }
+                   //console.log(new Date(guests[0].checkOutDate).toISOString().substring(0, 10) == this.state.checkInDate.toISOString().substring(0, 10))
+                   console.log("porównanie");
+                   console.log(new Date(guests[0].checkOutDate));
+                   console.log(this.state.checkInDate);
+                   if( new Date(guests[0].checkOutDate) <= this.state.checkInDate ) return true;
+                   else return false;
+               }
+               else
+                   return true;
+           }
+           else
+               return true;
         }).map(room => (
             <div key={room.id}>
                 <RoomThumbnail room={room}/>
@@ -96,10 +125,9 @@ export default class AllRooms extends React.Component {
                     <label style={{padding: '5px 12px 5px 30px'}}>Dostępny od:</label>
                         <DatePicker
                             dateFormat='y-MM-dd'
-                            style={{opacity: '0.3'}}
                             value={this.state.checkInDate}
                             selected={this.state.checkInDate}
-                            onChange={val => this.setState({checkInDate: val})}
+                            onChange={val => {val.setHours(2,0,0,0); this.setState({checkInDate: val});}}
                             minDate={this.state.minDate}
                         />
                         <label style={{padding: '5px 12px 5px 30px'}}>Dostępny do:</label>
@@ -107,7 +135,7 @@ export default class AllRooms extends React.Component {
                             dateFormat='y-MM-dd'
                             value={this.state.checkOutDate}
                             selected={this.state.checkOutDate}
-                            onChange={val => this.setState({checkOutDate: val})}
+                            onChange={val => {val.setHours(2,0,0,0); this.setState({checkOutDate: val});}}
                             minDate={this.state.checkInDate}        // bo data wymeldowania nie może być wczesniejsza niż data zameldowania
                         />
                     </label>

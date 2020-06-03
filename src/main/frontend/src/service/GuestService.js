@@ -12,6 +12,13 @@ class GuestService {
             return response.data._embedded.guests;
         });
     }
+
+    getAllGuests1() {
+        return axios.get("api/guests1").then(response => {
+            return response.data;
+        })
+    }
+
     createNewGuest(newGuest){
         return axios.post(API_URL, newGuest, {headers: authHeader()}).catch(err=>{console.log(err)});
     }

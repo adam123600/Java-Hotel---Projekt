@@ -78,7 +78,7 @@ export default class GuestDetails extends React.Component{
                         <ModalHeader toggle={() => {this.setState({modal: !this.state.modal})}}>Czy na pewno</ModalHeader>
                         <ModalBody>
                             Czy na pewno chcesz wymeldować gościa: <br/>
-                            {this.state.guestInfo.firstName} {this.state.guestInfo.lastName} ? <br/>
+                            pm {this.state.guestInfo.firstName} {this.state.guestInfo.lastName} ? <br/>
                             <Button style={{backgroundColor: '#f99cab', margin: '20px', width: '100px'}} onClick={this.onCheckoutGuest}>Tak</Button>
                             <Button style={{backgroundColor: '#f99cab', margin: '20px', width: '100px'}} onClick={() => { this.setState( {modal: !this.state.modal })}}>Nie</Button>
                         </ModalBody>
