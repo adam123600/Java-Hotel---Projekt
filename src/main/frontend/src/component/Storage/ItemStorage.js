@@ -5,6 +5,7 @@ import Item from "./Item";
 import AuthService from "../../service/AuthService";
 import AddItem from "./AddItem";
 import Modal from "reactstrap/es/Modal";
+import "./Storage.css"
 
 export default class ItemStorage extends Component {
     constructor(props) {
@@ -78,12 +79,12 @@ export default class ItemStorage extends Component {
             return (
                 <div>
                     {this.state.showAddItemButton &&
-                        <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.changeModalState}>Dodaj przedmiot</button>
+                        <button className="additem-button" style={{margin: '10px'}} onClick={this.changeModalState}>Dodaj przedmiot</button>
                     }
                     <Modal isOpen={this.state.showAddItemForm} toggle={this.changeModalState}>
                         <AddItem onCancel={this.changeModalState}/>
                     </Modal>
-                    <h3 style={{margin: '5px'}}>Brak przedmiotów w bazie.</h3>
+                    <h3 className="item-text">Brak przedmiotów w bazie.</h3>
                 </div>
             );
         }
@@ -105,7 +106,7 @@ export default class ItemStorage extends Component {
         return (
             <div>
                 {this.state.showAddItemButton &&
-                <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.changeModalState}>Dodaj przedmiot</button>
+                <button className="additem-button" style={{margin: '10px'}} onClick={this.changeModalState}>Dodaj przedmiot</button>
                 }
                 <Modal isOpen={this.state.showAddItemForm} toggle={this.changeModalState}>
                     <AddItem onCancel={this.changeModalState}/>
@@ -133,11 +134,14 @@ export default class ItemStorage extends Component {
                     }
                     return (
                         <div>
-                            <h2 key={index} style={{margin: '5px'}}>{nameOfCategory}</h2>
-                            {this.state.content.map(item => {
-                                if (item.category[0].category === category)
-                                    return <Item key={item.item_id} afterDelete={this.deleteItemFromList} afterUpdate={this.updateView} {...item}/>
-                            })}
+                            <h2 key={index} className="storage-text">{nameOfCategory}</h2>
+                            <div className="storage-container">
+                                {this.state.content.map(item => {
+                                    if (item.category[0].category === category)
+                                        return <Item key={item.item_id} afterDelete={this.deleteItemFromList}
+                                                     afterUpdate={this.updateView} {...item}/>
+                                })}
+                            </div>
                         </div>
                     )
                 })}

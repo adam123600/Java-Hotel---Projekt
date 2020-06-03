@@ -4,6 +4,7 @@ import AuthService from "../../service/AuthService";
 import EditItem from "./EditItem";
 import ItemService from "../../service/ItemService";
 import Modal from "reactstrap/es/Modal";
+import "./Storage.css"
 
 export default class Item extends Component{
     constructor(props) {
@@ -79,30 +80,31 @@ export default class Item extends Component{
 
     render() {
         return (
-            <div className="card">
-                <h3 className='card-header'>{this.state.item_name}</h3>
-                <div className='card-body'>
-                    <h4 className='card-title'>Obecna ilość: {this.state.current_quantity}</h4>
-                    <h4 className='card-subtitle'>Minimalna ilość: {this.state.min_quantity}</h4>
-                    {this.state.showEditDeleteButton &&
-                        <div>
-                            <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.changeEditFieldModalState}>Edytuj</button>
-                            <button className="btn btn-danger" style={{margin: '10px'}} onClick={this.changeConfirmationModalState}>Usuń</button>
-                        </div>
-                    }
-                    <Modal isOpen={this.state.showEditField} toggle={this.changeEditFieldModalState}>
-                        <EditItem onCancel={this.changeEditFieldModalState} afterEdit={this.updateItemInfo} {...this.state}/>
-                    </Modal>
-                    <Modal isOpen={this.state.showConfirmationOfDelete} toggle={this.changeConfirmationModalState}>
-                        <div>
-                            <h2>Czy na pewno chcesz usunąć: {this.state.item_name}?</h2>
-                            <button className="btn btn-danger" onClick={this.onDeleteBtnClick}>Tak</button>
-                            <button className="btn btn-danger" onClick={this.changeConfirmationModalState}>Nie</button>
-                        </div>
-                    </Modal>
+            <div className="storage-item">
+                <h3 className="storage-text storage-itemName-text">{this.state.item_name}</h3>
+                <h4 className="storage-text storage-itemDetails-text">Obecna ilość: {this.state.current_quantity}</h4>
+                <h4 className="storage-text storage-itemDetails-text">Minimalna ilość: {this.state.min_quantity}</h4>
+                {this.state.showEditDeleteButton &&
+                <div className="storage-item-buttons">
+                    <button className="additem-button storage-small-button" style={{margin: '10px'}}
+                            onClick={this.changeEditFieldModalState}>Edytuj
+                    </button>
+                    <button className="additem-button storage-small-button" style={{margin: '10px'}}
+                            onClick={this.changeConfirmationModalState}>Usuń
+                    </button>
                 </div>
-
-
+                }
+                <Modal isOpen={this.state.showEditField} toggle={this.changeEditFieldModalState}>
+                    <EditItem onCancel={this.changeEditFieldModalState}
+                              afterEdit={this.updateItemInfo} {...this.state}/>
+                </Modal>
+                <Modal isOpen={this.state.showConfirmationOfDelete} toggle={this.changeConfirmationModalState}>
+                    <h2 className="storage-text storage-itemName-text">Czy na pewno chcesz usunąć: {this.state.item_name}?</h2>
+                    <div className="storage-item-buttons">
+                        <button className="additem-button storage-confirmation-button" onClick={this.onDeleteBtnClick}>Tak</button>
+                        <button className="additem-button storage-confirmation-button" onClick={this.changeConfirmationModalState}>Nie</button>
+                    </div>
+                </Modal>
             </div>
         );
     }
