@@ -4,6 +4,7 @@ import ItemService from "../../service/ItemService";
 import Item from "./Item";
 import AuthService from "../../service/AuthService";
 import AddItem from "./AddItem";
+import Modal from "reactstrap/es/Modal";
 
 export default class ItemStorage extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ export default class ItemStorage extends Component {
         this.state = {
             content: [],
             showAddItemForm: false,
-            showAddItemButton: false
+            showAddItemButton: false,
         }
     }
 
@@ -42,14 +43,34 @@ export default class ItemStorage extends Component {
         }
     }
 
-    onAddBtnClick = () => {
+    changeModalState = () => {
         this.setState({showAddItemForm: !this.state.showAddItemForm});
     };
-    /**
-     * Funkcja używana wewnątrz komponentu AddItem.js
-     */
-    onCancelBtnClick = () => {
-        this.setState({showAddItemForm: false});
+
+    deleteItemFromList = (item_id) => {
+        this.setState(prevState => ({
+            content: prevState.content.filter(item => item.item_id !== item_id)
+        }));
+    };
+
+    updateView = () => {
+        ItemService.getAllItems().then(
+            response => {
+                this.setState({
+                    content: response.data
+                });
+            },
+            error => {
+                this.setState({
+                    content:
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString()
+                });
+            }
+        );
     };
 
     render() {
@@ -57,11 +78,11 @@ export default class ItemStorage extends Component {
             return (
                 <div>
                     {this.state.showAddItemButton &&
-                        <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.onAddBtnClick}>Dodaj przedmiot</button>
+                        <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.changeModalState}>Dodaj przedmiot</button>
                     }
-                    {this.state.showAddItemForm &&
-                        <AddItem onCancel={this.onCancelBtnClick}/>
-                    }
+                    <Modal isOpen={this.state.showAddItemForm} toggle={this.changeModalState}>
+                        <AddItem onCancel={this.changeModalState}/>
+                    </Modal>
                     <h3 style={{margin: '5px'}}>Brak przedmiotów w bazie.</h3>
                 </div>
             );
@@ -84,11 +105,11 @@ export default class ItemStorage extends Component {
         return (
             <div>
                 {this.state.showAddItemButton &&
-                <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.onAddBtnClick}>Dodaj przedmiot</button>
+                <button className="btn btn-primary" style={{margin: '10px'}} onClick={this.changeModalState}>Dodaj przedmiot</button>
                 }
-                {this.state.showAddItemForm &&
-                <AddItem onCancel={this.onCancelBtnClick}/>
-                }
+                <Modal isOpen={this.state.showAddItemForm} toggle={this.changeModalState}>
+                    <AddItem onCancel={this.changeModalState}/>
+                </Modal>
                 {listOfCategories.map((category, index) => {
                     let nameOfCategory = '';
                     switch (category) { //TODO: W razie dodania nowej kateogrii należy jedynie dopisać odpowiedni case
@@ -115,7 +136,7 @@ export default class ItemStorage extends Component {
                             <h2 key={index} style={{margin: '5px'}}>{nameOfCategory}</h2>
                             {this.state.content.map(item => {
                                 if (item.category[0].category === category)
-                                    return <Item key={item.item_id} {...item}/>
+                                    return <Item key={item.item_id} afterDelete={this.deleteItemFromList} afterUpdate={this.updateView} {...item}/>
                             })}
                         </div>
                     )

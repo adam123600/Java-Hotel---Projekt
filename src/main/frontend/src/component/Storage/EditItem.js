@@ -38,21 +38,25 @@ export default class EditItem extends Component {
             item_name: this.props.item_name,
             min_quantity: this.props.min_quantity,
             current_quantity: this.props.current_quantity,
-            category: this.props.category[0].category
+            category: this.props.category
         });
     }
 
     itemCategoryInput = createRef();
 
-    handleSubmit = () => {
+    handleSubmit = (event) => {
+        event.preventDefault();
         const newItem = {
             item_name: this.state.item_name,
             min_quantity: this.state.min_quantity,
             current_quantity: this.state.current_quantity,
             category: [{id: this.itemCategoryInput.current.value}]
         };
-        ItemService.updateItemById(this.state.item_id, newItem); //TODO: Jeśli chcemy obsługiwać komunikat błędu update'a na bazie to tutaj można to zrobić.
-
+        ItemService.updateItemById(this.state.item_id, newItem).then(
+            response => {
+                this.props.afterEdit(newItem);
+            }
+        ); //TODO: Jeśli chcemy obsługiwać komunikat błędu update'a na bazie to tutaj można to zrobić.
     };
 
     render() {
