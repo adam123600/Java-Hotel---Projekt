@@ -1,7 +1,6 @@
 import * as React from "react";
 import GuestService from "../../service/GuestService";
 import {ListGroup, ListGroupItem, Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
-import { Redirect, Link } from "react-router-dom";
 import RoomService from "../../service/RoomService";
 
 export default class GuestDetails extends React.Component{
@@ -12,7 +11,6 @@ export default class GuestDetails extends React.Component{
             this.state = {
                 guestInfo: [],
                 roomOfGuest: [],
-                redirect: false,
                 modal: false,
             }
         }
@@ -55,9 +53,6 @@ export default class GuestDetails extends React.Component{
             }
             RoomService.updateRoomById(this.state.roomOfGuest.id,guestRoom);
             GuestService.deleteGuestById(this.state.guestInfo.id);
-            this.setState({
-                redirect: true,
-            });
             this.props.history.push('/guests');
         }
 

@@ -4,6 +4,8 @@ import GuestService from "../../service/GuestService";
 import DatePicker from "react-date-picker";
 import { Form, Input, Col, FormGroup, Label, Button } from "reactstrap";
 
+const URL_TO_ROOM = "localhost8080/api/rooms/";
+
 export default class AddGuest extends Component {
     constructor(props) {
         super(props);
@@ -34,7 +36,7 @@ export default class AddGuest extends Component {
             response => {
                 this.setState({
                     all_rooms: response,
-                    hrefRoom: response[0]._links.self.href,
+                    hrefRoom: URL_TO_ROOM + this.props.reservation.room.id//response[0]._links.self.href,
                 });
             },
             error => {
@@ -86,35 +88,6 @@ export default class AddGuest extends Component {
     render() {
         return (
             <div onSubmit={this.handleSubmit} style={{margin: '10px'}}>
-                    {/*<form style={{display: 'inline'}}>
-                    <h3>Dodajesz gościa:</h3>
-                    <label htmlFor={'guestfirst_name'}>Imię:</label>
-                    <input type={'text'} value={this.state.first_name} onChange={event => this.setState({first_name: event.target.value})} name={'guestfirst_name'} required/><br/>
-                    <label htmlFor={'guestlast_name'}>Nazwisko:</label>
-                    <input type={'text'} value={this.state.last_name} onChange={event => this.setState({last_name: event.target.value})} name={'guestlast_name'} required/><br/>
-                    <label htmlFor={'accommodation_date'}>Data zameldowania:</label>
-                    <DatePicker value={this.state.accommodation_date} selected={this.state.accommodation_date} onChange={date => this.setState({accommodation_date: date})} dateFormat="yyyy-MM-dd" name={'accommodation_date'} required/><br/>
-                    <label htmlFor={'check_out_date'}>Data wymeldowania:</label>
-                    <DatePicker value={this.state.check_out_date} selected={this.state.check_out_date} onChange={date => this.setState({check_out_date: date})} dateFormat="yyyy-MM-dd" name={'check_out_date'} required/><br/>
-                    <label htmlFor={'roomNumber'}>Numer pokoju:</label>
-                    <select className="form-control-sm" onChange={event => this.handleSelect(event)} name={'roomNumber'} style={{textAlignLast: 'center'}}>
-                    {
-                        this.state.all_rooms.map(room => {
-                            if (room.roomName === this.state.newGuestRoom.roomName)
-                            {
-                                return <option key={room._links.self.href}
-                                               value={room._links.self.href} selected>{room.roomName}</option>
-                            }else
-                            {
-                                return <option key={room._links.self.href}
-                                               value={room._links.self.href}>{room.roomName}</option>
-                            }
-                        })
-                    }
-                    </select><br/>
-                    <input type={'submit'} value={'Dodaj'} className="btn btn-success" style={{margin: '10px'}}/>
-
-                </form>*/}
                 <h3>Dodajesz gościa:</h3>
                 <Form>
                     <FormGroup row>
@@ -154,9 +127,7 @@ export default class AddGuest extends Component {
                         })
                     }
                     </Input><br/>
-                    {/*<input type={'submit'} value={'Dodaj'} className="btn btn-success" style={{margin: '10px'}}/>*/}
                     <Button type="submit" style={{backgroundColor: '#f99cab', width: '100px'}}>Dodaj</Button>
-
                     </Col>
                     </FormGroup>
                 </Form>
