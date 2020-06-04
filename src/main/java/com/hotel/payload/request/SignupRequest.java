@@ -1,5 +1,8 @@
 package com.hotel.payload.request;
 
+import com.hotel.model.ERole;
+import com.hotel.model.Role;
+
 import java.util.Set;
 
 import javax.validation.constraints.*;
@@ -15,6 +18,12 @@ public class SignupRequest {
     private String email;
 
     private Set<String> role;
+
+    private String firstname;
+    private String lastname;
+
+    @Size(min = 9, max = 12)
+    private String phonenumber;
 
     @NotBlank
     @Size(min = 6, max = 40)
@@ -50,5 +59,29 @@ public class SignupRequest {
 
     public void setRole(Set<String> role) {
         this.role = role;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 }

@@ -27,12 +27,30 @@ class AuthService {
     return axios.post(API_URL + "register", {
       username,
       email,
-      password
+      password,
     });
+  }
+
+  register(username, email, password, firstname, lastname, phonenumber){
+    return axios.post(API_URL + "register", {
+      username,
+      email,
+      password,
+      firstname,
+      lastname,
+      phonenumber
+    })
   }
 
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));
+  }
+
+  getUserByUsername(username){
+    return axios.get("/api/users", {headers: authHeader()}).then(response => {
+      console.log(response);
+      return response.data;
+    });
   }
 
   getAllUsers() {

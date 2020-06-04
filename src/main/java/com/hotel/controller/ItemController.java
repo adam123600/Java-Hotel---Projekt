@@ -37,9 +37,7 @@ public class ItemController {
 
     @GetMapping
     @RequestMapping("categories")
-    public List<ItemCategory> getAllCategories() {
-        return itemCategoryRepository.findAll();
-    }
+    public List<ItemCategory> getAllCategories() { return itemCategoryRepository.findAll(); }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
