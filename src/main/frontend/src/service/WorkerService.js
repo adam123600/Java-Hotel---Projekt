@@ -23,7 +23,13 @@ class WorkerService {
         })
     }
 
-    roleNameToPolish(roleName) {
+   /* getWorkerID() {
+        return axios.get("/api/users").then(response => {
+            console.log(response.data);
+            return response.data._embedded.users[]._links.self.href;
+        })
+    }
+*/    roleNameToPolish(roleName) {
         switch(roleName) {
             case 'ROLE_RECEPTIONIST': return 'Recepcjonista';
             case 'ROLE_ACCOUNTANT': return 'Księgowy';

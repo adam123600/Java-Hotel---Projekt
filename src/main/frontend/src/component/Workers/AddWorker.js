@@ -76,12 +76,10 @@ export default class AddWorker extends React.Component {
             roleHref: "",
             firstname: "",
             lastname: "",
-            phonenumber: ""
+            phonenumber: "",
+            //currentWorkerID: 0,
+            allWorkers: [],
         };
-
-       /* WorkerService.getAllRoles().then(result => {
-            this.setState({allRoles: result});
-        });*/
     }
 
     onChangeUsername(e) {
@@ -138,14 +136,14 @@ export default class AddWorker extends React.Component {
             successful: false
         });
 
-        const addedWorker = {
-            username: this.state.username,
-            email: this.state.email,
-            password: this.state.password,
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            phonenumber: this.state.phonenumber
-        };
+        // const addedWorker = {
+        //     username: this.state.username,
+        //     email: this.state.email,
+        //     password: this.state.password,
+        //     firstname: this.state.firstname,
+        //     lastname: this.state.lastname,
+        //     phonenumber: this.state.phonenumber
+        // };
 
         this.form.validateAll();
 
@@ -156,7 +154,7 @@ export default class AddWorker extends React.Component {
                 this.state.password,
                 this.state.firstname,
                 this.state.lastname,
-                this.state.phonenumber
+                this.state.phonenumber,
             ).then(
                 response => {
                     this.setState({
@@ -179,32 +177,7 @@ export default class AddWorker extends React.Component {
                 }
             );
         }
-/*
-
-        this.form.validateAll();
-
-        const addedWorker = {
-            username: this.state.username,
-            email: this.state.email,
-            password: this.state.password,
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            phonenumber: this.state.phonenumber
-        };
-        AuthService.register(
-            this.state.username,
-            this.state.email,
-            this.state.password,
-            this.state.firstname,
-            this.state.lastname,
-            this.state.phonenumber
-        );
-
-        console.log(addedWorker);
-        axios.put('api/users/', addedWorker, {headers: authHeader()});
-*/
-
-        const role = {
+ /*       const role = {
             _links: {
                 roles: [
                     {
@@ -214,8 +187,8 @@ export default class AddWorker extends React.Component {
             }
         };
         console.log(role);
-        axios.put('api/users/' + addedWorker + '/roles', role,{headers: authHeader()});
-        window.location.reload();
+        axios.put('/api/users/' + {currentWorkerID} + '/roles', role,{headers: authHeader()});
+        */window.location.reload();
 
 
     }
@@ -301,10 +274,8 @@ export default class AddWorker extends React.Component {
                                             validations={[required, vpassword]}
                                         />
                                     </div>
-
-
                                         <div className="form-group">
-                                            <label htmlFor="username">Number telefonu</label>
+                                            <label htmlFor="username">Numer telefonu</label>
                                             <Input
                                                 type="text"
                                                 className="form-control"
@@ -314,61 +285,15 @@ export default class AddWorker extends React.Component {
                                             />
                                         </div>
 
-                                    <div className="form-group">
+                                   {/* <div className="form-group">
                                         <label htmlFor="role">Rola</label>
 
                                         <select className="form-control form-control-sm" onChange={this.onChangeRole}>
                                              {this.props.allRoles.map(role => {
                                                 return <option key={role._links.self.href} value={role._links.self.href}>{WorkerService.roleNameToPolish(role.name)}</option>
-                                               /* if(role.name == this.state.role)*/
-                                                   // return <option key={role._links.href} value={role._links.href} selected>{WorkerService.roleNameToPolish(role.name)}</option>
-                                               /* else
-                                                    return <option key={role._links.href} value={role._links.href}>{WorkerService.roleNameToPolish(role.name)}</option>*/
                                             })}
-
-                                       {/* <select
-                                            class="form-control form-control-sm"
-                                            //value={this.state.role}
-                                            onChange={this.onChangeRole}>
-                                            {this.state.allRoles.map(role => {
-                                              /*  if (role.name == this.state.role)
-                                                    return <option key={role._links.href}
-                                                                   value={role._links.href}
-                                                                   selected>{WorkerService.roleNameToPolish(role.name)}</option>
-                                                else//
-                                                    return <option key={role._links.href}
-                                                                   value={role._links.href}>{WorkerService.roleNameToPolish(role.name)}</option>
-                                            })}
-*/}
-
-
-
-                                           {/* return <option key={role._links.self.href} value={role._links.self.href}>{WorkerService.roleNameToPolish(role.name)}</option>*/}
-
-                                            {/* {this.state.allWorkers.map(worker => {
-                                                <option
-                                                    key={worker._links.self}>{WorkerService.roleNameToPolish(role.name)}</option>
-                                                <Worker worker={worker} allRoles={this.state.allRoles}/>
-                                            })}*/}
                                         </select>
-                                    </div><br/>
-                                           {/* var i;
-                                        for(var i=0; i< role; i++){
-                                            <option value="first">First</option>
-                                        }*/}
-                                            {/*<select onChange={this.handleSelect}>
-                                                {this.props.allRoles.map(role => {
-                                                    if(role.name == this.state.role)
-                                                        return <option key={role._links.self.href} value={role._links.self.href} selected>{WorkerService.roleNameToPolish(role.name)}</option>
-                                                    else
-                                                        return <option key={role._links.self.href} value={role._links.self.href}>{WorkerService.roleNameToPolish(role.name)}</option>
-                                                })}
-                                            </select>
-                                            <option value="second">Second</option>
-                                            <option value="third">Third</option>*/}
-                                   {/*     </select>
-                                    </div><br/>*/}
-
+                                    </div>*/}<br/>
 
                                     <div className="form-group">
                                         <button style={{margin: 15}} className="btn btn-primary">Dodaj pracownika</button>

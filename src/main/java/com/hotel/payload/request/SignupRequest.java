@@ -1,5 +1,8 @@
 package com.hotel.payload.request;
 
+import com.hotel.model.ERole;
+import com.hotel.model.Role;
+
 import java.util.Set;
 
 import javax.validation.constraints.*;

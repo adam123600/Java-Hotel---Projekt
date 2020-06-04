@@ -1,5 +1,6 @@
 package com.hotel.controller;
 
+import com.hotel.model.Item;
 import com.hotel.model.User;
 import com.hotel.payload.request.ChangePasswordRequest;
 import com.hotel.payload.request.SignupRequest;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping
 public class UserController {
     @Autowired
     UserRepository userRepository;
@@ -24,7 +25,7 @@ public class UserController {
     @Autowired
     PasswordEncoder encoder;
 
-    @RequestMapping(value = "{id}/changePassword", method = RequestMethod.PUT)
+    @RequestMapping(value = "/api/users/{id}/changePassword", method = RequestMethod.PUT)
     public ResponseEntity<MessageResponse> updateUser(@PathVariable Long id, @Valid @RequestBody ChangePasswordRequest newPassword){
 
         User userToUpdate= userRepository.getOne(id);
@@ -34,32 +35,11 @@ public class UserController {
         return ResponseEntity.ok(new MessageResponse("Hasło zostało zmienione!"));
     }
 
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> addUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
-        }
-
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
-        }
-
-        // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()),
-                signUpRequest.getFirstname(),
-                signUpRequest.getLastname(),
-                signUpRequest.getPhonenumber());
-
-        userRepository.saveAndFlush(user);
-
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    @GetMapping
+    @RequestMapping("{id}")
+    public User getUserById(@PathVariable Long id) {
+        return userRepository.getOne(id);
     }
+
+
 }
