@@ -2,6 +2,9 @@ import * as React from "react";
 import GuestService from "../../service/GuestService";
 import {ListGroup, ListGroupItem, Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import RoomService from "../../service/RoomService";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PdfBill from "../Pdf/PdfBill";
+
 
 export default class GuestDetails extends React.Component{
 
@@ -12,6 +15,7 @@ export default class GuestDetails extends React.Component{
                 guestInfo: [],
                 roomOfGuest: [],
                 modal: false,
+                createPdf: false,
             }
         }
 
@@ -55,6 +59,7 @@ export default class GuestDetails extends React.Component{
             GuestService.deleteGuestById(this.state.guestInfo.id);
             this.props.history.push('/guests');
         }
+        
 
     render() {
             return(
@@ -67,17 +72,32 @@ export default class GuestDetails extends React.Component{
                     <ListGroupItem>{this.state.guestInfo.accommodationDate}</ListGroupItem>
                     <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Data wymeldowania</ListGroupItem>
                     <ListGroupItem>{this.state.guestInfo.checkOutDate}</ListGroupItem>
-                    <Button style={{backgroundColor: '#f99cab', border: 'none'}}>Rachunek</Button>
+                    <Button onClick={() => this.setState({createPdf: !this.state.createPdf})} style={{backgroundColor: '#f99cab', border: 'none'}}>Rachunek</Button>
                     <Button onClick={() => this.setState({modal: !this.state.modal})} style={{backgroundColor: '#f99cab', border: 'none', marginTop: '2px'}}>Wymelduj</Button>
                     <Modal isOpen={this.state.modal}>
                         <ModalHeader toggle={() => {this.setState({modal: !this.state.modal})}}>Czy na pewno</ModalHeader>
                         <ModalBody>
                             Czy na pewno chcesz wymeldować gościa: <br/>
-                            pm {this.state.guestInfo.firstName} {this.state.guestInfo.lastName} ? <br/>
+                            {this.state.guestInfo.firstName} {this.state.guestInfo.lastName} ? <br/>
                             <Button style={{backgroundColor: '#f99cab', margin: '20px', width: '100px'}} onClick={this.onCheckoutGuest}>Tak</Button>
                             <Button style={{backgroundColor: '#f99cab', margin: '20px', width: '100px'}} onClick={() => { this.setState( {modal: !this.state.modal })}}>Nie</Button>
                         </ModalBody>
                     </Modal>
+                    { this.state.createPdf && <PDFDownloadLink
+                        document={<PdfBill guest={this.state.guestInfo} room={this.state.roomOfGuest}/>}
+                        fileName="billtest.pdf"
+                        style={{
+                            textDecoration: "none",
+                            padding: "10px",
+                            color: "#ffffff",
+                            backgroundColor: "#f99cab",
+                            border: 'none'
+                        }}
+                        >
+                        {({blob, url, loading, error}) => 
+                        loading ? "Loading document..." : "Download PDF"
+                        }
+                        </PDFDownloadLink>}
                 </ListGroup>
             );
         }
