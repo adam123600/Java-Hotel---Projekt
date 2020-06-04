@@ -23,10 +23,17 @@ public class Notification {
     @Column(name = "user_id")
     private String username;
 
+    @Size(max = 1000)
+    @Column(name = "description")
+    private String desription;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", nullable = false)
     private NotificationType notType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id")
+    private Room room;
 
 
     public Notification() {
@@ -35,9 +42,14 @@ public class Notification {
     public Notification(String username, NotificationType notType){
         this.username = username;
         this.notType = notType;
-
     }
 
+    public Notification(Long id, @NotBlank @Size(max = 20) String username, NotificationType notType, Room room) {
+        this.id = id;
+        this.username = username;
+        this.notType = notType;
+        this.room = room;
+    }
 
     public Long getId() {
         return id;
@@ -67,5 +79,19 @@ public class Notification {
         return notType.getId();
     }
 
+    public Room getRoom() {
+        return room;
+    }
 
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public String getDesription() {
+        return desription;
+    }
+
+    public void setDesription(String desription) {
+        this.desription = desription;
+    }
 }

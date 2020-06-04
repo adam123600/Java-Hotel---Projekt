@@ -60,3 +60,6 @@ npm run build
 - następnie wykonać clean i package na projekcie maven.
 - po tych operacjach możemy uruchomić połączony back i front na localhost:8080 
 java -jar <ściażeka do pliku jar>
+
+##Pakiety
+Date picker: https://www.npmjs.com/package/react-date-picker

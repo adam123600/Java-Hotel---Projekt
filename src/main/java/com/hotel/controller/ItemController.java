@@ -1,11 +1,7 @@
 package com.hotel.controller;
 
 import com.hotel.model.Item;
-import com.hotel.model.ItemCategory;
-import com.hotel.model.User;
-import com.hotel.repository.ItemCategoryRepository;
 import com.hotel.repository.ItemRepository;
-import com.hotel.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,10 +16,6 @@ public class ItemController {
     @Autowired
     private ItemRepository itemRepository;
 
-    @Autowired
-    private ItemCategoryRepository itemCategoryRepository;
-
-
     @GetMapping
     public List<Item> getAllItems(){
         return itemRepository.findAll();
@@ -34,10 +26,6 @@ public class ItemController {
     public Item getItemById(@PathVariable Long id) {
         return itemRepository.getOne(id);
     }
-
-    @GetMapping
-    @RequestMapping("categories")
-    public List<ItemCategory> getAllCategories() { return itemCategoryRepository.findAll(); }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

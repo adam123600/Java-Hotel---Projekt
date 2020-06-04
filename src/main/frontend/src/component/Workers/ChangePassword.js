@@ -5,13 +5,12 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import WorkerService from "../../service/WorkerService";
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+//import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+
+import { Button } from 'reactstrap';
 
 
 const required = value => {
