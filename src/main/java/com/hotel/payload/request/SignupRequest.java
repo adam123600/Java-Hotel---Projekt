@@ -3,6 +3,7 @@ package com.hotel.payload.request;
 import com.hotel.model.ERole;
 import com.hotel.model.Role;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.constraints.*;
@@ -57,8 +58,10 @@ public class SignupRequest {
         return this.role;
     }
 
-    public void setRole(Set<String> role) {
-        this.role = role;
+    public void setRole(String role) {
+        Set<String> roles = new HashSet<>();
+        roles.add(role);
+        this.role = roles;
     }
 
     public String getFirstname() {

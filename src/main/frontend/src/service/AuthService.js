@@ -31,14 +31,15 @@ class AuthService {
     });
   }
 
-  register(username, email, password, firstname, lastname, phonenumber){
+  register(username, email, password, firstname, lastname, phonenumber, role){
     return axios.post(API_URL + "register", {
       username,
       email,
       password,
       firstname,
       lastname,
-      phonenumber
+      phonenumber,
+      role
     })
   }
 
