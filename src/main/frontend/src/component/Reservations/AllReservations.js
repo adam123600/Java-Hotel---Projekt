@@ -102,13 +102,13 @@ export default class AllReservations extends Component{
         }).filter(reservation => {
             return reservation.lastName.match(lastNameRegex);
         }).filter(reservation => {
-            if(filterByDate == true) {
+            if(filterByDate === true) {
                 return reservation.startDate.match(checkInDate.getFullYear()+"-"+("0"+(checkInDate.getMonth()+1)).slice(-2)+"-"+checkInDate.getDate());
             } else {
                 return true;
             }
         }).filter(reservation => {
-            if(filterByDate == true) {
+            if(filterByDate === true) {
                 return reservation.endDate.match(checkOutDate.getFullYear()+"-"+("0"+(checkOutDate.getMonth()+1)).slice(-2)+"-"+checkOutDate.getDate());
             } else {
                 return true;

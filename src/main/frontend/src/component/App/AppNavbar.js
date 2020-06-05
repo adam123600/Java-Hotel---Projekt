@@ -101,7 +101,7 @@ class AppNavbar extends Component {
                                             <DropdownItem>
                                                 Harmonogramy
                                             </DropdownItem>
-                                            <DropdownItem>
+                                            <DropdownItem onClick={event => window.location.href = '/addworker'}>
                                                 Dodaj pracownika
                                             </DropdownItem>
                                         </DropdownMenu>
