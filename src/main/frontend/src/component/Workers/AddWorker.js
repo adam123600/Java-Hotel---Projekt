@@ -188,7 +188,8 @@ export default class AddWorker extends React.Component {
         };
         console.log(role);
         axios.put('/api/users/' + {currentWorkerID} + '/roles', role,{headers: authHeader()});
-        */window.location.reload();
+        */
+        //window.location.reload();
 
 
     }
@@ -296,8 +297,8 @@ export default class AddWorker extends React.Component {
                                     </div>*/}<br/>
 
                                     <div className="form-group">
-                                        <button style={{margin: 15}} className="btn btn-primary">Dodaj pracownika</button>
-                                        <button className="btn btn-primary" onClick={this.closeForm}>Anuluj</button>
+                                        <button style={{margin: 15, backgroundColor: '#f99cab'}} className="btn btn-primary">Dodaj pracownika</button>
+                                        <button style={{backgroundColor: '#f99cab'}} className="btn btn-primary" onClick={this.closeForm}>Anuluj</button>
                                     </div>
                                 </div>
                             )}
