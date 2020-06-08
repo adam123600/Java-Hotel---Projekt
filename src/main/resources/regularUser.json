@@ -2,5 +2,8 @@
   "username": "RegularUser",
   "email": "user@user.com",
   "password": "12345678",
-  "role": ["receptionist"]
+  "firstname": "Kamil",
+  "lastname": "Nowak",
+  "phonenumber": "569304569",
+  "role": "receptionist"
 }

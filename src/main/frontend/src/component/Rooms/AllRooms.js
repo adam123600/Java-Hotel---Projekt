@@ -5,6 +5,7 @@ import SearchRoom from "../Search/SearchRoom";
 import SearchGuestService from "../../SearchEngine/SearchGuestService";
 import DatePicker from "react-date-picker";
 import GuestService from "../../service/GuestService";
+import ReservationService from "../../service/ReservationService";
 
 export default class AllRooms extends React.Component {
     constructor(props) {
@@ -13,6 +14,7 @@ export default class AllRooms extends React.Component {
             allRooms: [],
             allStandards: [],
             allGuests: [],
+            allReservations: [],
             onlyEmpty: false,
             floorRegex: ".*",
             standardRegex: ".*",
@@ -33,6 +35,10 @@ export default class AllRooms extends React.Component {
             this.setState({allGuests: res});
         });
 
+        ReservationService.getAllReservations().then(res => {
+            this.setState({allReservations: res.data});
+        });
+
         // żeby przy porównywaniu dat były takie same godziny (+2h bo strefa czasowa)
         this.state.checkInDate.setHours(2,0,0,0);
         this.state.checkOutDate.setHours(2,0,0,0);
@@ -48,7 +54,6 @@ export default class AllRooms extends React.Component {
     handleSelectStandard(event) {
         this.setState({standardRegex: event.target.value});
     }
-
 
     render() {
         let datePickerStyle = this.state.filterOnDate ? {} : {opacity: '0.4'};
@@ -75,18 +80,36 @@ export default class AllRooms extends React.Component {
                            return 0;
                        });
                    }
-                   //console.log(new Date(guests[0].checkOutDate).toISOString().substring(0, 10) == this.state.checkInDate.toISOString().substring(0, 10))
-                   console.log("porównanie");
-                   console.log(new Date(guests[0].checkOutDate));
-                   console.log(this.state.checkInDate);
-                   if( new Date(guests[0].checkOutDate) <= this.state.checkInDate ) return true;
-                   else return false;
+                   return new Date(guests[0].checkOutDate) <= this.state.checkInDate;
                }
                else
                    return true;
            }
            else
                return true;
+        }).filter(room => {
+            if(this.state.filterOnDate) {
+                let reservations = this.state.allReservations.filter(reservation => {
+                    return room.id == reservation.room.id;
+                })
+                if(reservations.length == 0)        // jeśli dla danego pokoju nie ma żadnych rezerwacji to git, można przepuścić ten pokój przez filtr
+                    return true;
+                else {
+                    for(var i = 0; i < reservations.length; i++) {
+                        let startDate = new Date(reservations[i].startDate);
+                        let endDate = new Date(reservations[i].endDate);
+                        // jeśli 'dostępny od' lub 'dostępny do' zawiera się w przedziale <start + 1dzień ; end - 1dzień> którejkolwiek rezerwacji dla tego pokoju
+                        // lub jeśli przedział <start ; end > zawiera się w <dostępny od ; dostępny do>, to zwraca false
+                        if( (this.state.checkInDate >= startDate && this.state.checkInDate < endDate)   ||
+                            (this.state.checkOutDate > startDate && this.state.checkOutDate < endDate)  ||
+                            (this.state.checkInDate <= startDate && this.state.checkOutDate >= endDate) )
+                            return false;
+                    }
+                    return true;    // jeśli przez całą petlę ani razu nie zwróciło false, to pokój spełnia wymagania co do dostępności w zadanej dacie
+                }
+            }
+            else
+                return true;
         }).map(room => (
             <div key={room.id}>
                 <RoomThumbnail room={room}/>
@@ -115,9 +138,6 @@ export default class AllRooms extends React.Component {
                             <option value={standard.name}>{standard.name}</option>
                         ))}
                     </select>
-                    <br/>
-                    <br/>
-                    To jeszcze nie działa!!!
                     <br/>
                     <input className="checkbox" type="checkbox" onClick={() => this.setState({filterOnDate: !this.state.filterOnDate})}></input>
                     <label style={{padding: '5px 12px 5px'}}>Filtruj po dostępności</label>

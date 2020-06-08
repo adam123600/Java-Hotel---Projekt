@@ -44,6 +44,9 @@ export default class AddReservation extends Component {
             allRooms: [],
             roomId: 0
         }
+
+        this.state.checkInDate.setHours(2,0,0,0);
+        this.state.checkOutDate.setHours(2,0,0,0);
     }
 
     componentDidMount() {
@@ -73,12 +76,14 @@ export default class AddReservation extends Component {
     }
 
     onChangeCheckInDate = date => {
+        date.setHours(2, 0, 0, 0);
         this.setState({
             checkInDate: date
         });
     };
 
     onChangeCheckOutDate = date => {
+        date.setHours(2, 0, 0, 0);
         this.setState({
             checkOutDate: date
         });

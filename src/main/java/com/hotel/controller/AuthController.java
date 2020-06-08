@@ -96,37 +96,44 @@ public class AuthController {
         }else{
             strRoles.forEach(role -> {
                 switch (role) {
+                    case "ROLE_RECEPTIONIST":
                     case "receptionist":
                         Role receptionistRole = roleRepository.findByName(ERole.ROLE_RECEPTIONIST)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(receptionistRole);
                         break;
                     case "accountant":
+                    case "ROLE_ACCOUNTANT":
                         Role accountantRole = roleRepository.findByName(ERole.ROLE_ACCOUNTANT)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(accountantRole);
                         break;
                     case "cleaner":
+                    case "ROLE_CLEANER":
                         Role cleanerRole = roleRepository.findByName(ERole.ROLE_CLEANER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(cleanerRole);
                         break;
                     case "butler":
+                    case "ROLE_BUTLER":
                         Role butlerRole = roleRepository.findByName(ERole.ROLE_BUTLER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(butlerRole);
                         break;
                     case "manager":
+                    case "ROLE_MANAGER":
                         Role managerRole = roleRepository.findByName(ERole.ROLE_MANAGER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(managerRole);
                         break;
                     case "kitchen_manager":
+                    case "ROLE_KITCHEN_MANAGER":
                         Role kitchenManagerRole = roleRepository.findByName(ERole.ROLE_KITCHEN_MANAGER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(kitchenManagerRole);
                         break;
                     case "repairman":
+                    case "ROLE_REPAIRMAN":
                         Role repairManRole = roleRepository.findByName(ERole.ROLE_REPAIRMAN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(repairManRole);
