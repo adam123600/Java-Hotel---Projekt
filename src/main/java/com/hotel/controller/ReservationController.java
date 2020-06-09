@@ -3,6 +3,7 @@ package com.hotel.controller;
 
 
 import com.hotel.model.Reservation;
+import com.hotel.model.Room;
 import com.hotel.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

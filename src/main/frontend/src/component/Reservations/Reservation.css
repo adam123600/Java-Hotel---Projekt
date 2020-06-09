@@ -13,12 +13,13 @@
     
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 100px;
     align-items: center;
     justify-content: center;
-    border-width: thick;
+    border-style: solid;
     border-color:  #f3c2c7;
   }
+  
 
   .reservation-text {
     display: flex;

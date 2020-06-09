@@ -22,6 +22,7 @@ import AddReservation from "../Reservations/AddReservation";
 import GuestDetails from "../Guests/GuestDetails";
 import AllReservations from "../Reservations/AllReservations";
 import AddWorker from "../Workers/AddWorker";
+import CheckReservation from '../Reservations/CheckReservation';
 
 toast.configure();
 
@@ -49,6 +50,8 @@ class App extends Component {
           <Route path="/addguest" component={AddGuest} />
           <Route path="/reservations" component={AllReservations}/>
           <Route path="/addreservation" component={AddReservation}/>
+          <Route path="/checkreservation" component={CheckReservation}/>
+         
         </Switch>
         </div>
 
