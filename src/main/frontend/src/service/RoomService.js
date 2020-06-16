@@ -68,10 +68,11 @@ class RoomService {
             .catch(err => console.log(err));
     }
 
-    updateRoomById(id, newRoom){
+    updateRoomById(id, newRoom) {
         return axios.put("/api/rooms/" + id, newRoom, {headers: authHeader()})
             .catch(err => console.log(err));
     }
+
 }
 
 export default new RoomService();
