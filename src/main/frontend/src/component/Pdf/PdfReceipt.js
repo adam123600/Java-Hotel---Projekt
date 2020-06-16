@@ -1,12 +1,9 @@
 import * as React from "react";
 import { Font ,Document, Page, Text, Image, StyleSheet, View } from "@react-pdf/renderer";
-import { Table, TableHeader, TableCell, TableBody, DataTableCell, TableBorder, br} from "@david.kucsai/react-pdf-table"
-import { Collapse } from "reactstrap";
-import { TableRow } from "@david.kucsai/react-pdf-table/lib/TableRow";
 import RoomService from "../../service/RoomService";
 import ServicesService from "../../service/ServicesService";
 
-const hotelImg = require('../../image/hotelBillTop.png');
+const hotelImg = require('../../image/hotelReceiptTop.png');
 
 Font.register({
     family: "Roboto",
@@ -41,7 +38,7 @@ const styles = StyleSheet.create({
 
 })
 
-export default class PdfBill extends React.Component{
+export default class PdfReceipt extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -60,14 +57,7 @@ export default class PdfBill extends React.Component{
                     })
                 })
             }));
-            
-        
-        /*RoomService.getRoomServices(this.props.room).then(
-            results => {
-                this.setState({
-                    services: results,
-                })
-        })*/
+
         this.setState({
             guest: this.props.guest,
             room: this.props.room,
@@ -75,21 +65,6 @@ export default class PdfBill extends React.Component{
     }
 
     render(){
-        /*let servicesInfo = this.state.services.map( service => (
-            ServicesService.getServiceType(service).then( serviceType => {
-            return <Text>{serviceType.type} {serviceType.price}</Text>
-            })
-        ));*/
-        /*const servicesInfo = Object.keys(this.state.services).map(key => (
-            ServicesService.getServiceType(this.state.services[key]).then( serviceType => {
-                //return (<Text>{serviceType.type} {serviceType.price}</Text>)
-                console.log(serviceType);
-            })
-        ));*/
-        /*var servicesInfo = this.state.servicesType.map( function(service){
-            console.log("here " + service);
-            return(<Text>{service.price}</Text>);
-        });*/
         var credit = 0;
         this.state.servicesType.forEach( function(service){
             credit += service.price;
@@ -112,7 +87,7 @@ export default class PdfBill extends React.Component{
                     </View> 
                     {
                         this.state.servicesType.map( service => (
-                            <View key={service.id}  style={styles.paymentInfo}>
+                            <View style={styles.paymentInfo}>
                                 <Text>{service.type}</Text>
                                 <Text style={styles.price}>{service.price + " zł."}</Text>
                             </View>
@@ -123,31 +98,6 @@ export default class PdfBill extends React.Component{
                         <Text>Suma</Text>   
                         <Text style={styles.price}>{credit + " zł."}</Text>   
                     </View>
-                    {/*<Table 
-                        data={[{description: "guest room " + this.state.room.roomName, charges: this.state.room.balance + "zł", credit: ""},
-
-                               {description: "", charges: "", credit: this.state.credit + "zł"}
-                            ]}>
-                        <TableHeader textAlign={"center"} styles={styles.tableHeader}
-                            includeLeftBorder={false} includeRightBorder={false} includeTopBorder={false}>
-                            <TableCell>
-                                Description
-                            </TableCell>
-                            <TableCell>
-                                Charges
-                            </TableCell>
-                            <TableCell>
-                                Credit
-                            </TableCell>
-                        </TableHeader>
-                        <TableBody textAlign={"center"}
-                            includeLeftBorder={false} includeRightBorder={false} includeTopBorder={false} includeBottomBorder={false}>
-                            <DataTableCell getContent={(data) => data.description }/>
-                            <DataTableCell getContent={(data) => data.charges}/>
-                            <DataTableCell getContent={(data) => data.credit}/>
-                        </TableBody>
-                        
-                        </Table>*/}
                 </Page>
             </Document>        
         );

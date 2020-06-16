@@ -3,7 +3,7 @@ import GuestService from "../../service/GuestService";
 import {ListGroup, ListGroupItem, Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import RoomService from "../../service/RoomService";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import PdfBill from "../Pdf/PdfBill";
+import PdfReceipt from "../Pdf/PdfReceipt";
 
 
 export default class GuestDetails extends React.Component{
@@ -84,7 +84,7 @@ export default class GuestDetails extends React.Component{
                         </ModalBody>
                     </Modal>
                     { this.state.createPdf && <PDFDownloadLink
-                        document={<PdfBill guest={this.state.guestInfo} room={this.state.roomOfGuest}/>}
+                        document={<PdfReceipt guest={this.state.guestInfo} room={this.state.roomOfGuest}/>}
                         fileName = { "receipt_" + this.state.guestInfo.firstName + "_" + this.state.guestInfo.lastName + "_" + this.state.guestInfo.id}
                         style={{
                             textDecoration: "none",

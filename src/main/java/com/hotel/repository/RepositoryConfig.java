@@ -1,9 +1,6 @@
 package com.hotel.repository;
 
-import com.hotel.model.Guest;
-import com.hotel.model.Room;
-import com.hotel.model.Service;
-import com.hotel.model.User;
+import com.hotel.model.*;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
