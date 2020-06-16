@@ -85,7 +85,7 @@ export default class GuestDetails extends React.Component{
                     </Modal>
                     { this.state.createPdf && <PDFDownloadLink
                         document={<PdfBill guest={this.state.guestInfo} room={this.state.roomOfGuest}/>}
-                        fileName="billtest.pdf"
+                        fileName = { "receipt_" + this.state.guestInfo.firstName + "_" + this.state.guestInfo.lastName + "_" + this.state.guestInfo.id}
                         style={{
                             textDecoration: "none",
                             padding: "10px",
@@ -95,7 +95,7 @@ export default class GuestDetails extends React.Component{
                         }}
                         >
                         {({blob, url, loading, error}) => 
-                        loading ? "Loading document..." : "Download PDF"
+                        loading ? "Ładowanie dokumentu..." : "Pobierz PDF"
                         }
                         </PDFDownloadLink>}
                 </ListGroup>

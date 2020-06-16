@@ -151,16 +151,6 @@
 							<arguments>install @react-pdf/renderer --save</arguments>
 						</configuration>
 					</execution>
-					<execution>
-						<id>npm install react pdf table</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<phase>generate-resources</phase>
-						<configuration>
-							<arguments>install @david.kucsai/react-pdf-table</arguments>
-						</configuration>
-					</execution>
 				</executions>
 
 				<configuration>
