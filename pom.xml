@@ -140,6 +140,17 @@
 							<arguments>install react-date-picker</arguments>
 						</configuration>
 					</execution>
+
+					<execution>
+						<id>npm install react pdf</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<arguments>install @react-pdf/renderer --save</arguments>
+						</configuration>
+					</execution>
 				</executions>
 
 				<configuration>

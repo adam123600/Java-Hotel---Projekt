@@ -6,6 +6,7 @@ import AuthService from "../../service/AuthService";
 import AddItem from "./AddItem";
 import Modal from "reactstrap/es/Modal";
 import "./Storage.css"
+import { Button, Collapse, CardBody, Card, Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
 
 export default class ItemStorage extends Component {
     constructor(props) {
@@ -15,8 +16,34 @@ export default class ItemStorage extends Component {
             content: [],
             showAddItemForm: false,
             showAddItemButton: false,
+            filterItemsModal: false,
+            categoryNameRegex: "",
+            itemNameRegex: ""
         }
+
+        this.handleSearchByItemName = this.handleSearchByItemName.bind(this);
+        this.resetFilters = this.resetFilters.bind(this);
+        this.onChangeCategory = this.onChangeCategory.bind(this);
     }
+
+
+    handleSearchByItemName(event) {
+        this.setState({ 
+            itemNameRegex: event.target.value
+        });
+    }
+    resetFilters() {
+        this.setState({
+            categoryNameRegex: "",
+            itemNameRegex: "",
+        })
+    }
+    onChangeCategory(e) {
+        this.setState({
+            categoryNameRegex: e.target.value
+        });
+    }
+
 
     componentDidMount() {
         ItemService.getAllItems().then(
@@ -24,6 +51,7 @@ export default class ItemStorage extends Component {
                 this.setState({
                     content: response.data
                 });
+                console.log(response.data);
             },
             error => {
                 this.setState({
@@ -75,6 +103,9 @@ export default class ItemStorage extends Component {
     };
 
     render() {
+        const { content, filterItemsModal, categoryNameRegex, itemNameRegex } = this.state;
+
+
         if (this.state.content.length === 0) {
             return (
                 <div>
@@ -103,17 +134,68 @@ export default class ItemStorage extends Component {
             }
         );
 
+        let filtredCategories = content.filter( category => {
+            if( ["*","?","+"].includes(categoryNameRegex) ) {
+                return null;
+            }
+            return category.category[0].category.match("CAT_FOOD");
+        }).map(category => {
+            return category.category[0].category;
+        })
+
         return (
             <div>
-                {this.state.showAddItemButton &&
-                <button className="additem-button" style={{margin: '10px'}} onClick={this.changeModalState}>Dodaj przedmiot</button>
-                }
-                <Modal isOpen={this.state.showAddItemForm} toggle={this.changeModalState}>
-                    <AddItem onCancel={this.changeModalState}/>
-                </Modal>
-                {listOfCategories.map((category, index) => {
+                <div style={{display: 'inline-flex'}}>
+                    {this.state.showAddItemButton &&
+                    <button className="additem-button" style={{margin: '10px'}} onClick={this.changeModalState}>Dodaj przedmiot</button>
+                    }
+                    <Modal isOpen={this.state.showAddItemForm} toggle={this.changeModalState}>
+                        <AddItem onCancel={this.changeModalState}/>
+                    </Modal>
+                    <button className="additem-button" style={{margin: '10px'}} onClick={() => { this.setState( {filterItemsModal: !filterItemsModal })}}>
+                        Filtruj przedmiot
+                    </button>
+                </div>
+                <Collapse isOpen={filterItemsModal}>
+                        <Card>
+                            <CardBody>
+                                <div>
+                                    <InputGroup>
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>Kategoria</InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input type="select" onChange={this.onChangeCategory}>
+                                            <option></option>
+                                            {listOfCategories.map(category => {
+                                                return <option key={category} value={category}>{ItemService.categoryNameToPolish(category)}</option>
+                                            })}
+                                        </Input>
+                                    </InputGroup>
+                                    <br/>
+                                    <InputGroup>
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>Przedmiot</InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input type="text" name="itemName" value={itemNameRegex} onChange={this.handleSearchByItemName}/>
+                                    </InputGroup>          
+                                    <br/>
+                                    
+                                    <Button color="danger" onClick={this.resetFilters}>
+                                        Resetuj filtry
+                                    </Button>
+                                </div>
+                            </CardBody>
+                        </Card>
+                    </Collapse>
+                    
+                {listOfCategories.filter( category => {
+                    if( ["*","?","+"].includes(categoryNameRegex) ) {
+                        return null;
+                    }
+                    return category.match(categoryNameRegex);
+                }).map((category, index) => {
                     let nameOfCategory = '';
-                    switch (category) { //TODO: W razie dodania nowej kateogrii należy jedynie dopisać odpowiedni case
+                    switch (category) { //TODO: W razie dodania nowej kateogrii należy jedynie dopisać odpowiedni case oraz w itemService to samo
                         case 'CAT_FOOD':
                             nameOfCategory = 'Jedzenie';
                             break;
@@ -136,7 +218,12 @@ export default class ItemStorage extends Component {
                         <div>
                             <h2 key={index} className="storage-text">{nameOfCategory}</h2>
                             <div className="storage-container">
-                                {this.state.content.map(item => {
+                                {this.state.content.filter( itemName => {
+                                    if( ["*","?","+"].includes(itemNameRegex) ) {
+                                        return null;
+                                    }
+                                    return itemName.item_name.match(itemNameRegex);
+                                }).map(item => {
                                     if (item.category[0].category === category)
                                         return <Item key={item.item_id} afterDelete={this.deleteItemFromList}
                                                      afterUpdate={this.updateView} {...item}/>
@@ -145,6 +232,8 @@ export default class ItemStorage extends Component {
                         </div>
                     )
                 })}
+
+               
             </div>
         );
     }

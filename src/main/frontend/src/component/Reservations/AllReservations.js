@@ -76,6 +76,7 @@ export default class AllReservations extends Component{
                 this.setState({
                     allReservations: response.data
                 });
+                console.log(response.data);
             }).catch(error => {
             const resMessage =
                 (error.response && error.response.data && error.response.data.message) ||
@@ -98,8 +99,14 @@ export default class AllReservations extends Component{
             checkOutDate, filterByDate, filterByDateModal, filterReservationModal } = this.state;
         
         let filtredReservations = allReservations.filter(reservation => {
+            if( ["*","?","+"].includes(firstNameRegex) ) {
+                return null;
+            }
             return reservation.firstName.match(firstNameRegex);
         }).filter(reservation => {
+            if( ["*","?","+"].includes(lastNameRegex) ) {
+                return null;
+            }
             return reservation.lastName.match(lastNameRegex);
         }).filter(reservation => {
             if(filterByDate === true) {

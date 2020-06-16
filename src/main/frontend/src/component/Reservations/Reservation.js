@@ -9,7 +9,7 @@ import Modal from "reactstrap/es/Modal";
 export default class Reservation extends Component{
     constructor(props) {
         super(props);
-
+        
         this.state = {
             reservationId: 0,
             firstName: "",
@@ -54,7 +54,7 @@ export default class Reservation extends Component{
                 <h5 className="my-label"><span className="allreservations-label">Koniec rezerwacji: </span><span className="allreservations-enddate">{this.props.endDate}</span></h5>
                 <button className="my-button login-button" onClick={this.onButtonClick}>Zamelduj</button>
                 <Modal isOpen={this.state.modal} toggle={this.onButtonClick}>
-                    <AddGuest reservation={this.state}/>
+                    <AddGuest reservation={this.props}/>
                 </Modal>
             </div>
         )

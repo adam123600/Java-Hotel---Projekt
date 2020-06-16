@@ -49,6 +49,12 @@ class RoomService {
         })
     }
 
+    getRoomServices(room){
+        return axios.get("/api/rooms/" + room.id + "/services").then(response => {
+            return response.data._embedded.services;
+        })
+    }
+
     getAllStandards() {
         return axios.get("/api/roomStandards").then(response => {
             return response.data._embedded.roomStandards;
@@ -62,10 +68,11 @@ class RoomService {
             .catch(err => console.log(err));
     }
 
-    updateRoomById(id, newRoom){
+    updateRoomById(id, newRoom) {
         return axios.put("/api/rooms/" + id, newRoom, {headers: authHeader()})
             .catch(err => console.log(err));
     }
+
 }
 
 export default new RoomService();

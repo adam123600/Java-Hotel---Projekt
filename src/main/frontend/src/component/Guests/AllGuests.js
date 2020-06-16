@@ -35,6 +35,7 @@ export default class AllGuests extends React.Component{
 
 
     render() {
+        console.log(this.state.allGuests)
         return(
             
             <div className="main-container">

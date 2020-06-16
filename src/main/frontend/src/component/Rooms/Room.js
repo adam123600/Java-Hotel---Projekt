@@ -12,6 +12,8 @@ export default class Room extends React.Component {
             img: "",
             guests: [],
             modal: false,
+
+            services: [],
         }
 
         this.handleCheckout = this.handleCheckout.bind(this);
@@ -33,6 +35,9 @@ export default class Room extends React.Component {
                 RoomService.getRoomGuests(res).then(guests => {
                     this.setState({guests:guests});
                 })
+                RoomService.getRoomServices(res).then(services => {
+                    this.setState({services: services});
+                });
             })
         }
         // jeśli strona została otwarta przez kliknięcie w minuaturę pokoju, to {room} został przekazany z miniaturki do tego komponentu
@@ -46,6 +51,9 @@ export default class Room extends React.Component {
             });
             RoomService.getRoomGuests(room).then(guests => {
                 this.setState({guests: guests});
+            });
+            RoomService.getRoomServices(room).then(services => {
+                this.setState({services: services});
             });
         }
     }
@@ -69,6 +77,13 @@ export default class Room extends React.Component {
                 <h2>Aktualny rachunek: {this.state.room.balance} zł</h2>
                 {this.state.guests.length > 0 &&
                 <div> {/* trzeba css ogarnąć :D */}
+                    <div>
+                        <h4>Zamówione usługi do pokoju:</h4>
+                        {this.state.services.map(service => (
+                            <p>{service.description}</p>
+                            )
+                        )}
+                    </div>
                     <h2>Goście:</h2>
                     <table style={{width: '80%'}}>
                         <tr>

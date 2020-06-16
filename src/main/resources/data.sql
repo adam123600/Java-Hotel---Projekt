@@ -80,11 +80,9 @@ INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VAL
 INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (5,"admin",2);
 INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (6,"Nazwa użytkownika restującego hasło",1);
 
-INSERT IGNORE INTO servicetypes (id, type, price) VALUES (1, 'DUPECZKI', 350);
-INSERT IGNORE INTO servicetypes (id, type, price) VALUES (2, 'WODECZKA', 50.5);
-INSERT IGNORE INTO servicetypes (id, type, price) VALUES (3, 'KOKOLINA', 99.99);
-INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (1, 3, 1, 'Kilogram poprosze');
-INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (2, 2, 2, '2 Litry poprosze');
-INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (3, 1, 1, '2 by byly');
-INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (4, 1, 1, '2 by byly');
-INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (5, 1, 1, '2 by byly');
+INSERT IGNORE INTO servicetypes (id, type, price) VALUES (1, 'KOLACJA', 30);
+INSERT IGNORE INTO servicetypes (id, type, price) VALUES (2, 'ALKOHOL', 50);
+INSERT IGNORE INTO servicetypes (id, type, price) VALUES (3, 'OBIAD', 30);
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (2, 2, 2, '0.7 litra wódeczki');
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (3, 1, 2, 'Kolacja do pokoju');
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (1, 3, 2, 'Obiad do pokoju');

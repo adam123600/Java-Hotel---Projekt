@@ -62,4 +62,5 @@ npm run build
 java -jar <ściażeka do pliku jar>
 
 ##Pakiety
-Date picker: https://www.npmjs.com/package/react-date-picker
+Date picker: https://www.npmjs.com/package/react-date-picker <br />
+React pdf: https://react-pdf.org
