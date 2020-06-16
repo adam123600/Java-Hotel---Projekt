@@ -28,6 +28,16 @@ class ItemService {
         return axios.put(API_URL + id, newItem, {headers: authHeader()});
     }
 
+    categoryNameToPolish(categoryName) {
+        switch(categoryName) {
+            case 'CAT_FOOD':     return  'Jedzenie';
+            case 'CAT_OFFICE':   return  'Biuro';
+            case 'CAT_WORKSHOP': return 'Warsztat'
+            case 'CAT_OTHER':    return 'Inne';
+            case 'CAT_HYGIENE':  return 'Higiena';
+            default:             return 'Nieznana kategoria';
+        }
+    }
 }
 
 export default new ItemService();
