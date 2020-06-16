@@ -6,6 +6,12 @@ class SearchGuestService {
             return response.data;
         })
     }
+
+    searchByLastName(lastName) {
+        return axios.get("/api/guests/search/findByLastName?lastName=" + lastName).then(response => {
+            return response.data._embedded.guests;
+        })
+    }
 }
 
 export default new SearchGuestService();

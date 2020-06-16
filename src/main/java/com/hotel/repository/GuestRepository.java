@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface GuestRepository extends JpaRepository<Guest, Long> {
     Optional<Guest> findFirstByRoom_idOrderByCheckOutDateDesc(Long id);   // znajduje gościa, który zostaje w pokoju najdłużej
     Guest findFirstByOrderByCheckOutDate();
+    Optional<List<Guest>> findByLastName(String lastName);
 }

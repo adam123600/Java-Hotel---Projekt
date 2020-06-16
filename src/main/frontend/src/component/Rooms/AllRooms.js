@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import RoomService from "../../service/RoomService"
 import RoomThumbnail from "./RoomThumbnail"
 import SearchRoom from "../Search/SearchRoom";
+import SearchRoomByGuest from "../Search/SearchRoomByGuest";
 import SearchGuestService from "../../SearchEngine/SearchGuestService";
 import DatePicker from "react-date-picker";
 import GuestService from "../../service/GuestService";
@@ -120,6 +121,7 @@ export default class AllRooms extends React.Component {
             <div className="main-container">
                 <div className="content">
                     <SearchRoom/>
+                    <SearchRoomByGuest/>
                     <input className="checkbox" type="checkbox" onClick={() => this.setState({onlyEmpty: !this.state.onlyEmpty})}></input>
                     <label style={{padding: '5px 12px 5px'}}>Tylko wolne pokoje</label>
                     <label style={{padding: '5px 12px 5px 30px'}}>Piętro:</label>
