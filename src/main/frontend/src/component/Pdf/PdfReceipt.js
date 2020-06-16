@@ -70,7 +70,6 @@ export default class PdfReceipt extends React.Component{
             credit += service.price;
         })
         credit += this.state.room.balance;
-        console.log(credit)
         return(
             <Document>
                 <Page style={styles.page}>

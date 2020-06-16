@@ -45,7 +45,6 @@ export default class GuestDetails extends React.Component{
         }
         
         onCheckoutGuest = () =>{
-            console.log(this.state.roomOfGuest);
             const guestRoom = {
                 roomName: this.state.roomOfGuest.roomName,
                 currentNumberOfGuests: this.state.roomOfGuest.currentNumberOfGuests-1,
