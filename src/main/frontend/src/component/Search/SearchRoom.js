@@ -25,7 +25,7 @@ export default class SearchRoom extends React.Component {
             <div>
                 <div>
                     <form onSubmit={this.handleSubmit}>
-                        <label style={{padding: '5px 12px 5px'}}>Podaj numer pokoju:</label>
+                        <label style={{padding: '5px 12px 5px'}}>Numer pokoju:</label>
                         <input type="text" name="input" value={this.state.input} onChange={event => {event.preventDefault(); this.setState({input: event.target.value})}}/>
                         <input style={{backgroundColor: '#f99cab', color: 'white'}} type="submit" value={'Szukaj'}/>
                     </form>

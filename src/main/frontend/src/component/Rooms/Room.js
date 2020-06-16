@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import RoomService from "../../service/RoomService"
 import SearchRoomService from "../../SearchEngine/SearchRoomService"
 import {Button, Modal, ModalBody, ModalHeader} from "reactstrap";
+import GuestService from "../../service/GuestService";
 
 export default class Room extends React.Component {
     constructor(props) {
@@ -52,6 +53,10 @@ export default class Room extends React.Component {
     handleCheckout(guest) {
         this.setState({modal: !this.state.modal});
         console.log(guest.firstName);
+        var room = this.state.room;
+        room.currentNumberOfGuests -= 1;
+        GuestService.deleteGuestById(guest.id);
+        RoomService.updateRoomById(room.id, room);
     }
 
     render() {
