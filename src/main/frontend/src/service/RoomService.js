@@ -49,6 +49,12 @@ class RoomService {
         })
     }
 
+    getRoomServices(room){
+        return axios.get("/api/rooms/" + room.id + "/services").then(response => {
+            return response.data._embedded.services;
+        })
+    }
+
     getAllStandards() {
         return axios.get("/api/roomStandards").then(response => {
             return response.data._embedded.roomStandards;
