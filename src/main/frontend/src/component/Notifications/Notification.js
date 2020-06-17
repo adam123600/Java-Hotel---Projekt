@@ -8,15 +8,17 @@ import "./Notification.css";
 import ChangePassword from "../Workers/ChangePassword";
 import { Button } from "@material-ui/core";
 
+const FLAW_ID = 4;
 
 export default class Notification extends Component{
     constructor(props){
         super(props);
 
         this.state = {
+            showRepairmanNotifications: false,
             showAdminNotifications: false,
             allNotifications: [],
-            resPassNotifications: [],
+            currentNotifications: [],
             allWorkers: [],
             type : 1,
             message: ""
@@ -29,14 +31,18 @@ export default class Notification extends Component{
 
     componentDidMount() {
         const user = AuthService.getCurrentUser();
-    
+        var typeOfNot = this.state.type;
         if (user) {
           this.setState({
             currentUser: AuthService.getCurrentUser(),
-            showAdminNotifications: user.roles.includes("ROLE_MANAGER")
+            showAdminNotifications: user.roles.includes("ROLE_MANAGER"),
+            showRepairmanNotifications: user.roles.includes("ROLE_REPAIRMAN")
           });
+          if(user.roles.includes("ROLE_REPAIRMAN")){
+            typeOfNot = FLAW_ID;
+          }
         }
-
+    
         NotificationService.getAllNotifications().then(
             response => {
                 this.setState({
@@ -63,10 +69,10 @@ export default class Notification extends Component{
               }
             });
 
-            NotificationService.getAllNotificationsByNotificationTypeId(this.state.type).then(
+            NotificationService.getAllNotificationsByNotificationTypeId(typeOfNot).then(
               response => {
                   this.setState({
-                    resPassNotifications: response.data
+                    currentNotifications: response.data
                   });
 
               }).catch(error => {
@@ -104,7 +110,7 @@ export default class Notification extends Component{
                <div>
                   <h2>Prośby o zresetowanie hasła:</h2>
                   <div>
-                    {this.state.resPassNotifications.map(notification => 
+                    {this.state.currentNotifications.map(notification => 
                       <div style={{padding: '25px'}}>
 
                         <div key={notification.id} style={{display: 'inline-flex'}}>
@@ -125,7 +131,26 @@ export default class Notification extends Component{
                   </div>                 
                 </div>
               }
-                         
+              {this.state.showRepairmanNotifications &&
+                <div>
+                  <h2>Usterki</h2>
+                  <div>
+                    {this.state.currentNotifications.map(notification => 
+                      <div style={{padding: '25px'}}>
+
+                        <div key={notification.id} style={{display: 'inline-flex'}}>
+                          {notification.desription}
+                        </div>
+                        <div style={{display: 'inline-flex'}}>
+                        <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">
+                          Usuń powiadomienie
+                        </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              }           
             </div>
           )
       }
