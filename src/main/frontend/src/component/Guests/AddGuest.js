@@ -3,6 +3,7 @@ import RoomService from "../../service/RoomService";
 import GuestService from "../../service/GuestService";
 import DatePicker from "react-date-picker";
 import { Form, Input, Col, FormGroup, Label, Button } from "reactstrap";
+import ReservationService from "../../service/ReservationService";
 
 const URL_TO_ROOM = "localhost8080/api/rooms/";
 
@@ -71,6 +72,7 @@ export default class AddGuest extends Component {
         }
         RoomService.updateRoomById(this.state.newGuestRoom.id, guestRoom);
         GuestService.createNewGuest(newGuest);
+        ReservationService.deleteReservationById(this.props.reservation.id);
     }
 
     handleSelect = event => {
