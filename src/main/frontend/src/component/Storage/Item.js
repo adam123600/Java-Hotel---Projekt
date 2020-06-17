@@ -46,7 +46,8 @@ export default class Item extends Component{
                 category.includes("CAT_HYGIENE"))
             || (roles.includes("ROLE_KITCHEN_MANAGER") &&
                 category.includes("CAT_FOOD"))
-            || (roles.includes("ROLE_ACCOUNTANT")) &&
+            || (roles.includes("ROLE_ACCOUNTANT") ||
+                roles.includes("ROLE_RECEPTIONIST")) &&
                 category.includes("CAT_OFFICE"));
     }
 
