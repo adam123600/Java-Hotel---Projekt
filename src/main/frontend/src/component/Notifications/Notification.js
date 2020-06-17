@@ -139,7 +139,7 @@ export default class Notification extends Component{
                       <div style={{padding: '25px'}}>
 
                         <div key={notification.id} style={{display: 'inline-flex'}}>
-                          {notification.desription}
+                          {notification.description}
                         </div>
                         <div style={{display: 'inline-flex'}}>
                         <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">

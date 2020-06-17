@@ -25,7 +25,7 @@ public class Notification {
 
     @Size(max = 1000)
     @Column(name = "description")
-    private String desription;
+    private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", nullable = false)
@@ -87,11 +87,11 @@ public class Notification {
         this.room = room;
     }
 
-    public String getDesription() {
-        return desription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesription(String desription) {
-        this.desription = desription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

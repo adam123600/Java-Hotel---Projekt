@@ -78,9 +78,9 @@ INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VAL
 INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (2,"Recepcjonista",3, 1, "Kolejny brud");
 INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (3,"Recepcjonista",3, 1, "I jeszcze troszke");
 INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (4,"Recepcjonista",3, 2, "Brud brud brud");
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (5,"Nazwa uzytkownika wpisujacego",3, 4, "Polamane krzeslo");
 INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (5,"admin",2);
 INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (6,"Nazwa użytkownika restującego hasło",1);
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (7,"Nazwa uzytkownika wpisujacego",4, 4, "Polamane krzeslo");
 
 INSERT IGNORE INTO servicetypes (id, type, price) VALUES (1, 'KOLACJA', 30);
 INSERT IGNORE INTO servicetypes (id, type, price) VALUES (2, 'ALKOHOL', 50);
