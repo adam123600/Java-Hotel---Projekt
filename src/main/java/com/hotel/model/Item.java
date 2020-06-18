@@ -31,24 +31,32 @@ public class Item {
     @Column(nullable = false)
     private Integer current_quantity;
 
-/*    @Enumerated(EnumType.STRING)
-    @Column(length = 30, nullable = false)
-    private EItem item_category;*/
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "item_category",
             joinColumns = @JoinColumn(name = "item_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<ItemCategory> category = new HashSet<>();
 
+    @OneToOne(mappedBy = "item")
+    private Order order;
+
 
     public Item() {
     }
 
-    public Item(String itemName, Integer minQuantity, Integer current_quantity/*, EItem itemCategory*/){
+    public Item(String itemName, Integer minQuantity, Integer current_quantity){
         this.current_quantity = current_quantity;
-        //this.item_category = itemCategory;
         this.min_quantity = minQuantity;
         this.item_name = itemName;
+    }
+
+    public Item(Long item_id, @Size(max = 80) @NotBlank String item_name, Integer min_quantity, Integer current_quantity, Set<ItemCategory> category, Order order) {
+        this.item_id = item_id;
+        this.item_name = item_name;
+        this.min_quantity = min_quantity;
+        this.current_quantity = current_quantity;
+        this.category = category;
+        this.order = order;
     }
 
     public Set<ItemCategory> getCategory() {
@@ -97,5 +105,13 @@ public class Item {
 
     public void setCurrent_quantity(Integer current_quantity) {
         this.current_quantity = current_quantity;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

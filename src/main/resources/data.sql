@@ -88,3 +88,8 @@ INSERT IGNORE INTO servicetypes (id, type, price) VALUES (3, 'OBIAD', 30);
 INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (2, 2, 2, '0.7 litra wódeczki');
 INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (3, 1, 2, 'Kolacja do pokoju');
 INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (1, 3, 2, 'Obiad do pokoju');
+
+INSERT IGNORE INTO orders (order_id, item_counter, order_date, price, item_id) VALUES (1,10, DATE '2020-06-18', NULL, 1);
+INSERT IGNORE INTO orders (order_id, item_counter, order_date, price, item_id) VALUES (2,6, DATE '2020-06-19', NULL, 2);
+INSERT IGNORE INTO orders (order_id, item_counter, order_date, price, item_id) VALUES (3,8, DATE '2020-06-20', 24.21, 3);
+INSERT IGNORE INTO orders (order_id, item_counter, order_date, price, item_id) VALUES (4,66, DATE '2020-06-21', NULL, 4);
