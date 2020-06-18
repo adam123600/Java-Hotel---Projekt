@@ -12,5 +12,6 @@ public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
         config.exposeIdsFor(Room.class);        // jak potrzebujesz, żeby w jsonie było id dla innej klasy to se dodaj
         config.exposeIdsFor(Guest.class);
         config.exposeIdsFor(Service.class);
+        config.exposeIdsFor(Order.class);
     }
 }
