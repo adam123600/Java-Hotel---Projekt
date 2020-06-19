@@ -5,6 +5,7 @@ import EditItem from "./EditItem";
 import ItemService from "../../service/ItemService";
 import Modal from "reactstrap/es/Modal";
 import "./Storage.css"
+import NewOrder from "../Orders/NewOrder";
 
 export default class Item extends Component{
     constructor(props) {
@@ -13,6 +14,7 @@ export default class Item extends Component{
         this.state = {
             showEditDeleteButton: false,
             showEditField: false,
+            showNewOrderField: false,
             showConfirmationOfDelete: false,
             item_id: 0,
             item_name: "",
@@ -61,6 +63,12 @@ export default class Item extends Component{
         });
     };
 
+    changeNewOrderModalState = () => {
+       this.setState({
+           showNewOrderField: !this.state.showNewOrderField
+       });
+    };
+
     updateItemInfo = (item) => {
        this.setState({
            showEditField: false,
@@ -93,11 +101,17 @@ export default class Item extends Component{
                     <button className="additem-button storage-small-button" style={{margin: '10px'}}
                             onClick={this.changeConfirmationModalState}>Usuń
                     </button>
+                    <button className="additem-button storage-small-button" style={{margin: '10px'}}
+                            onClick={this.changeNewOrderModalState}>Zamów
+                    </button>
                 </div>
                 }
                 <Modal isOpen={this.state.showEditField} toggle={this.changeEditFieldModalState}>
                     <EditItem onCancel={this.changeEditFieldModalState}
                               afterEdit={this.updateItemInfo} {...this.state}/>
+                </Modal>
+                <Modal isOpen={this.state.showNewOrderField} toggle={this.changeNewOrderModalState}>
+                    <NewOrder itemId={this.state.item_id} itemName={this.state.item_name} onCancel={this.changeNewOrderModalState}/>
                 </Modal>
                 <Modal isOpen={this.state.showConfirmationOfDelete} toggle={this.changeConfirmationModalState}>
                     <h2 className="storage-text storage-itemName-text">Czy na pewno chcesz usunąć: {this.state.item_name}?</h2>

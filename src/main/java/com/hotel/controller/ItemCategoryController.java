@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/items/categories")
+@RequestMapping("/api/items1/categories")
 public class ItemCategoryController {
     @Autowired
     private ItemCategoryRepository itemCategoryRepository;
