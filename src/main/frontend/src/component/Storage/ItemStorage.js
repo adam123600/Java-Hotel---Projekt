@@ -51,7 +51,6 @@ export default class ItemStorage extends Component {
                 this.setState({
                     content: response.data
                 });
-                console.log(response.data);
             },
             error => {
                 this.setState({

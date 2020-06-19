@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -37,8 +38,8 @@ public class Item {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<ItemCategory> category = new HashSet<>();
 
-    @OneToOne(mappedBy = "item")
-    private Order order;
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
+    private List<Order> order;
 
 
     public Item() {
@@ -50,7 +51,7 @@ public class Item {
         this.item_name = itemName;
     }
 
-    public Item(Long item_id, @Size(max = 80) @NotBlank String item_name, Integer min_quantity, Integer current_quantity, Set<ItemCategory> category, Order order) {
+    public Item(Long item_id, @Size(max = 80) @NotBlank String item_name, Integer min_quantity, Integer current_quantity, Set<ItemCategory> category, List<Order> order) {
         this.item_id = item_id;
         this.item_name = item_name;
         this.min_quantity = min_quantity;
@@ -107,11 +108,11 @@ public class Item {
         this.current_quantity = current_quantity;
     }
 
-    public Order getOrder() {
+    public List<Order> getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(List<Order> order) {
         this.order = order;
     }
 }
