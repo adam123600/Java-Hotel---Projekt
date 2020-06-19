@@ -3,6 +3,7 @@ import RoomService from "../../service/RoomService"
 import SearchRoomService from "../../SearchEngine/SearchRoomService"
 import {Button, Modal, ModalBody, ModalHeader} from "reactstrap";
 import GuestService from "../../service/GuestService";
+import ServicesService from "../../service/ServicesService";
 
 export default class Room extends React.Component {
     constructor(props) {
@@ -12,11 +13,16 @@ export default class Room extends React.Component {
             img: "",
             guests: [],
             modal: false,
-
+            modalService: false,
+            serviceTypes: [],
+            chosenServiceTypeHref: "",
+            serviceDescription: "",
             services: [],
         }
 
         this.handleCheckout = this.handleCheckout.bind(this);
+        this.handleSubmitService = this.handleSubmitService.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     }
     componentDidMount() {
         // jeśli strona została otwarta przez wpisanie linku na sztywno w pasek adresu
@@ -56,6 +62,28 @@ export default class Room extends React.Component {
                 this.setState({services: services});
             });
         }
+
+        ServicesService.getAllServiceTypes().then(res => {
+            this.setState({serviceTypes: res});
+            this.setState({chosenServiceTypeHref: res[0]._links.self.href});
+            console.log(res);
+        });
+    }
+
+    handleSubmitService(event) {
+        event.preventDefault();
+        var service = {
+            description: this.state.serviceDescription,
+            serviceType: this.state.chosenServiceTypeHref,
+            room: "http://localhost:8080/api/rooms/" + this.state.room.id
+        }
+        console.log(service);
+        ServicesService.addServie(service);
+        this.setState({modalService: !this.state.modalService});
+    }
+
+    handleSelect(event) {
+        this.setState({chosenServiceTypeHref: event.target.value});
     }
 
     handleCheckout(guest) {
@@ -84,6 +112,27 @@ export default class Room extends React.Component {
                             )
                         )}
                     </div>
+                    <Button style={{backgroundColor: '#f99cab', margin: '5px 0px 30px'}} onClick={() => { this.setState( {modalService: !this.state.modalService})}}>
+                        Dodaj usługę
+                    </Button>
+                    <Modal isOpen={this.state.modalService} toggle={() => { this.setState( {modalService: !this.state.modalService })}}>
+                        <ModalHeader toggle={() => { this.setState( {modalService: !this.state.modalService })}}>Wybierz usługę</ModalHeader>
+                        <ModalBody>
+                            <form onSubmit={this.handleSubmitService}>
+                                <p>Typ usługi</p>
+                                <select onChange={this.handleSelect}>
+                                    {this.state.serviceTypes.map(type => (
+                                        <option value={type._links.self.href}>{type.type} {type.price} zł</option>
+                                    ))}
+                                </select>
+                                <p>Opis</p>
+                                <input type="text" onChange={event => {this.setState({serviceDescription: event.target.value})}}></input>
+                                <p style={{margin: '10px'}}>
+                                    <input style={{backgroundColor: '#f99cab', color: 'white'}} type="submit" value={'Dodaj'}/>
+                                </p>
+                            </form>
+                        </ModalBody>
+                    </Modal>
                     <h2>Goście:</h2>
                     <table style={{width: '80%'}}>
                         <tr>

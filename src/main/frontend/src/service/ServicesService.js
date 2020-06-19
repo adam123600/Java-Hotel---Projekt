@@ -8,6 +8,15 @@ class ServicesService {
             return response.data;
         })
     }
+    getAllServiceTypes() {
+        return axios.get("/api/serviceTypes").then(response => {
+            return response.data._embedded.serviceTypes;
+        })
+    }
+
+    addServie(service) {
+        axios.post("/api/services/", service, {headers: authHeader()});
+    }
 }
 
 export default new ServicesService();
