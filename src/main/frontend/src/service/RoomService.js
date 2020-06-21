@@ -73,6 +73,11 @@ class RoomService {
             .catch(err => console.log(err));
     }
 
+    patchRoomById(id, newValues) {      // można podać niepełny obiekt zawierający pola pokoju
+        return axios.patch("/api/rooms/" + id, newValues, {headers: authHeader()})
+            .catch(err => console.log(err));
+    }
+
 }
 
 export default new RoomService();

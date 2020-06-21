@@ -15,7 +15,7 @@ export default class Room extends React.Component {
             modal: false,
             modalService: false,
             serviceTypes: [],
-            chosenServiceTypeHref: "",
+            chosenServiceType: "",
             serviceDescription: "",
             services: [],
         }
@@ -65,7 +65,7 @@ export default class Room extends React.Component {
 
         ServicesService.getAllServiceTypes().then(res => {
             this.setState({serviceTypes: res});
-            this.setState({chosenServiceTypeHref: res[0]._links.self.href});
+            this.setState({chosenServiceType: res[0]});
             console.log(res);
         });
     }
@@ -74,16 +74,24 @@ export default class Room extends React.Component {
         event.preventDefault();
         var service = {
             description: this.state.serviceDescription,
-            serviceType: this.state.chosenServiceTypeHref,
+            serviceType: this.state.chosenServiceType._links.self.href,
             room: "http://localhost:8080/api/rooms/" + this.state.room.id
         }
         console.log(service);
         ServicesService.addServie(service);
         this.setState({modalService: !this.state.modalService});
+        var newbalance = {
+            balance: this.state.room.balance + this.state.chosenServiceType.price
+        };
+        console.log(newbalance);
+
+        RoomService.patchRoomById(this.state.room.id, newbalance);
+        window.location.reload(true);
     }
 
     handleSelect(event) {
-        this.setState({chosenServiceTypeHref: event.target.value});
+        var type = JSON.parse(event.target.value);
+        this.setState({chosenServiceType: type});
     }
 
     handleCheckout(guest) {
@@ -93,6 +101,7 @@ export default class Room extends React.Component {
         room.currentNumberOfGuests -= 1;
         GuestService.deleteGuestById(guest.id);
         RoomService.updateRoomById(room.id, room);
+        window.location.reload(true);
     }
 
     render() {
@@ -122,7 +131,7 @@ export default class Room extends React.Component {
                                 <p>Typ usługi</p>
                                 <select onChange={this.handleSelect}>
                                     {this.state.serviceTypes.map(type => (
-                                        <option value={type._links.self.href}>{type.type} {type.price} zł</option>
+                                        <option value={JSON.stringify(type)}>{type.type} {type.price} zł</option>
                                     ))}
                                 </select>
                                 <p>Opis</p>

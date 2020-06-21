@@ -3,6 +3,17 @@ import authHeader from "./AuthHeader";
 
 
 class ServicesService {
+    getAllServices() {
+        return axios.get("/api/services/").then(response => {
+            return response.data._embedded.services;
+        });
+    }
+    getAllServices1() {
+        return axios.get("/api/services1/").then(response => {
+            return response.data;
+        })
+    }
+
     getServiceType(service){
         return axios.get("/api/services/" + service.id + "/serviceType", {headers: authHeader() }).then(response => {
             return response.data;

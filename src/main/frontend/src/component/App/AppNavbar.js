@@ -144,6 +144,18 @@ class AppNavbar extends Component {
                                         </DropdownMenu>
                                     </UncontrolledDropdown>
                                 )}
+                                {currentUser && (
+                                    <UncontrolledDropdown nav inNavbar>
+                                        <DropdownToggle nav caret>
+                                            Usługi
+                                        </DropdownToggle>
+                                        <DropdownMenu right>
+                                            <DropdownItem onClick={event => window.location.href = '/services'}>
+                                                Wszystkie
+                                            </DropdownItem>
+                                        </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                )}
                             </Nav>
 
                             {currentUser ? (
