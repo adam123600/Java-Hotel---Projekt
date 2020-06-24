@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NotificationService from "../../service/NotificationService";
 import AuthService from "../../service/AuthService";
 import WorkerService from "../../service/WorkerService";
+import SmallAmountItem from "./SmallAmountItem";
 
 import { toast } from 'react-toastify';
 import "./Notification.css";
@@ -17,6 +18,7 @@ export default class Notification extends Component{
         this.state = {
             showRepairmanNotifications: false,
             showAdminNotifications: false,
+            showKitchenManagerNotifications: false,
             allNotifications: [],
             currentNotifications: [],
             allWorkers: [],
@@ -36,7 +38,8 @@ export default class Notification extends Component{
           this.setState({
             currentUser: AuthService.getCurrentUser(),
             showAdminNotifications: user.roles.includes("ROLE_MANAGER"),
-            showRepairmanNotifications: user.roles.includes("ROLE_REPAIRMAN")
+            showRepairmanNotifications: user.roles.includes("ROLE_REPAIRMAN"),
+            showKitchenManagerNotifications: user.roles.includes("ROLE_KITCHEN_MANAGER")
           });
           if(user.roles.includes("ROLE_REPAIRMAN")){
             typeOfNot = FLAW_ID;
@@ -106,29 +109,65 @@ export default class Notification extends Component{
         
           return(
             <div className="notification-container">
+              <SmallAmountItem/>
               {this.state.showAdminNotifications &&
                <div>
                   <h2>Prośby o zresetowanie hasła:</h2>
                   <div>
-                    {this.state.currentNotifications.map(notification => 
-                      <div style={{padding: '25px'}}>
-
-                        <div key={notification.id} style={{display: 'inline-flex'}}>
-                          {notification.username}
-                        </div>
-                        <div style={{display: 'inline-flex'}}>
-                          {this.state.allWorkers.map( worker => {
-                            if(notification.username == worker.username) {
-                              return <ChangePassword href={worker._links.self.href} currentWorker={worker}/>
-                            }
-                          })}
-                        <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">
-                          Usuń powiadomienie
-                        </button>
-                        </div>
-                      </div>
-                    )}                                            
-                  </div>                 
+                    {this.state.allNotifications.map(notification => {
+                      if(notification.notType.type == "RES_USER_PASSWORD") {
+                        return (
+                          <div style={{padding: '25px'}}>
+                            <div key={notification.id} style={{display: 'inline-flex'}}>
+                              {notification.username}
+                            </div>
+                            {'  '}
+                            <div style={{display: 'inline-flex'}}>
+                              {this.state.allWorkers.map( worker => {
+                                if(notification.username == worker.username) {
+                                  return <ChangePassword href={worker._links.self.href} currentWorker={worker}/>
+                                }
+                              })}
+                            {'  '}
+                            <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">
+                              Usuń powiadomienie
+                            </button>
+                            </div>
+                          </div>)
+                      }})}                                            
+                  </div>     
+                  <h2>Przedmioty:</h2>     
+                  <div>
+                    {this.state.allNotifications.map(notification => {
+                      if(notification.notType.type == "SMALL_AMOUNT_ITEM") {
+                        return (
+                          <div style={{padding: '25px'}}>
+                            <div key={notification.id} style={{display: 'inline-flex'}}>
+                              {notification.description}
+                            </div>
+                            {'  '}
+                            <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">
+                              Usuń powiadomienie
+                            </button>
+                          </div>)
+                      }})}                                            
+                  </div>         
+                  <h2>Usterki:</h2>     
+                  <div>
+                    {this.state.allNotifications.map(notification => {
+                      if(notification.notType.type == "FLAW") {
+                        return (
+                          <div style={{padding: '25px'}}>
+                            <div key={notification.id} style={{display: 'inline-flex'}}>
+                              {notification.description}
+                            </div>
+                            {'  '}
+                            <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">
+                              Usuń powiadomienie
+                            </button>
+                          </div>)
+                      }})}                                            
+                  </div>   
                 </div>
               }
               {this.state.showRepairmanNotifications &&
@@ -150,7 +189,28 @@ export default class Notification extends Component{
                     )}
                   </div>
                 </div>
-              }           
+              }    
+
+               {this.state.showKitchenManagerNotifications &&
+               <div> 
+                  <h2>Przedmioty:</h2>     
+                  <div>
+                    {this.state.allNotifications.map(notification => {
+                      if(notification.notType.type == "SMALL_AMOUNT_ITEM") {
+                        return (
+                          <div style={{padding: '25px'}}>
+                            <div key={notification.id} style={{display: 'inline-flex'}}>
+                              {notification.description}
+                            </div>
+                            {'  '}
+                            <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">
+                              Usuń powiadomienie
+                            </button>
+                          </div>)
+                      }})}                                            
+                  </div>         
+                </div>
+              }       
             </div>
           )
       }
