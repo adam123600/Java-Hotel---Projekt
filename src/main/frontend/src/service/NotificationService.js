@@ -10,13 +10,16 @@ class NotificationService{
         return axios.get(API_URL, {headers: authHeader()});
     }
 
-
     forgotUserPassword(username){
         return axios.post(API_URL + "forgotpassword",{
             username
         });
     }
 
+    smallAmountItem(item) {
+        return axios.post(API_URL + "smallAmountItem", item);
+    }
+    
     getNotificationById(id){
         return axios.get(API_URL + id, {headers: authHeader()});
     }

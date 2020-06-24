@@ -1,5 +1,6 @@
 package com.hotel.controller;
 
+import com.hotel.model.Item;
 import com.hotel.model.Notification;
 import com.hotel.payload.request.LoginRequest;
 import com.hotel.payload.response.MessageResponse;
@@ -37,6 +38,21 @@ public class NotificationController {
         notificationRepository.save(notification);
 
         return ResponseEntity.ok(new MessageResponse("Request was sent successfully"));
+    }
+
+    @PostMapping("/smallAmountItem")
+    public ResponseEntity smallAmountItemNotification(@RequestBody Item item) {
+        Notification newNotification = new Notification("Manager", notificationTypeRepository.findByType("SMALL_AMOUNT_ITEM"));
+        newNotification.setDescription("Mała ilość przedmiotu: "+item.getItem_name());
+
+        //check if similar notifications exist
+        for( Notification notification: notificationRepository.findAll() ) {
+            if(newNotification.getDescription().equals(notification.getDescription())) {
+                return ResponseEntity.ok(new MessageResponse("Already in the database"));
+            }
+        }
+        notificationRepository.saveAndFlush(newNotification);
+        return ResponseEntity.ok(new MessageResponse("Nowe powiadomienie, mała ilość przedmiotu: "+item.getItem_name()+"!"));
     }
 
     @GetMapping

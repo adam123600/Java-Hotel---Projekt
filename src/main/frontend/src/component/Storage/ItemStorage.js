@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import ItemService from "../../service/ItemService";
 import Item from "./Item";
 import AuthService from "../../service/AuthService";
+import SmallAmountItem from "../Notifications/SmallAmountItem"
 import AddItem from "./AddItem";
 import Modal from "reactstrap/es/Modal";
 import "./Storage.css"
@@ -103,7 +104,7 @@ export default class ItemStorage extends Component {
 
     render() {
         const { content, filterItemsModal, categoryNameRegex, itemNameRegex } = this.state;
-
+        
 
         if (this.state.content.length === 0) {
             return (
@@ -144,6 +145,7 @@ export default class ItemStorage extends Component {
 
         return (
             <div>
+                <SmallAmountItem/>
                 <div style={{display: 'inline-flex'}}>
                     {this.state.showAddItemButton &&
                     <button className="additem-button" style={{margin: '10px'}} onClick={this.changeModalState}>Dodaj przedmiot</button>

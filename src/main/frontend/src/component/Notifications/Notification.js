@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NotificationService from "../../service/NotificationService";
 import AuthService from "../../service/AuthService";
-import WorkerService from "../../service/WorkerService"
+import WorkerService from "../../service/WorkerService";
 
 import { toast } from 'react-toastify';
 import "./Notification.css";
@@ -103,7 +103,7 @@ export default class Notification extends Component{
     }
 
       render(){
-
+        
           return(
             <div className="notification-container">
               {this.state.showAdminNotifications &&
@@ -127,7 +127,7 @@ export default class Notification extends Component{
                         </button>
                         </div>
                       </div>
-                    )}
+                    )}                                            
                   </div>                 
                 </div>
               }
