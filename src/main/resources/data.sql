@@ -74,6 +74,7 @@ INSERT IGNORE INTO notificationtypes (id, type) VALUES (1, 'RES_USER_PASSWORD');
 INSERT IGNORE INTO notificationtypes (id, type) VALUES (2, 'FOOD_ENDED');
 INSERT IGNORE INTO notificationtypes (id, type) VALUES (3, 'ROOM_CLEANING');
 INSERT IGNORE INTO notificationtypes (id, type) VALUES (4, 'FLAW');
+INSERT IGNORE INTO notificationtypes (id, type) VALUES (5, 'SMALL_AMOUNT_ITEM');
 INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (1,"Recepcjonista",3, 1, "Rozlane cus tam");
 INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (2,"Recepcjonista",3, 1, "Kolejny brud");
 INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (3,"Recepcjonista",3, 1, "I jeszcze troszke");

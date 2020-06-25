@@ -10,6 +10,7 @@ class NotificationService{
         return axios.get(API_URL, {headers: authHeader()});
     }
 
+
     getAllNotificationTypes(){
         return axios.get(API_URLtype, {headers: authHeader()})
         .then( response => {
@@ -33,6 +34,10 @@ class NotificationService{
         });
     }
 
+    smallAmountItem(item) {
+        return axios.post(API_URL + "smallAmountItem", item);
+    }
+    
     getNotificationById(id){
         return axios.get(API_URL + id, {headers: authHeader()});
     }
