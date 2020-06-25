@@ -49,6 +49,10 @@ class NotificationService{
     deleteNotificationById(id) {
         return axios.delete(API_URL + id, {headers: authHeader()});
     }
+
+    deleteNotificationByLink(link) {
+        return axios.delete(link, {headers: authHeader()});
+    }
 }
 
 export default new NotificationService()
