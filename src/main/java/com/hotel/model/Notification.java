@@ -44,6 +44,12 @@ public class Notification {
         this.notType = notType;
     }
 
+    public Notification(@NotBlank @Size(max = 20) String username, NotificationType notType, Room room){
+        this.username = username;
+        this.notType = notType;
+        this.room = room;
+    }
+
     public Notification(Long id, @NotBlank @Size(max = 20) String username, NotificationType notType, Room room) {
         this.id = id;
         this.username = username;

@@ -4,6 +4,7 @@ import SearchRoomService from "../../SearchEngine/SearchRoomService"
 import {Button, Modal, ModalBody, ModalHeader} from "reactstrap";
 import GuestService from "../../service/GuestService";
 import ServicesService from "../../service/ServicesService";
+import AddNotification from "../Notifications/AddNotification";
 
 export default class Room extends React.Component {
     constructor(props) {
@@ -14,6 +15,7 @@ export default class Room extends React.Component {
             guests: [],
             modal: false,
             modalService: false,
+            modalNotifications: false,
             serviceTypes: [],
             chosenServiceType: "",
             serviceDescription: "",
@@ -106,8 +108,6 @@ export default class Room extends React.Component {
 
     render() {
         return(
-
-
             <div>
                 <h1>{this.state.room.roomName}</h1>
                 <img src={this.state.img}/>
@@ -170,10 +170,16 @@ export default class Room extends React.Component {
                                 </td>
                             </tr> ))}
                     </table>
+                    <Button style={{backgroundColor: '#f99cab', margin: '50px 30px', width: '170px'}} onClick={() => this.setState({ modalNotifications: !this.state.modalNotifications})}>Dodaj uwagę/usterkę</Button>
+                    <Modal isOpen={this.state.modalNotifications} toggle={() => this.setState({modalNotifications: !this.state.modalNotifications})}>
+                        <ModalHeader toggle={() => this.setState({ modalNotifications: !this.state.modalNotifications})}>Dodaj usterkę lub uwagę</ModalHeader>
+                        <ModalBody>
+                            <AddNotification room={this.state.room}/>
+                        </ModalBody>
+                    </Modal>
                     <Button style={{backgroundColor: '#f99cab', margin: '50px 30px', width: '150px'}}>Dodaj gościa</Button>
                     <Button style={{backgroundColor: '#f99cab', margin: '50px 30px', width: '150px'}}>Rachunek pokoju</Button>
                 </div>}
-
             </div>
         )
     }

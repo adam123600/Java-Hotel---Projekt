@@ -7,6 +7,7 @@ import com.hotel.repository.NotificationRepository;
 import com.hotel.repository.NotificationTypeRepository;
 import com.hotel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,12 @@ public class NotificationController {
 
     @Autowired
     NotificationTypeRepository notificationTypeRepository;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Notification addNewNotification(@RequestBody final Notification notification ){
+        return notificationRepository.saveAndFlush(notification);
+    }
 
     @PostMapping("/forgotpassword")
     public ResponseEntity<?> forgotUserPassword(@RequestBody LoginRequest loginRequest) {
