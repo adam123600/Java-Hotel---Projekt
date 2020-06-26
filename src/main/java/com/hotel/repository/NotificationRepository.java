@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@CrossOrigin
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
 
     List<Notification> findByNotType_id(Long NotificationType_id);
