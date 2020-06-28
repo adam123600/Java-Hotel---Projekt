@@ -127,8 +127,6 @@ export default class ItemStorage extends Component {
          */
 
         const listOfCategories = [];
-        console.log("tutaj");
-        console.log(this.state.content);
         this.state.content.map(item => {
                 if (!listOfCategories.includes(item.category[0].category)) {
                     listOfCategories.push(item.category[0].category);

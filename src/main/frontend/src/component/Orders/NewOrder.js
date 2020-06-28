@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import OrderService from "../../service/OrderService"
-import ItemService from "../../service/ItemService";
 
 export default class NewOrder extends Component{
     constructor(props) {
