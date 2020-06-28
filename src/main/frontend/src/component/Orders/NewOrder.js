@@ -25,13 +25,14 @@ export default class NewOrder extends Component{
     handleSubmit = (event) => {
         event.preventDefault();
         const newOrder = {
-            item_counter: this.state.quantity,
+            itemCounter: this.state.quantity,
             price: this.state.price,
-            item: this.state.item_id,
-            order_date: this.state.date
+            item: {
+                item_id: this.state.item_id
+            },
+            orderDate: this.state.date
         };
-        console.log(newOrder);
-        OrderService.createNewOrder(newOrder); //TODO: NIE DZIAŁA DODAWANIE (JAKI JSON WYSŁAĆ??)
+        OrderService.createNewOrder(newOrder);
         this.props.onCancel();
     }
 
