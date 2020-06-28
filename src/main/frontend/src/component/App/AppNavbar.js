@@ -165,7 +165,8 @@ class AppNavbar extends Component {
                                             {currentUser.username}
                                         </DropdownToggle>
                                         <DropdownMenu right>
-                                            <DropdownItem>
+                                            <DropdownItem onClick={event => window.location.href = '/personalschedule'}>
+                                            
                                                 Mój Harmonogram
                                             </DropdownItem>
                                             <DropdownItem>
