@@ -20,15 +20,6 @@ export default class Cleaning extends React.Component {
         this.onCleanedButton = this.onCleanedButton.bind(this);
         }
 
-    /*onCleanedButton = (name) => {
-        console.log(name);
-        let newRoom = this.state.allRooms.filter( room => {
-             room.roomName.match(name);
-        })
-        newRoom.cleaned = true;
-        RoomService.updateRoomById( newRoom.id, newRoom );
-    }*/
-
     onCleanedButton = (name, status) => {
         console.log(name);
         console.log(status);
@@ -49,6 +40,12 @@ export default class Cleaning extends React.Component {
         RoomService.updateRoomById( newRoom[0].id, newRoom[0] );
     }
 
+    componentDidUpdate() {
+        RoomService.getAllRooms1().then(res => {
+            this.setState({allRooms: res});
+        });
+    }
+
     render() {
         this.roomNames = this.state.allRooms.map(room => room.roomName );
         this.roomClean = this.state.allRooms.map( room => {
@@ -58,14 +55,14 @@ export default class Cleaning extends React.Component {
                 return "NIE";
             }
         });
-        console.log(this.roomClean);
+        //console.log(this.roomClean);
         return(
             <div>
                 <h1>Stan czystości pokojów</h1>
                 <Row>
                     <Col><h2>Numer pokoju</h2></Col>
-                    <Col><h2>Czy był sprzątany?</h2></Col>
-                    <Col><h2>Oznacz postrzątanie</h2></Col>
+                    <Col><h2>Czy jest sprzątany?</h2></Col>
+                    <Col><h2>Zmień status posprzątania</h2></Col>
                 </Row>
                 {this.roomNames.map( (name, indexName) => {
                     let status;
