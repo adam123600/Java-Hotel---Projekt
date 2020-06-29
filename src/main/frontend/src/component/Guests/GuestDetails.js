@@ -72,6 +72,10 @@ export default class GuestDetails extends React.Component{
                         fontFamily: 'Oswald'
                     }}>Nazwisko: {this.state.guestInfo.lastName}</ListGroupItem>
                     <ListGroupItem className="py-0" style={{
+                        fontSize: '24px',
+                        fontFamily: 'Oswald'
+                    }}>Pokój: {this.state.roomOfGuest.roomName}</ListGroupItem>
+                    <ListGroupItem className="py-0" style={{
                         fontSize: '20px',
                         fontFamily: 'Oswald',
                     }}>Data zameldowania: {this.state.guestInfo.accommodationDate}</ListGroupItem>
