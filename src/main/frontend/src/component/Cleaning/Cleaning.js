@@ -20,12 +20,33 @@ export default class Cleaning extends React.Component {
         this.onCleanedButton = this.onCleanedButton.bind(this);
         }
 
-    onCleanedButton = (name) => {
+    /*onCleanedButton = (name) => {
+        console.log(name);
         let newRoom = this.state.allRooms.filter( room => {
              room.roomName.match(name);
         })
         newRoom.cleaned = true;
         RoomService.updateRoomById( newRoom.id, newRoom );
+    }*/
+
+    onCleanedButton = (name, status) => {
+        console.log(name);
+        console.log(status);
+
+        let newRoom = this.state.allRooms.filter( room => {
+            if( room.roomName === name ) { return room; }
+        })
+
+        console.log(newRoom[0]);
+        if( status === "NIE" ){
+            newRoom[0].cleaned = true;
+        }
+        if( status === "TAK" ){
+            newRoom[0].cleaned = false;
+        }
+        console.log(newRoom[0]);
+
+        RoomService.updateRoomById( newRoom[0].id, newRoom[0] );
     }
 
     render() {
@@ -47,19 +68,23 @@ export default class Cleaning extends React.Component {
                     <Col><h2>Oznacz postrzątanie</h2></Col>
                 </Row>
                 {this.roomNames.map( (name, indexName) => {
+                    let status;
                     return (
                         <div>
                             <Row>
                                 <Col><h3 key={indexName}>{name}</h3></Col>
                                 {this.roomClean.map( (clean, indexClean) => {
                                     if( indexName === indexClean ) {
+                                        status = clean;
                                         return (
                                             <div>
                                                 <Col><h3 key={indexClean}>{clean}</h3></Col>
                                             </div>
                                         )}
                                 })}
-                                <Col><button className="btn btn-primary" style={{margin: '10px'}} onClick={this.onCleanedButton(name)}>Wysprzątane</button></Col>
+                                <Col>
+                                    <button className="btn btn-primary" style={{margin: '10px'}}  value={name} onClick={this.onCleanedButton.bind(this, name, status)}>Zmień status</button>
+                                </Col>
                             </Row>
                         </div>
                     )

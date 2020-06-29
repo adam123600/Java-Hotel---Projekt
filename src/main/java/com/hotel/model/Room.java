@@ -144,4 +144,9 @@ public class Room {
     public void setServices(List<Service> services) {
         this.services = services;
     }
+
+    public boolean getCleaned() { return cleaned; }
+
+    public void setCleaned(boolean cleaned) { this.cleaned = cleaned; }
+
 }
