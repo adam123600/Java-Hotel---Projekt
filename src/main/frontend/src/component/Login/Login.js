@@ -134,14 +134,14 @@ export default class Login extends Component {
               { isUser ? (
                 <div>
                   <div className="welcome-text">
-                    <span>Welcome Back</span>
+                    <span>Witaj z powrotem!</span>
                   </div>
                   <a href="/home" className="login-text">{isUser.username}</a>
                 </div>
               ) : (
                 <div>
                   <div className="welcome-text">
-                    <span>Welcome</span>
+                    <span>Witaj na pokładzie!</span>
                   </div>
 
                   <Form className = "login-form"
@@ -151,7 +151,7 @@ export default class Login extends Component {
                   }}>
 
                     <div className="my-form-group">
-                      <label htmlFor="username" className="my-label">USERNAME</label>
+                      <label htmlFor="username" className="my-label">NAZWA UŻYTKOWNIKA</label>
                       <Input
                         type="text"
                         className="input-control"
@@ -163,7 +163,7 @@ export default class Login extends Component {
                     </div>
 
                     <div className="my-form-group">
-                      <label htmlFor="password" className="my-label">PASSWORD</label>
+                      <label htmlFor="password" className="my-label">HASŁO</label>
                       <Input
                         type="password"
                         className="input-control"
@@ -175,7 +175,7 @@ export default class Login extends Component {
                     </div>
 
 
-                    <div className="checkbox">
+                    {/* <div className="checkbox">
                         <label htmlFor="checkid">
                           <input
                           id = "checkid"
@@ -186,7 +186,7 @@ export default class Login extends Component {
                           <span className="remember-me-text"> Remember me</span>
                         </label>
                     </div>
-                
+                 */}
 
 
                 <div className="my-form-group">
@@ -194,11 +194,11 @@ export default class Login extends Component {
                     className="my-button login-button"
                     disabled={this.state.loading}
                   >
-                    <span>LOGIN</span>
+                    <span>ZALOGUJ SIĘ</span>
                   </button>
                 </div>
 
-                        <Link to = "/forgotpassword" className = "forgot-password-link">Forgot password?</Link>
+                        <Link to = "/forgotpassword" className = "forgot-password-link">Zapomniałeś hasła?</Link>
     
                 <CheckButton
                   style={{ display: "none" }}
