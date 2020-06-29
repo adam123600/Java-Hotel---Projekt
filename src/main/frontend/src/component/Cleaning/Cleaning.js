@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import RoomService from "../../service/RoomService"
 import Room from "../Rooms/Room"
 import {TabContent, TabPane, Nav, NavItem, NavLink, Row, Col} from 'reactstrap';
+import AuthService from "../../service/AuthService";
 
 export default class Cleaning extends React.Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export default class Cleaning extends React.Component {
             allRooms: [],
             roomNames: [],
             roomClean: [],
+            disableStatusButton: true,
         }
 
         RoomService.getAllRooms1().then(res => {
@@ -18,7 +20,26 @@ export default class Cleaning extends React.Component {
         });
 
         this.onCleanedButton = this.onCleanedButton.bind(this);
+
+
+    }
+
+    componentDidMount() {
+        const user = AuthService.getCurrentUser();
+        console.log(user);
+        if (user.roles.includes("ROLE_MANAGER") ||  user.roles.includes("ROLE_CLEANER")) {
+            console.log(user.roles);
+            this.setState({
+                disableStatusButton: false
+            });
         }
+    }
+
+    componentDidUpdate() {
+        RoomService.getAllRooms1().then(res => {
+            this.setState({allRooms: res});
+        });
+    }
 
     onCleanedButton = (name, status) => {
         console.log(name);
@@ -38,12 +59,6 @@ export default class Cleaning extends React.Component {
         console.log(newRoom[0]);
 
         RoomService.updateRoomById( newRoom[0].id, newRoom[0] );
-    }
-
-    componentDidUpdate() {
-        RoomService.getAllRooms1().then(res => {
-            this.setState({allRooms: res});
-        });
     }
 
     render() {
@@ -80,7 +95,12 @@ export default class Cleaning extends React.Component {
                                         )}
                                 })}
                                 <Col>
-                                    <button className="btn btn-primary" style={{margin: '10px'}}  value={name} onClick={this.onCleanedButton.bind(this, name, status)}>Zmień status</button>
+                                    <button className="btn btn-primary"
+                                     style={{margin: '10px'}}
+                                     disabled={this.state.disableStatusButton}
+                                     onClick={this.onCleanedButton.bind(this, name, status)}>
+                                     Zmień status
+                                     </button>
                                 </Col>
                             </Row>
                         </div>
