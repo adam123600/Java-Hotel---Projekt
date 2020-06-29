@@ -17,8 +17,11 @@ const styles = StyleSheet.create({
         padding: 30,
         fontSize: 12,
     },
-    textInfo: {
+    textInfoColumn: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         paddingLeft: 35,
+        paddingRight: 35,
         marginBottom: 50,
     },
     paymentInfo: {
@@ -74,11 +77,19 @@ export default class PdfReceipt extends React.Component{
             <Document>
                 <Page style={styles.page}>
                     <Image source={hotelImg}/>
-                    <View style={styles.textInfo}>
-                        <Text>The Grand Budapest Hotel</Text>
-                        <Text>Kraków</Text>
-                        <Text>Ulica 1</Text>
-                        <Text>31-062</Text>
+                    <View style={styles.textInfoColumn}>
+                        <View>
+                            <Text>The Grand Budapest Hotel</Text>
+                            <Text>Kraków</Text>
+                            <Text>Ulica 1</Text>
+                            <Text>31-062</Text>
+                        </View>
+                        <View>
+                            <Text>Imię: {this.state.guest.firstName}</Text>
+                            <Text>Nazwisko: {this.state.guest.lastName}</Text>
+                            <Text>Data zameldowania: {this.state.guest.accommodationDate}</Text>
+                            <Text>Data wymeldowania: {this.state.guest.checkOutDate}</Text>
+                        </View>
                     </View>
                     <View style={styles.paymentInfo}>
                         <Text>{"Pokój numer " + this.state.room.roomName}</Text>
