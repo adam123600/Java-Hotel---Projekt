@@ -136,7 +136,7 @@ export default class Login extends Component {
                   <div className="welcome-text">
                     <span>Witaj z powrotem!</span>
                   </div>
-                  <a href="/home" className="login-text">{isUser.username}</a>
+                  <a href="/profile" className="welcome-back-text welcome-back-link">{isUser.username}</a>
                 </div>
               ) : (
                 <div>
@@ -173,20 +173,6 @@ export default class Login extends Component {
                         validations={[required]}
                       />
                     </div>
-
-
-                    {/* <div className="checkbox">
-                        <label htmlFor="checkid">
-                          <input
-                          id = "checkid"
-                          type = "checkbox"
-                          value = {this.state.isChecked}
-                          onChange={this.onCheckboxChange}
-                          />
-                          <span className="remember-me-text"> Remember me</span>
-                        </label>
-                    </div>
-                 */}
 
 
                 <div className="my-form-group">
