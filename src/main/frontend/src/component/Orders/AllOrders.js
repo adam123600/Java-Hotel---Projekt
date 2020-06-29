@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import OrderService from "../../service/OrderService"
 import Order from "./Order";
+import { Button, Collapse, CardBody, Card, Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
 
 
 export default class AllOrders extends Component{
@@ -8,8 +9,26 @@ export default class AllOrders extends Component{
         super(props);
 
         this.state = {
-            orders : []
+            orders : [],
+            orderNameRegex: "",
+            filterOrdersModal: false
         }
+
+        this.resetFilters = this.resetFilters.bind(this);
+        this.handleSearchByOrderName = this.handleSearchByOrderName.bind(this);
+    }
+
+    resetFilters() {
+        this.setState({
+            orderNameRegex: ""
+        })
+    }
+
+    
+    handleSearchByOrderName(event) {
+        this.setState({ 
+            orderNameRegex: event.target.value
+        });
     }
 
     componentDidMount() {
@@ -39,13 +58,41 @@ export default class AllOrders extends Component{
     };
 
     render() {
+        const { filterOrdersModal, orderNameRegex } = this.state;
         return (
             <div>
+                <button className="additem-button" style={{margin: '10px'}} onClick={() => { this.setState( {filterOrdersModal: !filterOrdersModal })}}>
+                Filtruj przedmiot
+                </button>
+                <Collapse isOpen={filterOrdersModal}>
+                        <Card>
+                            <CardBody>
+                                <div>
+                                    <InputGroup>
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>Przedmiot</InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input type="text" name="itemName" value={orderNameRegex} onChange={this.handleSearchByOrderName}/>
+                                    </InputGroup>          
+                                    <br/>
+                                    
+                                    <Button color="danger" onClick={this.resetFilters}>
+                                        Resetuj filtry
+                                    </Button>
+                                </div>
+                            </CardBody>
+                        </Card>
+                </Collapse>
                 <div className="allreservations-header">
                     ZAMÓWIENIA
                 </div>
                 <div className="allreservations-container">
-                    {this.state.orders.map(order => {
+                    {this.state.orders.filter( orderName => {
+                        if( ["*","?","+"].includes(orderNameRegex) ) {
+                            return null;
+                        }
+                        return orderName.item.item_name.match(orderNameRegex);
+                    }).map(order => {
                         return <Order key={order.order_id} afterDelete={this.deleteOrderFromList} {...order}/>
                     })}
                 </div>
@@ -53,3 +100,4 @@ export default class AllOrders extends Component{
         );
     }
 }
+
