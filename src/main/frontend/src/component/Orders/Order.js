@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import OrderService from "../../service/OrderService"
 import Modal from "reactstrap/es/Modal";
 import ItemService from "../../service/ItemService";
+import AuthService from "../../service/AuthService";
 
 
 export default class Order extends Component{
@@ -14,7 +15,8 @@ export default class Order extends Component{
             orderDate: 0,
             itemCounter: 0,
             item: [],
-            modal: false
+            modal: false,
+            showPdfButton: false
         }
     }
 
@@ -24,10 +26,18 @@ export default class Order extends Component{
             price: this.props.price,
             orderDate: this.props.orderDate,
             itemCounter: this.props.itemCounter,
-            item: this.props.item
+            item: this.props.item,
+            showPdfButton: this.checkPermissionToPdfButton(),
         });
     }
 
+    checkPermissionToPdfButton(){
+        const user = AuthService.getCurrentUser();
+        if(user){
+            return user.roles.includes("ROLE_MANAGER");
+        }
+        return false
+    }
     onButtonClick = () => {
         this.setState({
             modal: !this.state.modal
@@ -69,6 +79,7 @@ export default class Order extends Component{
                         <button className="additem-button storage-confirmation-button" onClick={this.onButtonClick}>Zamykam</button>
                     </div>
                 </Modal>
+                {this.state.showPdfButton && <button className="my-button login-button" style={{width: '222px'}}>Generuj pdf</button>}
             </div>
         );
     }
