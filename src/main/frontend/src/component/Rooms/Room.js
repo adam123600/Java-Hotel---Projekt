@@ -4,6 +4,9 @@ import SearchRoomService from "../../SearchEngine/SearchRoomService"
 import {Button, Modal, ModalBody, ModalHeader} from "reactstrap";
 import GuestService from "../../service/GuestService";
 import ServicesService from "../../service/ServicesService";
+import AddNotification from "../Notifications/AddNotification";
+import SearchNotificationService from "../../SearchEngine/SearchNotificationService";
+import NotificationService from "../../service/NotificationService";
 
 export default class Room extends React.Component {
     constructor(props) {
@@ -14,10 +17,12 @@ export default class Room extends React.Component {
             guests: [],
             modal: false,
             modalService: false,
+            modalNotifications: false,
             serviceTypes: [],
             chosenServiceType: "",
             serviceDescription: "",
             services: [],
+            notifications: [],
         }
 
         this.handleCheckout = this.handleCheckout.bind(this);
@@ -49,6 +54,7 @@ export default class Room extends React.Component {
         // jeśli strona została otwarta przez kliknięcie w minuaturę pokoju, to {room} został przekazany z miniaturki do tego komponentu
         else {
             var room = this.props.location.state.room;
+            roomName = room.roomName;
             this.setState({
                 room: room,
             });
@@ -68,6 +74,12 @@ export default class Room extends React.Component {
             this.setState({chosenServiceType: res[0]});
             console.log(res);
         });
+
+        SearchNotificationService.findByRoomName(roomName).then(res => {
+            this.setState({notifications: res});
+            console.log("nots");
+            console.log(res);
+        })
     }
 
     handleSubmitService(event) {
@@ -104,10 +116,14 @@ export default class Room extends React.Component {
         window.location.reload(true);
     }
 
+    handleDeleteNotification(notification) {
+        console.log(notification._links.self.href);
+        NotificationService.deleteNotificationByLink(notification._links.self.href);
+        window.location.reload(true);
+    }
+
     render() {
         return(
-
-
             <div>
                 <h1>{this.state.room.roomName}</h1>
                 <img src={this.state.img}/>
@@ -120,6 +136,27 @@ export default class Room extends React.Component {
                             <p>{service.description}</p>
                             )
                         )}
+                    </div>
+                    <div>
+                        <h4>Usterki i uwagi:</h4>
+                        <table style={{width: '60%', marginLeft: 'auto', marginRight: 'auto'}}>
+                            <tr>
+                                <th>Opis</th>
+                                <th>Pokój</th>
+                                <th></th>
+                            </tr>
+                        {this.state.notifications.map(notification => (
+                            <tr>
+                                <td>{notification.description}</td>
+                                <td>
+                                    <Button style={{backgroundColor: '#f99cab'}} onClick={() => this.handleDeleteNotification(notification)}>
+                                        Usuń
+                                    </Button>
+                                </td>
+                            </tr>
+                            )
+                        )}
+                        </table>
                     </div>
                     <Button style={{backgroundColor: '#f99cab', margin: '5px 0px 30px'}} onClick={() => { this.setState( {modalService: !this.state.modalService})}}>
                         Dodaj usługę
@@ -170,10 +207,16 @@ export default class Room extends React.Component {
                                 </td>
                             </tr> ))}
                     </table>
+                    <Button style={{backgroundColor: '#f99cab', margin: '50px 30px', width: '170px'}} onClick={() => this.setState({ modalNotifications: !this.state.modalNotifications})}>Dodaj uwagę/usterkę</Button>
+                    <Modal isOpen={this.state.modalNotifications} toggle={() => this.setState({modalNotifications: !this.state.modalNotifications})}>
+                        <ModalHeader toggle={() => this.setState({ modalNotifications: !this.state.modalNotifications})}>Dodaj usterkę lub uwagę</ModalHeader>
+                        <ModalBody>
+                            <AddNotification room={this.state.room}/>
+                        </ModalBody>
+                    </Modal>
                     <Button style={{backgroundColor: '#f99cab', margin: '50px 30px', width: '150px'}}>Dodaj gościa</Button>
                     <Button style={{backgroundColor: '#f99cab', margin: '50px 30px', width: '150px'}}>Rachunek pokoju</Button>
                 </div>}
-
             </div>
         )
     }

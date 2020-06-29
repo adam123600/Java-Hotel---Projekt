@@ -2,12 +2,30 @@ import axios from "axios";
 import authHeader from './AuthHeader';
 
 const API_URL = "/api/notifications/";
-
+const API_URLtype = "/api/notificationTypes/";
 
 class NotificationService{
 
     getAllNotifications() {
         return axios.get(API_URL, {headers: authHeader()});
+    }
+
+
+    getAllNotificationTypes(){
+        return axios.get(API_URLtype, {headers: authHeader()})
+        .then( response => {
+            return response.data._embedded.notificationTypes;
+        })
+        .catch(err => 
+            console.log(err)
+        );
+    }
+
+    createNewNotification(notification){
+        return axios.post(API_URL, notification, {headers: authHeader()})
+        .catch( err => 
+            console.log(err)
+        )
     }
 
     forgotUserPassword(username){
@@ -30,6 +48,10 @@ class NotificationService{
 
     deleteNotificationById(id) {
         return axios.delete(API_URL + id, {headers: authHeader()});
+    }
+
+    deleteNotificationByLink(link) {
+        return axios.delete(link, {headers: authHeader()});
     }
 }
 

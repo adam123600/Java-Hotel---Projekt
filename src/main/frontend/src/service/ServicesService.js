@@ -28,6 +28,10 @@ class ServicesService {
     addServie(service) {
         axios.post("/api/services/", service, {headers: authHeader()});
     }
+
+    deleteService(service) {
+        axios.delete("/api/services/" + service.id);
+    }
 }
 
 export default new ServicesService();

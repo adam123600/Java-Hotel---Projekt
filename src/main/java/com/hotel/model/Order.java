@@ -29,7 +29,6 @@ public class Order {
     @Column(nullable = false)
     private Integer itemCounter;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;

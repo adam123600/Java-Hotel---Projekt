@@ -46,7 +46,7 @@ class WorkerService {
             case 'ROLE_RECEPTIONIST':       return 'Recepcjonista';
             case 'ROLE_ACCOUNTANT':         return 'Księgowy';
             case 'ROLE_CLEANER':            return 'Sprzątacz';
-            case 'ROLE_BUTLER':             return'Lokaj';
+            case 'ROLE_BUTLER':             return 'Lokaj';
             case 'ROLE_MANAGER':            return 'Menadżer';
             case 'ROLE_KITCHEN_MANAGER':    return 'Menadżer kuchni';
             case 'ROLE_REPAIRMAN':          return 'Konserwator';

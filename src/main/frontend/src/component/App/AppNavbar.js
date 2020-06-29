@@ -83,7 +83,7 @@ class AppNavbar extends Component {
                                             <DropdownItem onClick={event => window.location.href = '/itemstorage'}>
                                                 Stany magazynowe
                                             </DropdownItem>
-                                            <DropdownItem>
+                                            <DropdownItem onClick={event => window.location.href = '/orders'}>
                                                 Zamówienia
                                             </DropdownItem>
                                         </DropdownMenu>

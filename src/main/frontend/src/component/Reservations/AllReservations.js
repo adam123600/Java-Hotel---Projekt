@@ -76,7 +76,6 @@ export default class AllReservations extends Component{
                 this.setState({
                     allReservations: response.data
                 });
-                console.log(response.data);
             }).catch(error => {
             const resMessage =
                 (error.response && error.response.data && error.response.data.message) ||

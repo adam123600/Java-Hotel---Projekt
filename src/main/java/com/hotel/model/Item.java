@@ -1,5 +1,6 @@
 package com.hotel.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -38,6 +39,7 @@ public class Item {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<ItemCategory> category = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
     private List<Order> order;
 

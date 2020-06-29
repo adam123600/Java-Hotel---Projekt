@@ -13,5 +13,6 @@ public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
         config.exposeIdsFor(Guest.class);
         config.exposeIdsFor(Service.class);
         config.exposeIdsFor(Order.class);
+        config.exposeIdsFor(NotificationType.class);
     }
 }
