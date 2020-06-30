@@ -25,7 +25,7 @@ class ServicesService {
         })
     }
 
-    addServie(service) {
+    addService(service) {
         axios.post("/api/services/", service, {headers: authHeader()});
     }
 

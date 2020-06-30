@@ -135,7 +135,7 @@ class AppNavbar extends Component {
                                             <DropdownItem onClick={event => window.location.href = '/rooms'}  >
                                                 Wszystkie Pokoje
                                             </DropdownItem>
-                                            <DropdownItem>
+                                            <DropdownItem onClick={event => window.location.href = '/servicesbyrole'}>
                                                 Zgłoszenia
                                             </DropdownItem>
                                             <DropdownItem>

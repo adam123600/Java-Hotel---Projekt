@@ -90,7 +90,7 @@ export default class Room extends React.Component {
             room: "http://localhost:8080/api/rooms/" + this.state.room.id
         }
         console.log(service);
-        ServicesService.addServie(service);
+        ServicesService.addService(service);
         this.setState({modalService: !this.state.modalService});
         var newbalance = {
             balance: this.state.room.balance + this.state.chosenServiceType.price
