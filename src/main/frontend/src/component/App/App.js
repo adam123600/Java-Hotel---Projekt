@@ -56,6 +56,7 @@ class App extends Component {
           <Route path="/checkreservation" component={CheckReservation}/>
           <Route path="/services" component={AllServices}/>
           <Route path="/orders" component={AllOrders}/>
+          <Route path="/cleaning" component={Cleaning}/>
         </Switch>
         </div>
 
