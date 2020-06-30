@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import GuestService from "../../service/GuestService";
 import Guest from "./Guest";
+import {Spinner} from "reactstrap";
 
 export default class AllGuests extends React.Component{
     constructor(props) {
@@ -9,6 +10,7 @@ export default class AllGuests extends React.Component{
             this.state = {
                 allGuests: [],
                 unmount: false,
+                loading: true
             }
         }
 
@@ -17,7 +19,8 @@ export default class AllGuests extends React.Component{
         GuestService.getAllGuests().then(
         response => {
             this.setState( {
-                allGuests: response
+                allGuests: response, 
+                loading: false
             });
         }
     )
@@ -35,10 +38,9 @@ export default class AllGuests extends React.Component{
 
 
     render() {
-        console.log(this.state.allGuests)
         return(
-            
             <div className="main-container">
+                {this.state.loading && <Spinner animation="border"/>}
                 <div className="content">
                     <h2>Goście:</h2>
                     <ul>

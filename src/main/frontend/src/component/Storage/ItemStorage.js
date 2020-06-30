@@ -7,7 +7,7 @@ import SmallAmountItem from "../Notifications/SmallAmountItem"
 import AddItem from "./AddItem";
 import Modal from "reactstrap/es/Modal";
 import "./Storage.css"
-import { Button, Collapse, CardBody, Card, Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
+import { Button, Collapse, CardBody, Card, Input, InputGroup, InputGroupAddon, InputGroupText, Spinner} from 'reactstrap';
 
 export default class ItemStorage extends Component {
     constructor(props) {
@@ -19,7 +19,8 @@ export default class ItemStorage extends Component {
             showAddItemButton: false,
             filterItemsModal: false,
             categoryNameRegex: "",
-            itemNameRegex: ""
+            itemNameRegex: "", 
+            loading: true
         }
 
         this.handleSearchByItemName = this.handleSearchByItemName.bind(this);
@@ -50,7 +51,8 @@ export default class ItemStorage extends Component {
         ItemService.getAllItems().then(
             response => {
                 this.setState({
-                    content: response.data
+                    content: response.data, 
+                    loading: false
                 });
             },
             error => {
@@ -145,6 +147,7 @@ export default class ItemStorage extends Component {
 
         return (
             <div>
+                {this.state.loading && <Spinner animation="border"/>}
                 <SmallAmountItem/>
                 <div style={{display: 'inline-flex'}}>
                     {this.state.showAddItemButton &&
