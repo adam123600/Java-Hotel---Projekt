@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import OrderService from "../../service/OrderService"
 import Order from "./Order";
-import { Button, Collapse, CardBody, Card, Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
+import { Button, Collapse, CardBody, Card, Input, InputGroup, InputGroupAddon, InputGroupText, Spinner} from 'reactstrap';
 
 
 export default class AllOrders extends Component{
@@ -11,7 +11,8 @@ export default class AllOrders extends Component{
         this.state = {
             orders : [],
             orderNameRegex: "",
-            filterOrdersModal: false
+            filterOrdersModal: false,
+            loading: true
         }
 
         this.resetFilters = this.resetFilters.bind(this);
@@ -35,7 +36,8 @@ export default class AllOrders extends Component{
         OrderService.getAllOrders().then(
             response => {
                 this.setState({
-                    orders: response.data
+                    orders: response.data,
+                    loading: false
                 });
             },
             error => {
@@ -61,6 +63,7 @@ export default class AllOrders extends Component{
         const { filterOrdersModal, orderNameRegex } = this.state;
         return (
             <div>
+                {this.state.loading && <Spinner animation="border"/>}
                 <button className="additem-button" style={{margin: '10px'}} onClick={() => { this.setState( {filterOrdersModal: !filterOrdersModal })}}>
                 Filtruj przedmiot
                 </button>

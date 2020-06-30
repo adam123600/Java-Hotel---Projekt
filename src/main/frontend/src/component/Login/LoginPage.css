@@ -94,10 +94,23 @@
   .welcome-text {
     display: flex;
     align-self: center;
+    align-items: center;
     font-family: 'Source Sans Pro', sans-serif;
     margin-bottom: 40px;
     font-weight: 600;
     font-size: 60px;
+    color: #f99cab;
+  }
+
+  .welcome-back-text{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    margin-bottom: 40px;
+    font-weight: 600;
+    font-size: 30px;
     color: #f99cab;
   }
 
@@ -165,7 +178,28 @@
     display: block;
     font-size: 18px;
   }
+
   
+
+    /* A link that has not been visited */
+    .welcome-back-link:link {
+      color: #f99cab;
+    }
+    /* A link that has been visited */
+    .welcome-back-link:visited {
+      color:  #f99cab;
+    }
+    /* A link that is hovered on */
+    .welcome-back-link:hover {
+      color: #f99cab;
+    }
+    
+    /* A link that is selected */
+    .welcome-back-link:active {
+      color:  #f99cab;
+    }
+  
+
   /* A link that has not been visited */
   .forgot-password-link:link {
     color: #929292;

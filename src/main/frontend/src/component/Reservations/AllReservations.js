@@ -6,7 +6,7 @@ import {toast} from "react-toastify";
 import Reservation from "./Reservation";
 import DatePicker from "react-date-picker";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Collapse, CardBody, Card, 
-        Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
+        Input, InputGroup, InputGroupAddon, InputGroupText, Spinner} from 'reactstrap';
 
 
 export default class AllReservations extends Component{
@@ -24,6 +24,7 @@ export default class AllReservations extends Component{
             minDate: new Date(),
             checkInDate:  new Date(),
             checkOutDate: new Date(),
+            loading: true
         }
 
         this.handleSearchByFirstName = this.handleSearchByFirstName.bind(this);
@@ -74,7 +75,8 @@ export default class AllReservations extends Component{
         ReservationService.getAllReservations().then(
             response => {
                 this.setState({
-                    allReservations: response.data
+                    allReservations: response.data,
+                    loading: false
                 });
             }).catch(error => {
             const resMessage =
@@ -125,6 +127,7 @@ export default class AllReservations extends Component{
 
         return (
             <div>
+                {this.state.loading && <Spinner animation="border"/>}
                 <div className="allreservations-header">
                     LISTA REZERWACJI
                 </div> 

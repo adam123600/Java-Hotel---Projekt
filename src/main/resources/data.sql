@@ -94,3 +94,8 @@ INSERT IGNORE INTO orders (order_id, item_counter, order_date, price, item_id) V
 INSERT IGNORE INTO orders (order_id, item_counter, order_date, price, item_id) VALUES (2,6, DATE '2020-06-19', NULL, 2);
 INSERT IGNORE INTO orders (order_id, item_counter, order_date, price, item_id) VALUES (3,8, DATE '2020-06-20', 24.21, 3);
 INSERT IGNORE INTO orders (order_id, item_counter, order_date, price, item_id) VALUES (4,66, DATE '2020-06-21', NULL, 4);
+
+INSERT IGNORE INTO hours (id, amount_hours, date, user_id) VALUES (1, 20, '1998:10:10', 3);
+INSERT IGNORE INTO payments (id, date, payment, user_id) VALUES (1, '2020:10:05', 3500, 3);
+INSERT IGNORE INTO rate_payment (id, rate_per_hour, user_id) VALUES (1, 50, 3);
+INSERT IGNORE INTO rate_payment (id, rate_per_hour, user_id) VALUES (2, 21, 4);
