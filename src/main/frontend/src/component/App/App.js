@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import AppNavbar from './AppNavbar';
+import Home from '../Home';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import Login from "../Login/Login";
@@ -36,6 +37,7 @@ class App extends Component {
         <AppNavbar/>
         <div className="new-container">
         <Switch>
+          <Route exact path="/home" component={Home} />
           <Route exact path={["/", "/login"]} component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/profile" component={Profile} />
@@ -53,6 +55,7 @@ class App extends Component {
           <Route path="/addreservation" component={AddReservation}/>
           <Route path="/checkreservation" component={CheckReservation}/>
           <Route path="/services" component={AllServices}/>
+          <Route path="/orders" component={AllOrders}/>
           <Route path="/cleaning" component={Cleaning}/>
         </Switch>
         </div>
