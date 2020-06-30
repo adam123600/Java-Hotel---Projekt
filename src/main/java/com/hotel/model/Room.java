@@ -34,6 +34,8 @@ public class Room {
     @Column(nullable = false)
     private Float balance;
 
+    @Column(nullable = false)
+    private Boolean cleaned;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "standard_id", nullable = false)
@@ -58,7 +60,7 @@ public class Room {
     public Room() {
     }
 
-    public Room(Long id, @Size(max = 10) @NotBlank String roomName, Integer currentNumberOfGuests, Float balance, RoomStandard roomStandard, List<Reservation> reservations, List<Guest> guests, List<Notification> notifications, List<Service> services) {
+    public Room(Long id, @Size(max = 10) @NotBlank String roomName, Integer currentNumberOfGuests, Float balance, RoomStandard roomStandard, List<Reservation> reservations, List<Guest> guests, List<Notification> notifications, List<Service> services, Boolean cleaned) {
         this.id = id;
         this.roomName = roomName;
         this.currentNumberOfGuests = currentNumberOfGuests;
@@ -68,6 +70,7 @@ public class Room {
         this.guests = guests;
         this.notifications = notifications;
         this.services = services;
+        this.cleaned = cleaned;
     }
 
     public Long getId() {
@@ -141,4 +144,9 @@ public class Room {
     public void setServices(List<Service> services) {
         this.services = services;
     }
+
+    public boolean getCleaned() { return cleaned; }
+
+    public void setCleaned(boolean cleaned) { this.cleaned = cleaned; }
+
 }

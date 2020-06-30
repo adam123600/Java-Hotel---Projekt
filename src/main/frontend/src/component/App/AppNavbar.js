@@ -138,7 +138,7 @@ class AppNavbar extends Component {
                                             <DropdownItem>
                                                 Zgłoszenia
                                             </DropdownItem>
-                                            <DropdownItem>
+                                            <DropdownItem onClick={event => window.location.href = '/cleaning'} >
                                                 Sprzątanie
                                             </DropdownItem>
                                         </DropdownMenu>
