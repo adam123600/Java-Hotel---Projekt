@@ -3,10 +3,11 @@ import RoomService from "../../service/RoomService"
 import RoomThumbnail from "./RoomThumbnail"
 import SearchRoom from "../Search/SearchRoom";
 import SearchRoomByGuest from "../Search/SearchRoomByGuest";
-import SearchGuestService from "../../SearchEngine/SearchGuestService";
 import DatePicker from "react-date-picker";
 import GuestService from "../../service/GuestService";
 import ReservationService from "../../service/ReservationService";
+import {Spinner} from 'reactstrap';
+
 
 export default class AllRooms extends React.Component {
     constructor(props) {
@@ -23,6 +24,7 @@ export default class AllRooms extends React.Component {
             minDate: new Date(),
             checkInDate:  new Date(),
             checkOutDate: new Date(),
+            loading: true
         }
         RoomService.getAllRooms1().then(res => {
             this.setState({allRooms: res});
@@ -37,7 +39,10 @@ export default class AllRooms extends React.Component {
         });
 
         ReservationService.getAllReservations().then(res => {
-            this.setState({allReservations: res.data});
+            this.setState({
+                allReservations: res.data,
+                loading: false
+            });
         });
 
         // żeby przy porównywaniu dat były takie same godziny (+2h bo strefa czasowa)
@@ -119,6 +124,7 @@ export default class AllRooms extends React.Component {
 
         return(
             <div className="main-container">
+                {this.state.loading && <Spinner animation="border"/>}
                 <div className="content">
                     <SearchRoom/>
                     <SearchRoomByGuest/>

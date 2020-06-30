@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import "./Notification.css";
 import ChangePassword from "../Workers/ChangePassword";
 import { Button } from "@material-ui/core";
+import { Spinner } from "reactstrap";
 
 const FLAW_ID = 4;
 
@@ -23,7 +24,8 @@ export default class Notification extends Component{
             currentNotifications: [],
             allWorkers: [],
             type : 1,
-            message: ""
+            message: "",
+            loading: true
         }
 
         WorkerService.getAllWorkers().then(result => {
@@ -75,7 +77,8 @@ export default class Notification extends Component{
             NotificationService.getAllNotificationsByNotificationTypeId(typeOfNot).then(
               response => {
                   this.setState({
-                    currentNotifications: response.data
+                    currentNotifications: response.data,
+                    loading: false
                   });
 
               }).catch(error => {
@@ -109,6 +112,7 @@ export default class Notification extends Component{
         
           return(
             <div className="notification-container">
+              {this.state.loading && <Spinner animation="border" variant="primary" />}
               <SmallAmountItem/>
               {this.state.showAdminNotifications &&
                <div>
