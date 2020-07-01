@@ -1,17 +1,11 @@
 import React, {Component} from "react";
-import ReservationService from "../../service/ReservationService";
-import RoomService from "../../service/RoomService";
 import DatePicker from "react-date-picker";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../Login/LoginPage.css';
 import './Reservation.css';
 import CheckReservation from './CheckReservation';
 import Modal from "reactstrap/es/Modal";
-import { Button } from 'reactstrap';
+
 
 
 
@@ -33,53 +27,18 @@ export default class AddReservation extends Component {
      
         this.onChangeCheckInDate = this.onChangeCheckInDate.bind(this);
         this.onChangeCheckOutDate = this.onChangeCheckOutDate.bind(this);
-        // this.onClickButtonCheckFreeRooms = this.onClickButtonCheckFreeRooms.bind(this);
+
 
         this.state = {
-            // message: "",
-            // success : false,
-            // toastId : null,
             checkInDate:  new Date(),
             checkOutDate: new Date(),
-            // loading: true,
-            // filterByDateModal: false,
-            // filterByDate: false,
-            // allRooms: [],
-            // reservedRooms: [],
-            // allReservations: [],
             modal: false,
-            // roomId: 0
         }
 
         this.state.checkInDate.setHours(2,0,0,0);
         this.state.checkOutDate.setHours(2,0,0,0);
     }
 
-    // componentDidMount() {
-    //     RoomService.getAllRooms3().then(
-    //         response => {
-    //             this.setState({
-    //                 allRooms: response.data
-    //             });
-    //         }).catch(error => {
-    //         const resMessage =
-    //             (error.response && error.response.data && error.response.data.message) ||
-    //             error.message ||
-    //             error.toString();
-    //     });
-
-    //     ReservationService.getAllReservations().then(
-    //         response => {
-    //             this.setState({
-    //                 allReservations: response.data
-    //             });
-    //         }).catch(error => {
-    //         const resMessage =
-    //             (error.response && error.response.data && error.response.data.message) ||
-    //             error.message ||
-    //             error.toString();
-    //     });
-    // }
 
     onButtonClick = () => {
         this.setState({
@@ -103,77 +62,7 @@ export default class AddReservation extends Component {
         });
     };
 
-    // onClickButtonCheckFreeRooms(e){
-    //     e.preventDefault();
-    //     this.setState({
-    //         filterByDate: true,
-    //         loading: false
-    //     });
-    // }
-
-    // handleRoomSelection(e) {
-    //     e.preventDefault();
-
-    //     this.setState({
-    //         roomId: e.target.value
-    //     });
-    // }
-
-    // handleConfirmReservation(e) {
-    //     e.preventDefault();
-
-    //     this.setState({
-    //         message: "",
-    //         success: false
-    //     });
-
-    //     this.form.validateAll();
-
-    //     const newReservation = {
-    //         firstName: this.state.firstName,
-    //         lastName: this.state.lastName,
-    //         startDate: this.state.checkInDate,
-    //         endDate: this.state.checkOutDate,
-    //         room: {id: this.state.roomId}
-    //     };
-
-
-    //     if (this.checkBtn.context._errors.length === 0) {
-    //         ReservationService.createNewReservation(newReservation).then(
-    //             response => {
-    //                 this.setState({
-    //                     success: true
-    //                 });
-
-    //                 if (!toast.isActive(this.state.toastId)) {
-    //                     this.setState({
-    //                         toastId: toast.success('Reservation added successfully', {
-    //                             position: toast.POSITION.BOTTOM_CENTER,
-    //                             autoClose: false
-    //                         })
-    //                     })
-    //                 }
-    //             }).catch(error => {
-    //             const resMessage = (error.response && error.response.data && error.response.data.message) ||
-    //                 error.message ||
-    //                 error.toString();
-
-    //             this.setState({
-    //                 success: false,
-    //                 message: resMessage
-    //             });
-
-    //             if (!toast.isActive(this.state.toastId)) {
-    //                 this.setState({
-    //                     toastId: toast.error('ERROR!', {
-    //                         position: toast.POSITION.BOTTOM_CENTER,
-    //                         autoClose: false
-    //                     })
-    //                 })
-    //             }
-    //         });
-    //     }
-    // }
+    
 
     render(){
         

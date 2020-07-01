@@ -65,7 +65,7 @@ class AppNavbar extends Component {
             return (
                 <div>
                     <Navbar className="AppNavbar" dark expand="md">
-                        <NavbarBrand href="/home">Strona Główna</NavbarBrand>
+                        {/* <NavbarBrand href="/home">Strona Główna</NavbarBrand> */}
                         <NavbarToggler onClick={this.toggle}/>
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="mr-auto" navbar>
@@ -138,7 +138,7 @@ class AppNavbar extends Component {
                                             <DropdownItem>
                                                 Zgłoszenia
                                             </DropdownItem>
-                                            <DropdownItem>
+                                            <DropdownItem onClick={event => window.location.href = '/cleaning'} >
                                                 Sprzątanie
                                             </DropdownItem>
                                         </DropdownMenu>

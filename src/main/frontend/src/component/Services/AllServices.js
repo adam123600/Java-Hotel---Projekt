@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ServicesService from "../../service/ServicesService";
 import AuthService from "../../service/AuthService";
-import {Button} from "reactstrap";
+import {Button, Spinner} from "reactstrap";
 
 export default class AllServices extends React.Component {
     constructor(props) {
@@ -11,13 +11,17 @@ export default class AllServices extends React.Component {
             allServices: [],
             serviceTypes: [],
             currentRole: curUser.roles[0],
+            loading: true
         };
 
         ServicesService.getAllServices1().then(res => {
             this.setState({allServices: res});
         });
         ServicesService.getAllServiceTypes().then(res => {
-            this.setState({serviceTypes: res});
+            this.setState({
+                serviceTypes: res,
+                loading: false
+            });
         });
 
         this.handleDeleteService = this.handleDeleteService.bind(this);
@@ -53,6 +57,7 @@ export default class AllServices extends React.Component {
 
         return(
             <div>
+                {this.state.loading && <Spinner animation="border"/>}
                 {allServices.map(s => (
                     <div>
                         <h3>{s.type}</h3>
