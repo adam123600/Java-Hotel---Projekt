@@ -14,7 +14,7 @@ export default class AllGuests extends React.Component{
 
     componentDidMount() {
         
-        GuestService.getAllGuests().then(
+        GuestService.getAllGuests1().then(
         response => {
             this.setState( {
                 allGuests: response

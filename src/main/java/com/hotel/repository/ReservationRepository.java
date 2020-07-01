@@ -12,4 +12,5 @@ import java.util.Optional;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     Optional<List<Reservation>> findByRoom_idOrderByEndDateDesc(Long id);
+    Optional<List<Reservation>> findByRoom_id(Long id);
 }

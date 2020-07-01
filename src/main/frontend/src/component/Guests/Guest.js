@@ -9,19 +9,11 @@ export  default class Guest extends React.Component {
         super(props);
 
         this.state = {
-            guestID: this.getGuestId(),
+            guestID: this.props.guest.id,
             renderDetails: false
         }
 
         this.renderDetails = this.renderDetails.bind(this);
-        this.getGuestId = this.getGuestId.bind(this);
-        
-    }
-
-    getGuestId = () => {
-        let href = this.props.guest._links.self.href;
-        let reGEXP = /[0-9]*$/;
-        return href.match(reGEXP).toString();
     }
 
     renderDetails() {

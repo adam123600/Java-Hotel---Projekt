@@ -14,7 +14,7 @@ class GuestService {
     }
 
     getAllGuests1() {
-        return axios.get("api/guests1").then(response => {
+        return axios.get("/api/guests1").then(response => {
             return response.data;
         })
     }
@@ -41,6 +41,10 @@ class GuestService {
 
     deleteGuestById(id){
         return axios.delete(API_URL + id, {headers: authHeader()}).catch( err => { console.log(err) });
+    }
+
+    updateGuestById(id, guest) {
+        axios.patch("/api/guests/" + id, guest, {headers: authHeader()});
     }
 }
 

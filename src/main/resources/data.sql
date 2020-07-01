@@ -54,15 +54,15 @@ INSERT IGNORE INTO rooms (id, balance, current_number_of_guests, room_name, stan
 
 INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (1, DATE '2020-05-23', 'Jan', 'Kowalski', DATE '2020-05-15', 1);
 INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (2, DATE '2020-05-30', 'Darek', 'Dariusz', DATE '2020-05-24', 1);
-INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (3, DATE '2020-05-21', 'Tedeo', 'Tadeo', DATE '2020-05-18', 2);
-INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (4, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 2);
+INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (3, DATE '2020-07-20', 'Tedeo', 'Tadeo', DATE '2020-07-15', 2);
+INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (4, DATE '2020-07-30', 'Jaro', 'Jarosław', DATE '2020-07-25', 2);
 INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (5, DATE '2020-05-19', 'Jaro', 'Jarosław', DATE '2020-05-05', 3);
 INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (6, DATE '2020-06-15', 'Jacek', 'Kurski', DATE '2020-06-10', 5);
 INSERT IGNORE INTO reservations(id, end_date, first_name, last_name, start_date, room_id) VALUES (7, DATE '2020-06-25', 'Wiesław', 'Wojnar', DATE '2020-06-20', 5);
 
 INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (1, DATE '2020-05-15', DATE '2020-05-23', 'Jan', 'Kowalski', 1 );
-INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (2, DATE '2020-05-24', DATE '2020-05-29', 'Darek', 'Dariusz', 2 );
-INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (3, DATE '2020-05-18', DATE '2020-06-30', 'Tedeo', 'Tadeo', 2 );
+INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (2, DATE '2020-06-24', DATE '2020-07-10', 'Darek', 'Dariusz', 2 );
+INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (3, DATE '2020-06-18', DATE '2020-06-07', 'Tedeo', 'Tadeo', 2 );
 INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (4, DATE '2020-05-18', DATE '2020-06-28', 'Marek', 'Mariusz', 4 );
 INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (5, DATE '2020-05-18', DATE '2020-05-21', 'Darek', 'Dariusz', 7 );
 INSERT IGNORE INTO guests(id, accommodation_date, check_out_date, first_name, last_name, room_id) VALUES (6, DATE '2020-05-18', DATE '2020-05-21', 'Jurek', 'Jarek', 9 );

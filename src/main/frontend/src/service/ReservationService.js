@@ -10,6 +10,13 @@ class ReservationService {
         return axios.get(API_URL, {headers: authHeader()});
         
     }
+
+    getAllReservations1() {
+        return axios.get("/api/reservations1").then(response => {
+            return response.data;
+        })
+    }
+
     createNewReservation(newReservation){
         return axios.post(API_URL, newReservation, {headers: authHeader()}).catch(err=>{console.log(err)});
     }
