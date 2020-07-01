@@ -3,11 +3,12 @@ import ServicesService from "../../service/ServicesService";
 import AuthService from "../../service/AuthService";
 import {Button} from "reactstrap";
 import NotificationService from "../../service/NotificationService";
+import {Row, Col, Table} from 'reactstrap';
 
 const FLAW = 4;
 const ROOM_CLEANING = 3;
 
-export default class ServicesByRole extends React.Component {
+export default class ServicesByRole extends Component {
     constructor(props) {
         super(props);
         var curUser = AuthService.getCurrentUser()
@@ -16,8 +17,8 @@ export default class ServicesByRole extends React.Component {
             serviceTypes: [],
             currentRole: curUser.roles[0],
             allNotifications: [],
-            typeOfNot: 1,
-            showNotifications: false,
+            typeOfNot: 3,
+            showNotifications: true,
             showServices: false
         };
 
@@ -27,9 +28,9 @@ export default class ServicesByRole extends React.Component {
         ServicesService.getAllServiceTypes().then(res => {
             this.setState({serviceTypes: res});
         });
-        NotificationService.getAllNotifications().then( res => {
+        /*NotificationService.getAllNotifications().then( res => {
             this.setState({allNotifications: res})
-        })
+        })*/
 
         this.handleDeleteService = this.handleDeleteService.bind(this);
         this.handleDeleteNotification = this.handleDeleteNotification.bind(this);
@@ -49,26 +50,53 @@ export default class ServicesByRole extends React.Component {
 
     componentDidMount() {
 
-        if(this.state.currentRole === "ROLE_REPAIRMAN") {
+        if (this.state.currentRole === "ROLE_REPAIRMAN" || this.state.currentRole === "ROLE_MANAGER") {
             this.setState({
                 showNotifications: true,
                 typeOfNot: FLAW
             })
+            console.log("type of not")
+            console.log(this.state.typeOfNot)
+            console.log("show Notifications")
+            console.log(this.state.showNotifications)
+            NotificationService.getAllNotificationsByNotificationTypeId(this.state.typeOfNot).then(
+                response => {
+                    this.setState({
+                        allNotifications: response.data
+                    });
+                })
         }
 
-        if(this.state.currentRole === "ROLE_CLEANER") {
+
+        if(this.state.currentRole === "ROLE_CLEANER"  /*|| this.state.currentRole === "ROLE_MANAGER"*/) {
             this.setState({
                 showNotifications: true,
                 typeOfNot: ROOM_CLEANING
             })
+            NotificationService.getAllNotificationsByNotificationTypeId(this.state.typeOfNot).then(
+                response => {
+                    this.setState({
+                        allNotifications: response.data
+                    });
+                })
         }
-
-        NotificationService.getAllNotificationsByNotificationTypeId(this.state.typeOfNot).then(
-            response => {
-                this.setState({
-                    allNotifications: response.data
-                });
+/*
+        if (this.state.currentRole === "ROLE_MANAGER") {
+            this.setState({
+                showNotifications: true,
+                typeOfNot: FLAW
             })
+            console.log(this.state.typeOfNot)
+
+            NotificationService.getAllNotificationsByNotificationTypeId(this.state.typeOfNot).then(
+                response => {
+                    this.setState({
+                        allNotifications: response.data
+                    });
+                })
+        }*/
+
+
         /*allNotifications.push({
         type: serviceTypes[i].type,
        services: services,
@@ -91,13 +119,14 @@ export default class ServicesByRole extends React.Component {
             })
         }
 
-        if(this.state.currentRole === "ROLE_BUTLER") {
+        if(this.state.currentRole === "ROLE_BUTLER"  || this.state.currentRole === "ROLE_MANAGER") {
             showServices = true
             serviceTypes = serviceTypes.filter(type => {
                 return type.type === "KOLACJA" || type.type === "OBIAD" || type.type === "ALKOHOL";
             })
         }
-
+        console.log("pokaz services")
+        console.log(showServices)
         var allServices = [];
 
         for(var i = 0; i < serviceTypes.length; i++) {
@@ -114,18 +143,21 @@ export default class ServicesByRole extends React.Component {
 
         return(
             <div>
+                <Row>
+                    <Col sm="12">
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>Typ</th>
+                                <th>Opis</th>
+                                <th>Pokój</th>
+                                <th></th>
+                            </tr>
+                        </thead>
                 {showServices &&
-                    <div>
-                        {this.state.allServices.map(s => (
-                            <div>
-                                <table style={{width: '60%', marginLeft: 'auto', marginRight: 'auto'}}>
-                                    <tr>
-                                        <th>Typ</th>
-                                        <th>Opis</th>
-                                        <th>Pokój</th>
-                                        <th></th>
-                                    </tr>
-                                    {s.services.map(service => (
+                            allServices.map(s => (
+                                    s.services.map(service => (
+                                        <tbody>
                                         <tr>
                                             <td>{s.type}</td>
                                             <td>{service.description}</td>
@@ -137,37 +169,31 @@ export default class ServicesByRole extends React.Component {
                                                 </Button>
                                             </td>
                                         </tr>
-                                    ))}
-                                </table>
-                            </div>
-                        ))}
-                    </div>
+                                        </tbody>
+                                    ))
+                            ))
                 }
                 {this.state.showNotifications &&
-                    <div>
-                        {this.state.allNotifications.map(n => (
-                            <div>
-                                <table style={{width: '60%', marginLeft: 'auto', marginRight: 'auto'}}>
+                    this.state.allNotifications.map(n => (
+                               <tbody>
                                     <tr>
-                                        <th>Opis</th>
-                                        <th>Pokój</th>
-                                        <th></th>
-                                    </tr>
-                                    <tr>
+                                        <td>{n.notType.type}</td>
                                         <td>{n.description}</td>
                                         <td>{n.room.roomName}</td>
                                         <td>
-                                            <Button style={{backgroundColor: '#2b2b2b'}}
+                                            <Button style={{backgroundColor: '#f99cab'}}
                                                     onClick={() => this.handleDeleteNotification.bind(this, n.id)}>
                                                 Usuń
                                             </Button>
                                         </td>
                                     </tr>
-                                </table>
-                            </div>
-                        ))}
-                    </div>
+                               </tbody>
+                        ))
+
                 }
+                    </Table>
+                    </Col>
+                </Row>
             </div>
         )
     }
