@@ -78,19 +78,48 @@ export default class GuestDetails extends React.Component{
                     <ListGroupItem className="py-0" style={{
                         fontSize: '24px',
                         fontFamily: 'Oswald'
-                    }}>Imię</ListGroupItem>
-                    <ListGroupItem>{this.state.guestInfo.firstName}</ListGroupItem>
-                    <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Nazwisko</ListGroupItem>
-                    <ListGroupItem>{this.state.guestInfo.lastName}</ListGroupItem>
-                    <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Data zameldowania</ListGroupItem>
-                    <ListGroupItem>{this.state.guestInfo.accommodationDate}</ListGroupItem>
-                    <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Data wymeldowania</ListGroupItem>
-                    <ListGroupItem>{this.state.guestInfo.checkOutDate}</ListGroupItem>
-                    <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Pokój</ListGroupItem>
-                    <ListGroupItem>{this.state.roomOfGuest.roomName}</ListGroupItem>
-                    <Button onClick={() => this.setState({createPdf: !this.state.createPdf})} style={{backgroundColor: '#f99cab', border: 'none'}}>Rachunek</Button>
-                    <Button onClick={() => this.setState({modalExtendStay: !this.state.modalExtendStay})} style={{backgroundColor: '#f99cab', border: 'none', marginTop: '2px'}}>Przedłuż PObyt</Button>
-                    <Button onClick={() => this.setState({modal: !this.state.modal})} style={{backgroundColor: '#f99cab', border: 'none', marginTop: '2px'}}>Wymelduj</Button>
+                    }}>Imię: {this.state.guestInfo.firstName}</ListGroupItem>
+                    <ListGroupItem className="py-0" style={{
+                        fontSize: '24px',
+                        fontFamily: 'Oswald'
+                    }}>Nazwisko: {this.state.guestInfo.lastName}</ListGroupItem>
+                    <ListGroupItem className="py-0" style={{
+                        fontSize: '20px',
+                        fontFamily: 'Oswald',
+                    }}>Data zameldowania: {this.state.guestInfo.accommodationDate}</ListGroupItem>
+                    <ListGroupItem className="py-0" style={{
+                        fontSize: '20px',
+                        fontFamily: 'Oswald'
+                    }}>Data wymeldowania: {this.state.guestInfo.checkOutDate}</ListGroupItem>
+                    <ListGroupItem className="py-0" style={{
+                        fontSize: '20px',
+                        fontFamily: 'Oswald'
+                    }}>Pokój: {this.state.roomOfGuest.roomName}</ListGroupItem>
+
+                    <Button onClick={() => this.setState({createPdf: !this.state.createPdf})} style={{
+                        backgroundColor: '#f99cab',
+                        border: 'none',
+                        marginTop: '10px',
+                        fontFamily: 'Oswald',
+                        fontSize: '20px',
+                        borderRadius: '5px',
+                    }}>Rachunek</Button>
+                    <Button onClick={() => this.setState({modalExtendStay: !this.state.modalExtendStay})} style={{
+                        backgroundColor: '#f99cab',
+                        border: 'none',
+                        marginTop: '10px',
+                        fontFamily: 'Oswald',
+                        fontSize: '20px',
+                        borderRadius: '5px',
+                    }}>Przedłuż pobyt</Button>
+                    <Button onClick={() => this.setState({modal: !this.state.modal})} style={{
+                        backgroundColor: '#f99cab',
+                        border: 'none',
+                        marginTop: '10px',
+                        fontFamily: 'Oswald',
+                        fontSize: '20px',
+                        borderRadius: '5px',
+                    }}>Wymelduj</Button>
                     <Modal isOpen={this.state.modal}>
                         <ModalHeader toggle={() => {this.setState({modal: !this.state.modal})}}>Czy na pewno</ModalHeader>
                         <ModalBody>
@@ -111,10 +140,14 @@ export default class GuestDetails extends React.Component{
                         fileName = { "receipt_" + this.state.guestInfo.firstName + "_" + this.state.guestInfo.lastName + "_" + this.state.guestInfo.id}
                         style={{
                             textDecoration: "none",
-                            padding: "10px",
+                            padding: "5px",
                             color: "#ffffff",
                             backgroundColor: "#f99cab",
-                            border: 'none'
+                            border: 'none',
+                            borderRadius: '5px',
+                            fontFamily: 'Oswald',
+                            fontSize: '20px',
+                            marginTop: '10px',
                         }}
                         >
                         {({blob, url, loading, error}) => 
