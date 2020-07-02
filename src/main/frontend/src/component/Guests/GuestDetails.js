@@ -75,7 +75,10 @@ export default class GuestDetails extends React.Component{
     render() {
             return(
                 <ListGroup className="w-25" style={{ position: 'absolute', top: '25%', left: '40%', zIndex: '-1'}}>
-                    <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Imię</ListGroupItem>
+                    <ListGroupItem className="py-0" style={{
+                        fontSize: '24px',
+                        fontFamily: 'Oswald'
+                    }}>Imię</ListGroupItem>
                     <ListGroupItem>{this.state.guestInfo.firstName}</ListGroupItem>
                     <ListGroupItem className="py-0" style={{fontSize: '16px'}}>Nazwisko</ListGroupItem>
                     <ListGroupItem>{this.state.guestInfo.lastName}</ListGroupItem>
