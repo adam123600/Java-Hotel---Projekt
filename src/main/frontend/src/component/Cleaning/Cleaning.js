@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import RoomService from "../../service/RoomService"
 import Room from "../Rooms/Room"
-import {TabContent, TabPane, Nav, NavItem, NavLink, Row, Col} from 'reactstrap';
+import {TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Table} from 'reactstrap';
 import AuthService from "../../service/AuthService";
 import './Cleaning.css';
 
@@ -75,39 +75,45 @@ export default class Cleaning extends React.Component {
         return(
             <div>
                 <h1 className="main-header">Stan czystości pokojów</h1>
-                <table style={{width: '100%'}}>
-                <tr>
-                    <th><h2 className="subheader">Numer pokoju</h2></th>
-                    <th><h2 className="subheader">Czy jest posprzątany?</h2></th>
-                    <th><h2 className="subheader">Zmień status posprzątania</h2></th>
-                </tr>
-                {this.roomNames.map( (name, indexName) => {
-                    let status;
-                    return (
-                        <div>
-                            <tr>
-                                <td><h3 key={indexName}>{name}</h3></td>
-                                {this.roomClean.map( (clean, indexClean) => {
-                                    if( indexName === indexClean ) {
-                                        status = clean;
-                                        return (
-                                            <div>
-                                                <td><h3 key={indexClean}>{clean}</h3></td>
-                                            </div>
-                                        )}
+                <Row>
+                    <Col>
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th><h2 className="subheader">Numer pokoju</h2></th>
+                                    <th><h2 className="subheader">Czy jest posprzątany?</h2></th>
+                                    <th><h2 className="subheader">Zmień status posprzątania</h2></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.roomNames.map( (name, indexName) => {
+                                    let status;
+                                    return (
+                                        <tr>
+                                            <td><h3 key={indexName}>{name}</h3></td>
+                                            {this.roomClean.map( (clean, indexClean) => {
+                                                if( indexName === indexClean ) {
+                                                    status = clean;
+                                                    return (
+                                                        <td>
+                                                            <h3 key={indexClean}>{clean}</h3>
+                                                        </td>
+                                                    )}
+                                            })}
+                                            <td>
+                                                <button className="change-status-button"
+                                                 disabled={this.state.disableStatusButton}
+                                                 onClick={this.onCleanedButton.bind(this, name, status)}>
+                                                 Zmień status
+                                                 </button>
+                                            </td>
+                                        </tr>
+                                    )
                                 })}
-                                <td>
-                                    <button className="change-status-button"
-                                     disabled={this.state.disableStatusButton}
-                                     onClick={this.onCleanedButton.bind(this, name, status)}>
-                                     Zmień status
-                                     </button>
-                                </td>
-                            </tr>
-                        </div>
-                    )
-                })}
-             </table>
+                            </tbody>
+                        </Table>
+                    </Col>
+                </Row>
              </div>
         )
 
