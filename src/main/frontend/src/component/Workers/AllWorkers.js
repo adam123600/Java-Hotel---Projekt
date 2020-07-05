@@ -1,7 +1,7 @@
 import React, {useState, Component} from "react";
 import WorkerService from "../../service/WorkerService";
 import Worker from "./Worker";
-import {ListGroup, ListGroupItem} from 'reactstrap';
+import './Worker.css'
 import {TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Table} from 'reactstrap';
 
 export default class AllWorkers extends Component {
@@ -27,11 +27,9 @@ export default class AllWorkers extends Component {
     showWorkers = () => {
         return (
             <div>
+                <h1 className="main-header">Pracownicy</h1>
                 <Nav tabs>
                     {this.state.allRoles.map((role, index) => {
-                        {
-                            console.log("role: ", role, "index ", index)
-                        }
                         return (
                             <NavItem>
                                 <NavLink
@@ -39,7 +37,7 @@ export default class AllWorkers extends Component {
                                     onClick={() => {
                                         this.setState({activeTab: index})
                                     }}>
-                                    {WorkerService.roleNameToPolish(role.name)}
+                                    <h4>{WorkerService.roleNameToPolish(role.name)}</h4>
                                 </NavLink>
                             </NavItem>
                         )
@@ -55,9 +53,9 @@ export default class AllWorkers extends Component {
                                         <Table>
                                             <thead>
                                                 <tr>
-                                                    <th>Imię</th>
-                                                    <th>Nazwisko</th>
-                                                    <th>Dane</th>
+                                                    <th className="subheaderWorker">Imię</th>
+                                                    <th className="subheaderWorker">Nazwisko</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-
+import './Guest.css'
 import GuestService from "../../service/GuestService";
 import Guest from "./Guest";
-import {Spinner} from "reactstrap";
+import {Spinner, Table, Row, Col} from "reactstrap";
 
 export default class AllGuests extends React.Component{
     constructor(props) {
@@ -39,21 +39,26 @@ export default class AllGuests extends React.Component{
 
     render() {
         return(
-            <div className="main-container">
+            <div>
                 {this.state.loading && <Spinner animation="border"/>}
-                <div className="content">
-                    <h2>Goście:</h2>
-                    <ul>
-                        {
-                            this.state.allGuests.map(
-                                guest => (
-                                    <li key={guest.id}>
-                                        <Guest guest={guest} />
-                                    </li>
-                                )
-                            )
-                        }
-                    </ul>
+                <div>
+                    <h1 className="main-header">Goście:</h1>
+                            <Table striped>
+                                <thead>
+                                    <th><h2 className="subheader">Imię</h2></th>
+                                    <th><h2 className="subheader">Nazwisko</h2></th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                {
+                                    this.state.allGuests.map(
+                                        guest => (
+                                                <Guest guest={guest} />
+                                        )
+                                    )
+                                }
+                                </tbody>
+                            </Table>
                 </div>
             </div>
         )

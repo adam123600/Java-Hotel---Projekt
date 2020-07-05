@@ -5,6 +5,7 @@ import WorkerService from "../../service/WorkerService";
 import ChangePassword from "./ChangePassword";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table } from 'reactstrap';
 import { ListGroup, ListGroupItem } from 'reactstrap';
+import './Worker.css';
 
 export default class Worker extends React.Component {
     constructor(props) {
@@ -42,12 +43,12 @@ export default class Worker extends React.Component {
         return(
             <tr>
                 
-                    <td>{this.props.worker.firstname}</td>
-                    <td>{this.props.worker.lastname}</td>
+                    <td className="tableText">{this.props.worker.firstname}</td>
+                    <td className="tableText">{this.props.worker.lastname}</td>
                     <td>
-                        <Button style={{backgroundColor: '#f99cab'}} onClick={() => { this.setState( {modal: !this.state.modal })}}>
+                        <button className="button" onClick={() => { this.setState( {modal: !this.state.modal })}}>
                             Pokaż szczegółowe dane
-                        </Button>
+                        </button>
                         <Modal isOpen={modal} toggle={() => { this.setState( {modal: !this.state.modal })}}>
                             <ModalHeader toggle={() => { this.setState( {modal: !this.state.modal })}}>Dane</ModalHeader>
                             <ModalBody>
@@ -87,10 +88,10 @@ export default class Worker extends React.Component {
                     </td>
                     { isManager &&
                         <td>
-                            <Button style={{backgroundColor: '#f99cab'}} 
+                            <button className="button" 
                                     onClick={() => { WorkerService.deleteWorker(this.props.worker); window.location.reload(); } }>
                                         Usuń pracownika
-                            </Button>
+                            </button>
                         </td>
                     }
                
