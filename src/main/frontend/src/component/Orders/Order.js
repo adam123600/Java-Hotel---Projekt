@@ -82,8 +82,7 @@ export default class Order extends Component{
                         <button className="additem-button storage-confirmation-button" onClick={this.onButtonClick}>Zamykam</button>
                     </div>
                 </Modal>
-                {/*this.state.showPdfButton && <button className="my-button login-button" onClick={() => this.setState({createPdf: !this.state.createPdf})} style={{width: '222px'}}>Generuj pdf</button>*/}
-                {/*this.state.createPdf && */<PDFDownloadLink
+                {this.state.showPdfButton && <PDFDownloadLink
                     className="my-button login-button"
                     document={<PdfOrder order={this.props} item={this.state.item}/>}
                     fileName = { "order_" + this.state.item.item_name + "_" + this.state.id }
