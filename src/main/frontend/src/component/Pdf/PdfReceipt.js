@@ -103,7 +103,7 @@ export default class PdfReceipt extends React.Component{
                             </View>
                         ))
                     }
-                    <View style={styles.bottomLine}></View>
+                    <View style={styles.bottomLine}/>
                     <View style={styles.paymentInfo}>
                         <Text>Suma</Text>   
                         <Text style={styles.price}>{credit + " zł."}</Text>   
