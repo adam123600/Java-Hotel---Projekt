@@ -28,19 +28,86 @@ class AppNavbar extends Component {
 
         this.state = {
             isOpen: false,
-            currentUser: undefined
+            currentUser: undefined,
+            renderNotifications: false,
+            renderStorage: false,
+            renderWorkers: false,
+            renderReservations: false,
+            renderRooms: false,
+            renderServices: false,
         };
 
     }
 
     componentDidMount() {
         const user = AuthService.getCurrentUser();
-
+        console.log(user);
         if (user) {
             this.setState({
                 currentUser: AuthService.getCurrentUser(),
             });
+
+            if (user.roles.includes("ROLE_MANAGER")) {
+                this.setState({
+                    renderNotifications:    true,
+                    renderStorage:          true,
+                    renderWorkers:          true,
+                    renderReservations:     true,
+                    renderRooms:            true,
+                    renderServices:         true
+                });
+            }
+
+            if (user.roles.includes("ROLE_RECEPTIONIST")) {
+                this.setState({
+                    renderNotifications:    true,
+                    renderStorage:          true,
+                    renderReservations:     true,
+                    renderRooms:            true,
+                    renderServices:         true
+                });
+            }
+            if (user.roles.includes("ROLE_ACCOUNTANT")) {
+                this.setState({
+                    renderNotifications:    true,
+                    renderStorage:          true,
+                    renderWorkers:          true,
+                    renderReservations:     true,
+                    renderRooms:            true,
+                });
+            }
+            if (user.roles.includes("ROLE_CLEANER")) {
+                this.setState({
+                    renderNotifications:    true,
+                    renderStorage:          true,
+                    renderRooms:            true,
+                });
+            }
+            if (user.roles.includes("ROLE_KITCHEN_MANAGER")) {
+                this.setState({
+                    renderNotifications:    true,
+                    renderStorage:          true,
+                    renderRooms:            true,
+                    renderServices:         true
+                });
+            }
+            if (user.roles.includes("ROLE_BUTLER")) {
+                this.setState({
+                    renderNotifications:    true,
+                    renderStorage:          true,
+                    renderRooms:            true,
+                    renderServices:         true
+                });
+            }
+            if (user.roles.includes("ROLE_REPAIRMAN")) {
+                this.setState({
+                    renderNotifications:    true,
+                    renderStorage:          true,
+                    renderRooms:            true,
+                });
+            }
         }
+
     }
 
     toggle() {
@@ -69,12 +136,12 @@ class AppNavbar extends Component {
                         <NavbarToggler onClick={this.toggle}/>
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="mr-auto" navbar>
-                                {currentUser && (
+                                {currentUser && this.state.renderNotifications && (
                                     <NavItem>
                                         <NavLink href="/notifications">Powiadomienia</NavLink>
                                     </NavItem>
                                 )}
-                                {currentUser && (
+                                {currentUser && this.state.renderStorage && (
                                     <UncontrolledDropdown nav inNavbar>
                                         <DropdownToggle nav caret>
                                             Magazyn Przedmiotów
@@ -89,7 +156,7 @@ class AppNavbar extends Component {
                                         </DropdownMenu>
                                     </UncontrolledDropdown>
                                 )}
-                                {currentUser && (
+                                {currentUser && this.state.renderWorkers && (
                                     <UncontrolledDropdown nav inNavbar>
                                         <DropdownToggle nav caret>
                                             Pracownicy
@@ -107,7 +174,7 @@ class AppNavbar extends Component {
                                         </DropdownMenu>
                                     </UncontrolledDropdown>
                                 )}
-                                {currentUser && (
+                                {currentUser && this.state.renderReservations && (
                                     <UncontrolledDropdown nav inNavbar>
                                         <DropdownToggle nav caret>
                                             Rezerwacje
@@ -126,7 +193,7 @@ class AppNavbar extends Component {
                                         </DropdownMenu>
                                     </UncontrolledDropdown>
                                 )}
-                                {currentUser && (
+                                {currentUser && this.state.renderRooms && (
                                     <UncontrolledDropdown nav inNavbar>
                                         <DropdownToggle nav caret>
                                             Pokoje
@@ -144,7 +211,7 @@ class AppNavbar extends Component {
                                         </DropdownMenu>
                                     </UncontrolledDropdown>
                                 )}
-                                {currentUser && (
+                                {currentUser && this.state.renderServices && (
                                     <UncontrolledDropdown nav inNavbar>
                                         <DropdownToggle nav caret>
                                             Usługi
