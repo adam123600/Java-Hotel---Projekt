@@ -19,7 +19,7 @@ export default class Order extends Component{
             item: [],
             modal: false,
             showPdfButton: false,
-            createPdf: false
+            loadPdf: false
         }
     }
 
@@ -82,7 +82,12 @@ export default class Order extends Component{
                         <button className="additem-button storage-confirmation-button" onClick={this.onButtonClick}>Zamykam</button>
                     </div>
                 </Modal>
-                {this.state.showPdfButton && <PDFDownloadLink
+                {
+                    this.state.showPdfButton && !this.state.loadPdf &&
+                        <button className="my-button login-button" onClick={() => this.setState({loadPdf: !this.state.loadPdf})} style={{width: '222px'}}>Generuj pdf</button>
+                }
+                {
+                    this.state.loadPdf && <PDFDownloadLink
                     className="my-button login-button"
                     document={<PdfOrder order={this.props} item={this.state.item}/>}
                     fileName = { "order_" + this.state.item.item_name + "_" + this.state.id }
@@ -94,7 +99,8 @@ export default class Order extends Component{
                     {({loading}) =>
                         loading ? "Ładowanie" : "Pobierz pdf"
                     }
-                </PDFDownloadLink>}
+                    </PDFDownloadLink>
+                }
             </div>
         );
     }
