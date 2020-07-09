@@ -3,6 +3,8 @@ import OrderService from "../../service/OrderService"
 import Modal from "reactstrap/es/Modal";
 import ItemService from "../../service/ItemService";
 import AuthService from "../../service/AuthService";
+import {PDFDownloadLink} from "@react-pdf/renderer";
+import PdfOrder from "../Pdf/PdfOrder";
 
 
 export default class Order extends Component{
@@ -16,7 +18,8 @@ export default class Order extends Component{
             itemCounter: 0,
             item: [],
             modal: false,
-            showPdfButton: false
+            showPdfButton: false,
+            loadPdf: false
         }
     }
 
@@ -79,7 +82,25 @@ export default class Order extends Component{
                         <button className="additem-button storage-confirmation-button" onClick={this.onButtonClick}>Zamykam</button>
                     </div>
                 </Modal>
-                {this.state.showPdfButton && <button className="my-button login-button" style={{width: '222px'}}>Generuj pdf</button>}
+                {
+                    this.state.showPdfButton && !this.state.loadPdf &&
+                        <button className="my-button login-button" onClick={() => this.setState({loadPdf: !this.state.loadPdf})} style={{width: '222px'}}>Generuj pdf</button>
+                }
+                {
+                    this.state.loadPdf && <PDFDownloadLink
+                    className="my-button login-button"
+                    document={<PdfOrder order={this.props} item={this.state.item}/>}
+                    fileName = { "order_" + this.state.item.item_name + "_" + this.state.id }
+                    style={{
+                        color: 'white',
+                        width: '222px',
+                        textDecoration: 'none',
+                    }}>
+                    {({loading}) =>
+                        loading ? "Ładowanie" : "Pobierz pdf"
+                    }
+                    </PDFDownloadLink>
+                }
             </div>
         );
     }

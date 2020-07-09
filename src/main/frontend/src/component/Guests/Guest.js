@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import GuestService from "../../service/GuestService";
-import GuestDetails from "./GuestDetails";
 import {Link, NavLink} from "react-router-dom";
 import { Button } from "reactstrap";
+import './Guest.css'
 
 export  default class Guest extends React.Component {
     constructor(props) {
@@ -23,16 +22,18 @@ export  default class Guest extends React.Component {
 
     render() {
         return (
-            <div style={{padding: '25px'}}>
-                <h5>Imię: {this.props.guest.firstName} <br/>
-                    Nazwisko: {this.props.guest.lastName}</h5>
-                <Link to={{
-                    pathname:`/guests/${this.state.guestID}`,
-                    props:{guest: this.props.guest}
-                            }}>
-                    <Button style={{backgroundColor: '#f99cab'}}>Szczegółowe dane</Button>
-                </Link>
-            </div>
+            <tr>
+                <td><h3>{this.props.guest.firstName}</h3></td>   
+                <td><h3>{this.props.guest.lastName}</h3></td>
+                <td>
+                    <Link to={{
+                        pathname:`/guests/${this.state.guestID}`,
+                        props:{guest: this.props.guest}
+                                }}>
+                        <button className="show-data-button">Szczegółowe dane</button>
+                    </Link>
+                </td>
+            </tr>
         )
     }
 }

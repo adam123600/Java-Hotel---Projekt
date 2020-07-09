@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import RoomService from "../../service/RoomService"
 import Room from "../Rooms/Room"
-import {TabContent, TabPane, Nav, NavItem, NavLink, Row, Col} from 'reactstrap';
+import {TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Table} from 'reactstrap';
 import AuthService from "../../service/AuthService";
+import './Cleaning.css';
 
 export default class Cleaning extends React.Component {
     constructor(props) {
@@ -73,39 +74,46 @@ export default class Cleaning extends React.Component {
         //console.log(this.roomClean);
         return(
             <div>
-                <h1>Stan czystości pokojów</h1>
+                <h1 className="main-header">Stan czystości pokojów</h1>
                 <Row>
-                    <Col><h2>Numer pokoju</h2></Col>
-                    <Col><h2>Czy jest sprzątany?</h2></Col>
-                    <Col><h2>Zmień status posprzątania</h2></Col>
-                </Row>
-                {this.roomNames.map( (name, indexName) => {
-                    let status;
-                    return (
-                        <div>
-                            <Row>
-                                <Col><h3 key={indexName}>{name}</h3></Col>
-                                {this.roomClean.map( (clean, indexClean) => {
-                                    if( indexName === indexClean ) {
-                                        status = clean;
-                                        return (
-                                            <div>
-                                                <Col><h3 key={indexClean}>{clean}</h3></Col>
-                                            </div>
-                                        )}
+                    <Col>
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th><h2 className="subheader">Numer pokoju</h2></th>
+                                    <th><h2 className="subheader">Czy jest posprzątany?</h2></th>
+                                    <th><h2 className="subheader">Zmień status posprzątania</h2></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.roomNames.map( (name, indexName) => {
+                                    let status;
+                                    return (
+                                        <tr>
+                                            <td><h3 key={indexName}>{name}</h3></td>
+                                            {this.roomClean.map( (clean, indexClean) => {
+                                                if( indexName === indexClean ) {
+                                                    status = clean;
+                                                    return (
+                                                        <td>
+                                                            <h3 key={indexClean}>{clean}</h3>
+                                                        </td>
+                                                    )}
+                                            })}
+                                            <td>
+                                                <button className="change-status-button"
+                                                 disabled={this.state.disableStatusButton}
+                                                 onClick={this.onCleanedButton.bind(this, name, status)}>
+                                                 Zmień status
+                                                 </button>
+                                            </td>
+                                        </tr>
+                                    )
                                 })}
-                                <Col>
-                                    <button className="btn btn-primary"
-                                     style={{margin: '10px'}}
-                                     disabled={this.state.disableStatusButton}
-                                     onClick={this.onCleanedButton.bind(this, name, status)}>
-                                     Zmień status
-                                     </button>
-                                </Col>
-                            </Row>
-                        </div>
-                    )
-                })}
+                            </tbody>
+                        </Table>
+                    </Col>
+                </Row>
              </div>
         )
 
