@@ -136,7 +136,7 @@ export default class CheckReservation extends Component {
 
                     if (!toast.isActive(this.state.toastId)) {
                         this.setState({
-                            toastId: toast.success('Reservation added successfully', {
+                            toastId: toast.success('Rezerwacja dodana pomyślnie', {
                                 position: toast.POSITION.BOTTOM_CENTER,
                                 autoClose: false
                             })

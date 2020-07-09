@@ -44,7 +44,7 @@ public class NotificationController {
         Notification notification = new Notification(loginRequest.getUsername(), notificationTypeRepository.findByType("RES_USER_PASSWORD"));
         notificationRepository.save(notification);
 
-        return ResponseEntity.ok(new MessageResponse("Request was sent successfully"));
+        return ResponseEntity.ok(new MessageResponse("Prośba wysłana pomyślnie!"));
     }
 
     @PostMapping("/smallAmountItem")

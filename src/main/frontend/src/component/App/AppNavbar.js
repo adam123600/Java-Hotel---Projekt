@@ -165,9 +165,6 @@ class AppNavbar extends Component {
                                             <DropdownItem onClick={event => window.location.href = '/workers'}>
                                                 Lista pracowników
                                             </DropdownItem>
-                                            <DropdownItem>
-                                                Harmonogramy
-                                            </DropdownItem>
                                             <DropdownItem onClick={event => window.location.href = '/addworker'}>
                                                 Dodaj pracownika
                                             </DropdownItem>
@@ -202,9 +199,6 @@ class AppNavbar extends Component {
                                             <DropdownItem onClick={event => window.location.href = '/rooms'}  >
                                                 Wszystkie Pokoje
                                             </DropdownItem>
-                                            <DropdownItem>
-                                                Zgłoszenia
-                                            </DropdownItem>
                                             <DropdownItem onClick={event => window.location.href = '/cleaning'} >
                                                 Sprzątanie
                                             </DropdownItem>
@@ -227,19 +221,11 @@ class AppNavbar extends Component {
 
                             {currentUser ? (
                                 <Nav className="ml-auto" navbar>
-                                    <UncontrolledDropdown nav inNavbar>
-                                        <DropdownToggle nav caret>
+                                    <NavItem nav inNavbar>
+                                        <NavLink nav caret>
                                             {currentUser.username}
-                                        </DropdownToggle>
-                                        <DropdownMenu right>
-                                            <DropdownItem>
-                                                Mój Harmonogram
-                                            </DropdownItem>
-                                            <DropdownItem>
-                                                Ustal dyspozycyjność
-                                            </DropdownItem>
-                                        </DropdownMenu>
-                                    </UncontrolledDropdown>
+                                        </NavLink>
+                                    </NavItem>
                                     <NavItem>
                                         <NavLink href="/login" onClick={this.logOut}>
                                             Wyloguj
@@ -250,13 +236,7 @@ class AppNavbar extends Component {
                                 <Nav className="ml-auto" navbar>
                                     <NavItem>
                                         <NavLink href="/login">
-                                            Login
-                                        </NavLink>
-                                    </NavItem>
-
-                                    <NavItem>
-                                        <NavLink href="/register">
-                                            Sign Up
+                                            Zaloguj się
                                         </NavLink>
                                     </NavItem>
                                 </Nav>

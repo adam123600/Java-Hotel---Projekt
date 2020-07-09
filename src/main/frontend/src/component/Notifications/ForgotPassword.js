@@ -90,7 +90,7 @@ export default class ForgotPassword extends Component{
 
 
                 <div className="my-form-group">
-                  <label htmlFor="username" className="my-label">USERNAME</label>
+                  <label htmlFor="username" className="my-label">Nazwa użytkownika</label>
                   <Input
                     type="text"
                     className="input-control"
@@ -102,7 +102,7 @@ export default class ForgotPassword extends Component{
 
                 <div className="my-form-group">
                       <button className="my-button login-button">
-                        <span>SEND REQUEST TO MANAGER</span>
+                        <span>Wyślij prośbę do managera</span>
                       </button>
                 </div>
 
