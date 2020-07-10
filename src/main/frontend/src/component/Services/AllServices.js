@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ServicesService from "../../service/ServicesService";
 import AuthService from "../../service/AuthService";
-import {Button, Spinner} from "reactstrap";
+import {Button, Spinner, Row, Col, Table} from "reactstrap";
 
 export default class AllServices extends React.Component {
     constructor(props) {
@@ -18,9 +18,8 @@ export default class AllServices extends React.Component {
             this.setState({allServices: res});
         });
         ServicesService.getAllServiceTypes().then(res => {
-            this.setState({
-                serviceTypes: res,
-                loading: false
+            this.setState({serviceTypes: res,
+            loading: false
             });
         });
 
@@ -53,34 +52,40 @@ export default class AllServices extends React.Component {
             });
         };
 
-        console.log(allServices)
 
         return(
             <div>
                 {this.state.loading && <Spinner animation="border"/>}
-                {allServices.map(s => (
-                    <div>
-                        <h3>{s.type}</h3>
-                        <table style={{width: '60%', marginLeft: 'auto', marginRight: 'auto'}}>
-                        <tr>
-                            <th>Opis</th>
-                            <th>Pokój</th>
-                            <th></th>
-                        </tr>
-                        {s.services.map(service => (
-                                <tr>
-                                    <td>{service.description}</td>
-                                    <td>{service.room.roomName}</td>
-                                    <td>
-                                        <Button style={{backgroundColor: '#f99cab'}} onClick={() => this.handleDeleteService(service)}>
-                                            Usuń
-                                        </Button>
-                                    </td>
-                                </tr>
-                        ))}
-                            </table>
-                    </div>
-                ))}
+                <Row>
+                    <Col sm="12">
+                        <Table>
+                            <thead>
+                            <tr>
+                                <th>Typ</th>
+                                <th>Opis</th>
+                                <th>Pokój</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {allServices.map(s => (
+                                s.services.map(service => (
+                                    <tr>
+                                        <td>{s.type}</td>
+                                        <td>{service.description}</td>
+                                        <td>{service.room.roomName}</td>
+                                        <td>
+                                            <Button style={{backgroundColor: '#f99cab'}} onClick={() => this.handleDeleteService(service)}>
+                                                Usuń
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))
+                            ))}
+                            </tbody>
+                        </Table>
+                    </Col>
+                </Row>
             </div>
         )
     }

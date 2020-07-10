@@ -26,6 +26,7 @@ import CheckReservation from '../Reservations/CheckReservation';
 import AllServices from "../Services/AllServices";
 import AllOrders from "../Orders/AllOrders";
 import Cleaning from "../Cleaning/Cleaning";
+import ServicesByRole from "../Services/ServicesByRole"
 
 toast.configure();
 
@@ -57,6 +58,7 @@ class App extends Component {
           <Route path="/services" component={AllServices}/>
           <Route path="/orders" component={AllOrders}/>
           <Route path="/cleaning" component={Cleaning}/>
+          <Route path="/servicesbyrole" component={ServicesByRole}/>
         </Switch>
         </div>
 

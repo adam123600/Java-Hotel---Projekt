@@ -75,20 +75,30 @@ INSERT IGNORE INTO notificationtypes (id, type) VALUES (2, 'FOOD_ENDED');
 INSERT IGNORE INTO notificationtypes (id, type) VALUES (3, 'ROOM_CLEANING');
 INSERT IGNORE INTO notificationtypes (id, type) VALUES (4, 'FLAW');
 INSERT IGNORE INTO notificationtypes (id, type) VALUES (5, 'SMALL_AMOUNT_ITEM');
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (1,"Recepcjonista",3, 1, "Rozlane cus tam");
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (2,"Recepcjonista",3, 1, "Kolejny brud");
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (3,"Recepcjonista",3, 1, "I jeszcze troszke");
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (4,"Recepcjonista",3, 2, "Brud brud brud");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (1,"Recepcjonista",3, 1, "Rozlane coś w pokoju");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (2,"Recepcjonista",3, 2, "Bardzo brudno");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (3,"Recepcjonista",3, 12, "Łazienka do posprzątania");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (4,"Recepcjonista",3, 5, "Zmienić pościel");
 INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (5,"admin",2);
 INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (6,"Nazwa użytkownika restującego hasło",1);
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (7,"Nazwa uzytkownika wpisujacego",4, 4, "Polamane krzeslo");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (7,"Nazwa uzytkownika wpisujacego",4, 4, "Połamane krzesło");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (7,"Nazwa uzytkownika wpisujacego",4, 5, "Zatkany odpływ w umywalce");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (7,"Nazwa uzytkownika wpisujacego",4, 8, "Zacina się zamek w drzwiach");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (7,"Nazwa uzytkownika wpisujacego",4, 13, "Naprawić prysznic");
 
 INSERT IGNORE INTO servicetypes (id, type, price) VALUES (1, 'KOLACJA', 30);
 INSERT IGNORE INTO servicetypes (id, type, price) VALUES (2, 'ALKOHOL', 50);
 INSERT IGNORE INTO servicetypes (id, type, price) VALUES (3, 'OBIAD', 30);
-INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (2, 2, 2, '0.7 litra wódeczki');
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (2, 2, 2, '0.7 litra wódki');
 INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (3, 1, 2, 'Kolacja do pokoju');
-INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (1, 3, 2, 'Obiad do pokoju');
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (4, 3, 6, 'Obiad do pokoju');
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (5, 3, 12, 'Obiad do pokoju');
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (6, 1, 13, 'Kolacja do pokoju');
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (7, 3, 1, 'Obiad do pokoju');
+INSERT IGNORE INTO services (id, type_id, room_id, description) VALUES (8, 2, 2, '2 drinki');
+
+
+
 
 INSERT IGNORE INTO orders (order_id, item_counter, order_date, price, item_id) VALUES (1,10, DATE '2020-06-18', NULL, 1);
 INSERT IGNORE INTO orders (order_id, item_counter, order_date, price, item_id) VALUES (2,6, DATE '2020-06-19', NULL, 2);
