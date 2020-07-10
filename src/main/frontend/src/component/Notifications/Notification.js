@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import "./Notification.css";
 import ChangePassword from "../Workers/ChangePassword";
 import { Button } from "@material-ui/core";
-import { Spinner } from "reactstrap";
+import {Spinner, Table} from "reactstrap";
 
 const FLAW_ID = 4;
 
@@ -116,103 +116,119 @@ export default class Notification extends Component{
               <SmallAmountItem/>
               {this.state.showAdminNotifications &&
                <div>
-                  <h2>Prośby o zresetowanie hasła:</h2>
-                  <div>
+                   <h1 className="headers">Prośby o zresetowanie hasła:</h1>
+                   <Table striped>
+                       <thead>
                     {this.state.allNotifications.map(notification => {
-                      if(notification.notType.type == "RES_USER_PASSWORD") {
+                      if(notification.notType.type === "RES_USER_PASSWORD") {
                         return (
-                          <div style={{padding: '25px'}}>
-                            <div key={notification.id} style={{display: 'inline-flex'}}>
-                              {notification.username}
-                            </div>
+                            <tr>
+                            <td key={notification.id} style={{display: 'inline-flex'}}>
+                                <h1 className="text-not">{notification.username}</h1>
+                            </td>
                             {'  '}
-                            <div style={{display: 'inline-flex'}}>
+                            <td style={{display: 'inline-flex'}}>
                               {this.state.allWorkers.map( worker => {
-                                if(notification.username == worker.username) {
+                                if(notification.username === worker.username) {
                                   return <ChangePassword href={worker._links.self.href} currentWorker={worker}/>
                                 }
                               })}
                             {'  '}
-                            <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">
+                            <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="button-not">
                               Usuń powiadomienie
                             </button>
-                            </div>
-                          </div>)
-                      }})}                                            
-                  </div>     
-                  <h2>Przedmioty:</h2>     
-                  <div>
+                            </td>
+                            </tr>)
+                      }})}
+                       </thead>
+                   </Table>
+                   <h1 className="headers">Przedmioty:</h1>
+                  <Table striped>
+                      <thead>
                     {this.state.allNotifications.map(notification => {
-                      if(notification.notType.type == "SMALL_AMOUNT_ITEM") {
+                      if(notification.notType.type === "SMALL_AMOUNT_ITEM") {
                         return (
-                          <div style={{padding: '25px'}}>
-                            <div key={notification.id} style={{display: 'inline-flex'}}>
-                              {notification.description}
-                            </div>
+                          <tr>
+                            <td key={notification.id} style={{display: 'inline-flex'}}>
+                                <h1 className="text-not">{notification.description}</h1>
+                            </td>
+
+                            <td>
                             {'  '}
-                            <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">
+                            <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="button-not">
                               Usuń powiadomienie
                             </button>
-                          </div>)
-                      }})}                                            
-                  </div>         
-                  <h2>Usterki:</h2>     
-                  <div>
+                            </td>
+                          </tr>)
+                      }})}
+                      </thead>
+                  </Table>
+                   <h1 className="headers">Usterki:</h1>
+                  <Table striped>
+                      <thead>
                     {this.state.allNotifications.map(notification => {
-                      if(notification.notType.type == "FLAW") {
+                      if(notification.notType.type === "FLAW") {
                         return (
-                          <div style={{padding: '25px'}}>
-                            <div key={notification.id} style={{display: 'inline-flex'}}>
-                              {notification.description}
-                            </div>
+                          <tr>
+                            <td key={notification.id} style={{display: 'inline-flex'}}>
+                                <h1 className="text-not">{notification.description}</h1>
+                            </td>
+                              <td>
                             {'  '}
-                            <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">
+                            <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="button-not">
                               Usuń powiadomienie
                             </button>
-                          </div>)
-                      }})}                                            
-                  </div>   
+                              </td>
+                          </tr>)
+                      }})}
+                      </thead>
+                  </Table>
                 </div>
               }
               {this.state.showRepairmanNotifications &&
                 <div>
-                  <h2>Usterki</h2>
-                  <div>
+                    <h1 className="headers">Usterki</h1>
+                  <Table striped>
+                      <thead>
                     {this.state.currentNotifications.map(notification => 
-                      <div style={{padding: '25px'}}>
-
-                        <div key={notification.id} style={{display: 'inline-flex'}}>
-                          {notification.description}
-                        </div>
-                        <div style={{display: 'inline-flex'}}>
-                        <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">
+                      <tr>
+                        <td key={notification.id} style={{display: 'inline-flex'}}>
+                            <h1 className="text-not">{notification.description}</h1>
+                        </td>
+                        <td style={{display: 'inline-flex'}}>
+                        <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="button-not">
                           Usuń powiadomienie
                         </button>
-                        </div>
-                      </div>
+                        </td>
+                      </tr>
                     )}
-                  </div>
+                      </thead>
+                  </Table>
                 </div>
               }    
 
                {this.state.showKitchenManagerNotifications &&
-               <div> 
-                  <h2>Przedmioty:</h2>     
-                  <div>
+               <div>
+                   <h1 className="headers">Przedmioty:</h1>
+                  <Table striped>
+                      <thead>
                     {this.state.allNotifications.map(notification => {
-                      if(notification.notType.type == "SMALL_AMOUNT_ITEM") {
+                      if(notification.notType.type === "SMALL_AMOUNT_ITEM") {
                         return (
-                          <div style={{padding: '25px'}}>
-                            <div key={notification.id} style={{display: 'inline-flex'}}>
-                              {notification.description}
-                            </div>
+                          <tr>
+                            <td key={notification.id} style={{display: 'inline-flex'}}>
+                                <h1 className="text-not">{notification.description}</h1>
+                            </td>
+                              <td>
                             {'  '}
-                            <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="btn btn-danger">
+                            <button onClick={this.handleDeleteNotification.bind(this, notification.id)} className="button-not">
                               Usuń powiadomienie
                             </button>
-                          </div>)
-                      }})}                                            
-                  </div>         
+                              </td>
+                          </tr>)
+                      }})}
+                      </thead>
+                  </Table>
                 </div>
               }       
             </div>
