@@ -12,8 +12,10 @@ export default class ServicesByRole extends Component {
         this.state = {
             currentRole: curUser.roles[0],
             allNotifications: [],
+            allNotifications1: [],
             typeOfNot: 4,
-            showNotifications: true,
+            showNotifications: false,
+            showNotifications1: false
         }
 
         this.handleDeleteNotification = this.handleDeleteNotification.bind(this);
@@ -27,27 +29,21 @@ export default class ServicesByRole extends Component {
     componentDidMount() {
 
         if (this.state.currentRole === "ROLE_REPAIRMAN" || this.state.currentRole === "ROLE_MANAGER") {
-            this.setState({
-                showNotifications: true,
-                typeOfNot: 4
-            })
-            NotificationService.getAllNotificationsByNotificationTypeId(this.state.typeOfNot).then(
+            NotificationService.getAllNotificationsByNotificationTypeId(4).then(
                 response => {
                    this.setState({
+                       showNotifications: true,
                         allNotifications: response.data
                     });
                 })
         }
 
         if(this.state.currentRole === "ROLE_CLEANER"  || this.state.currentRole === "ROLE_MANAGER") {
-            this.setState({
-                showNotifications: true,
-                typeOfNot: 3
-            })
-            NotificationService.getAllNotificationsByNotificationTypeId(this.state.typeOfNot).then(
+            NotificationService.getAllNotificationsByNotificationTypeId(3).then(
                 response => {
                     this.setState({
-                        allNotifications: response.data
+                        showNotifications1: true,
+                        allNotifications1: response.data
                     });
                 })
         }
@@ -57,6 +53,7 @@ export default class ServicesByRole extends Component {
 
 
     render() {
+
         return(
             <div>
                 <Row>
@@ -87,6 +84,8 @@ export default class ServicesByRole extends Component {
                                             </tr>
                                         </tbody>
                                     )
+                            })}
+                            {this.state.showNotifications1 && this.state.allNotifications1.map(n => {
                                 if(n.notType.type === "ROOM_CLEANING")
                                     return(
                                         <tbody>

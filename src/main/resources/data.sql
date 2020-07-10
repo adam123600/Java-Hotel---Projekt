@@ -81,10 +81,10 @@ INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VAL
 INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (4,"Recepcjonista",3, 5, "Zmienić pościel");
 INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (5,"admin",2);
 INSERT IGNORE INTO notifications(id, user_id, type_id) VALUES (6,"Nazwa użytkownika restującego hasło",1);
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (7,"Nazwa uzytkownika wpisujacego",4, 4, "Połamane krzesło");
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (7,"Nazwa uzytkownika wpisujacego",4, 5, "Zatkany odpływ w umywalce");
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (7,"Nazwa uzytkownika wpisujacego",4, 8, "Zacina się zamek w drzwiach");
-INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (7,"Nazwa uzytkownika wpisujacego",4, 13, "Naprawić prysznic");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (7,"Recepcjonista",4, 4, "Połamane krzesło");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (8,"Recepcjonista",4, 5, "Zatkany odpływ w umywalce");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (9,"Recepcjonista",4, 8, "Zacina się zamek w drzwiach");
+INSERT IGNORE INTO notifications(id, user_id, type_id, room_id, description) VALUES (10,"Recepcjonista",4, 13, "Naprawić prysznic");
 
 INSERT IGNORE INTO servicetypes (id, type, price) VALUES (1, 'KOLACJA', 30);
 INSERT IGNORE INTO servicetypes (id, type, price) VALUES (2, 'ALKOHOL', 50);
